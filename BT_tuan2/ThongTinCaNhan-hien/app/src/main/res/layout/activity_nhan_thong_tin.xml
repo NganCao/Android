@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_nhan_thong_tin"
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context="com.th.thuhien.thongtincanhan.NhanThongTin">
+
+    <TextView
+        android:gravity="center_vertical"
+        android:layout_weight="2"
+        android:textColor="#39cced"
+        android:textSize="30sp"
+        android:text="Thông tin cá nhân"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="7"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            android:id="@+id/textTen"
+            android:textSize="30sp"
+            android:text="Ten"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textCmnd"
+            android:textSize="30sp"
+            android:text="cmnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textBangCap"
+            android:textSize="30sp"
+            android:text="bangcap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textSoThich"
+            android:textSize="30sp"
+            android:text="sothich"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textSize="30sp"
+            android:text="-------------------"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textSize="30sp"
+            android:text="Thông tin bổ sung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textBoSung"
+            android:textSize="30sp"
+            android:text="di du lich"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonDong"
+        android:layout_gravity="center"
+        android:text="Đóng"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp" />
+
+</LinearLayout>
