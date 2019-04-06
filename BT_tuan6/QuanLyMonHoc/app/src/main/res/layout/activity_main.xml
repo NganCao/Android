@@ -32,23 +32,29 @@
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="6dp"
+                android:gravity="bottom|center"
+                android:paddingBottom="5sp"
                 android:text="Mã MH:" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="10dp"
+                android:gravity="bottom|center"
+                android:paddingBottom="5sp"
                 android:text="Tên MH:" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
+                android:gravity="bottom|center"
+                android:paddingBottom="5sp"
                 android:text="Số Tiết:" />
         </LinearLayout>
 
@@ -60,23 +66,26 @@
             <EditText
                 android:id="@+id/maMH"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="50dp"
                 android:ems="10"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/tenMH"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="50dp"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/Sotiet"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="50dp"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -93,7 +102,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:onClick="InsertMH"
             android:text="INSERT" />
 
         <Button
@@ -101,7 +109,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="DeleteMH"
             android:text="DELETE" />
 
         <Button
@@ -117,7 +124,6 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:onClick="updateMH"
             android:text="UPDATE" />
     </LinearLayout>
 

@@ -49,7 +49,7 @@ public class MonhocAdapter extends ArrayAdapter<Monhoc> {
         }
         Monhoc mh = data.get(position);
 
-        holder.icon.setImageResource(R.drawable.CNTT);
+        holder.icon.setImageResource(R.drawable.cntt);
         holder.txt1.setText("Mã MH: " + mh.getMa());
         holder.txt2.setText("Tên MH: " + mh.getTen());
         holder.txt3.setText("Số tiết: " + mh.getSotiet());

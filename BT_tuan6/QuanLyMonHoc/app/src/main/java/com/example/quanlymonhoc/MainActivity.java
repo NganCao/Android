@@ -38,10 +38,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InsertMH();
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DeleteMH();
+            }
+        });
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateMH();
+            }
+        });
+
     }
 
     private void setControl(){
         listView = (ListView) findViewById(R.id.listView);
+        btnInsert = (Button) findViewById(R.id.btnInsert);
+        btnDelete = (Button) findViewById(R.id.btnDelete);
+        btnUpdate = (Button) findViewById(R.id.btnUpdate);
     }
 
     private void setEvent(){
