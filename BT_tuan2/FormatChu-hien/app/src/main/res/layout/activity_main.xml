@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.th.thuhien.formatchu.MainActivity">
+
+    <TextView
+        android:layout_marginTop="6dp"
+        android:layout_gravity="center"
+        android:background="#d8bff4"
+        android:gravity="fill_vertical"
+        android:layout_weight="1"
+        android:textSize="30sp"
+        android:text="Format"
+        android:layout_width="360dp"
+        android:layout_height="0dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <CheckBox
+            android:id="@+id/checkboxBackground"
+            android:layout_weight="1"
+            android:text="Background"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <CheckBox
+            android:id="@+id/checkboxTextColor"
+            android:text="Text Color"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <CheckBox
+            android:id="@+id/checkboxCenter"
+            android:text="Center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <TextView
+        android:layout_gravity="center"
+        android:gravity="fill_vertical"
+        android:background="#d8bff4"
+        android:layout_weight="1"
+        android:textSize="30sp"
+        android:text="Number Type"
+        android:layout_width="360dp"
+        android:layout_height="0dp" />
+    <RadioGroup
+        android:orientation="horizontal"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <RadioButton
+            android:layout_weight="1"
+            android:id="@+id/radiobuttonOdd"
+            android:text="Odd"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <RadioButton
+            android:layout_weight="1"
+            android:id="@+id/radiobuttonEven"
+            android:text="Even"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <RadioButton
+            android:layout_weight="1"
+            android:id="@+id/radiobuttonBoth"
+            android:text="Both"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <Button
+            android:id="@+id/buttonResult"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:text="SHOW RESULT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <TextView
+            android:id="@+id/textviewKetQua"
+            android:textSize="40sp"
+            android:text="48"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>
