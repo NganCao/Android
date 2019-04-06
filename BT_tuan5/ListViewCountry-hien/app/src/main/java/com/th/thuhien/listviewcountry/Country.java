@@ -5,8 +5,7 @@ public class Country {
     public String ten;
     public int danSo;
 
-    public Country() {
-    }
+    public Country() {    }
 
     public Country(String hinh, String ten, int danSo) {
         this.hinh = hinh;
