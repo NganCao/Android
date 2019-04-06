@@ -6,7 +6,7 @@
     android:weightSum="10"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    tools:context="com.th.thuhien.thongtincanhan.NhanThongTin">
+    tools:context="com.th.thuhien.thongtincanhan.NhanThongTinActivity">
 
     <TextView
         android:gravity="center_vertical"
