@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.ManHinhSanPhamActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:background="#8BC34A"
+        app:titleTextColor="#FCFCFA"
+        app:title="Sen đá"
+        android:id="@+id/toolbarMHSanPham"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"></android.support.v7.widget.Toolbar>
+    <ListView
+        android:id="@+id/listviewMHSanPham"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
+</LinearLayout>
