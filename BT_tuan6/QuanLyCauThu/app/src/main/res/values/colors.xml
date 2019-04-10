@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FB1942</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#FFE600</color>
+    <drawable name="blue_hover">#87CEFA</drawable>
+</resources>
