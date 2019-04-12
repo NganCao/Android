@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="7">
+
+    <ImageView
+        android:id="@+id/imageviewFilm"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="2"
+        android:layout_width="0dp"
+        android:layout_height="160dp" />
+
+    <LinearLayout
+        android:layout_marginLeft="5dp"
+        android:orientation="vertical"
+        android:layout_weight="5"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textviewTenTA"
+            android:layout_marginTop="5dp"
+            android:textColor="#2196F3"
+            android:textStyle="bold"
+            android:text="Tên film"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textviewTenTV"
+            android:textStyle="bold"
+            android:text="(Nữ siêu nhân)"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <RatingBar
+                android:isIndicator="true"
+                android:progressTint="@color/colorYellow"
+                android:rating="2"
+                android:id="@+id/ratingbar_danhgia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:numStars="5"
+                android:stepSize="1" />
+        </LinearLayout>
+
+    </LinearLayout>
+    
+</LinearLayout>
