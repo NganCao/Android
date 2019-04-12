@@ -9,11 +9,11 @@
     android:layout_weight="10">
 
     <android.support.v7.widget.Toolbar
-        android:background="#03A9F4"
-        app:title="Giỏ hàng"
         android:id="@+id/toolbarGioHang"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.Toolbar>
+        android:layout_height="wrap_content"
+        android:background="#03A9F4"
+        app:title="Giỏ hàng"></android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_weight="7"

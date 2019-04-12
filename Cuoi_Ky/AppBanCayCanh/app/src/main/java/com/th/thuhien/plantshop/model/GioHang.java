@@ -1,5 +1,10 @@
 package com.th.thuhien.plantshop.model;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
+import java.util.Objects;
+
 public class GioHang {
     public int idSP;
     public String tenSP;
@@ -57,4 +62,17 @@ public class GioHang {
     public void setSoluongSP(int soluongSP) {
         this.soluongSP = soluongSP;
     }
+
+    @Override
+    public String toString() {
+        return "GioHang{" +
+                "idSP=" + idSP +
+                ", tenSP='" + tenSP + '\'' +
+                ", giaSP=" + giaSP +
+                ", hinhSP='" + hinhSP + '\'' +
+                ", soluongSP=" + soluongSP +
+                '}';
+    }
+
+
 }
