@@ -4,77 +4,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.GioHangActivity"
+    android:layout_weight="10"
     android:orientation="vertical"
-    android:layout_weight="10">
+    android:theme="@style/Animation.AppCompat.DropDownUp"
+    tools:context=".activity.GioHangActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarGioHang"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#03A9F4"
-        app:title="Giỏ hàng"></android.support.v7.widget.Toolbar>
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarGioHang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#03A9F4"
+            app:title="Giỏ hàng"
+            app:titleTextColor="@android:color/background_light"></android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="40dp"
+            android:text="Total: "
+            android:textColor="@android:color/background_light"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/total"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="1.000.000vnđ"
+            android:textSize="24sp" />
+    </LinearLayout>
 
     <LinearLayout
-        android:layout_weight="7"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:layout_weight="7">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            
+
             <TextView
-                android:layout_gravity="center"
                 android:id="@+id/textviewThongBaoGH"
-                android:textSize="30sp"
-                android:text="Giỏ hàng đang trống"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Giỏ hàng đang trống"
+                android:textSize="30sp" />
+
             <ListView
                 android:id="@+id/listviewGioHang"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"></ListView>
         </FrameLayout>
     </LinearLayout>
+
     <LinearLayout
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
-
-        <LinearLayout
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal"
-            android:layout_weight="2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:textColor="#F44336"
-                android:text="Tổng tiền: "
-                android:textSize="30sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_weight="2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="bottom"
+        android:orientation="horizontal">
 
         <Button
-            android:text="Thanh toán giỏ hàng"
-            android:layout_weight="1"
+            android:id="@+id/button4"
             android:layout_width="match_parent"
-            android:layout_height="0dp" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="TIẾP TỤC MUA" />
 
         <Button
-            android:text="Tiếp tục mua hàng"
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="0dp" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="THANH TOÁN" />
     </LinearLayout>
+</LinearLayout>
 </LinearLayout>

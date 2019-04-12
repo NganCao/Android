@@ -8,12 +8,12 @@
     tools:context=".activity.ManHinhSanPhamActivity">
 
     <android.support.v7.widget.Toolbar
-        android:background="#8BC34A"
-        app:titleTextColor="#FCFCFA"
-        app:title="Sen đá"
         android:id="@+id/toolbarMHSanPham"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"></android.support.v7.widget.Toolbar>
+        android:layout_height="?actionBarSize"
+        android:background="#FF249B0F"
+        app:title="Sen đá"
+        app:titleTextColor="#FCFCFA"></android.support.v7.widget.Toolbar>
     <ListView
         android:id="@+id/listviewMHSanPham"
         android:layout_width="match_parent"

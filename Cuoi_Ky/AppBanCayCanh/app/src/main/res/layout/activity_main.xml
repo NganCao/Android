@@ -16,32 +16,54 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbarmanhinhchinh"
-                app:title="Trang chủ"
-                android:background="#8EE46A"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
+                android:layout_height="wrap_content"
+                android:background="#FF249B0F"
+                android:orientation="horizontal">
 
-            </android.support.v7.widget.Toolbar>
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbarmanhinhchinh"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_weight="1"
+                    android:background="#FF249B0F"
+                    app:title="TRANG CHỦ"
+                    app:titleTextColor="@android:color/background_light">
+
+                </android.support.v7.widget.Toolbar>
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/logo"
+                    android:gravity="center" />
+            </LinearLayout>
+
             <ViewFlipper
                 android:id="@+id/viewflipper"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"></ViewFlipper>
+
             <LinearLayout
-                android:orientation="vertical"
-                android:background="#6AA2CE"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@drawable/botron_home"
+                android:orientation="vertical">
 
                 <TextView
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="#f00"
-                    android:layout_margin="5dp"
-                    android:text="Sản phẩm mới nhất"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/botron_home"
+                    android:text="Sản phẩm mới nhất"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerview"
                     android:layout_width="match_parent"

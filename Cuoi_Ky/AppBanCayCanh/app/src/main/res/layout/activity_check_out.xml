@@ -14,7 +14,8 @@
         android:background="#03A9F4"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:title="Thông tin thanh toán" />
+        app:title="Thông tin thanh toán"
+        app:titleTextColor="@android:color/background_light" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -77,7 +78,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/editText4"
+                android:id="@+id/txtName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -87,7 +88,7 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/editText5"
+                android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -96,7 +97,7 @@
                 android:inputType="textEmailSubject" />
 
             <EditText
-                android:id="@+id/editText6"
+                android:id="@+id/txtPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -105,7 +106,7 @@
                 android:inputType="textPhonetic" />
 
             <EditText
-                android:id="@+id/editText7"
+                android:id="@+id/txtAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -130,6 +131,7 @@
             app:title="Sản phẩm mua" />
 
         <ListView
+            android:id="@+id/lv"
             android:layout_width="match_parent"
             android:layout_height="350dp" />
     </LinearLayout>
@@ -142,14 +144,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Back" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btnDathang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
