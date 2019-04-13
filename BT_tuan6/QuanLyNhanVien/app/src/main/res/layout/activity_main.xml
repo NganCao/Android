@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:weightSum="24">
+
+    <TextView
+        android:gravity="center"
+        android:background="#4CAF50"
+        android:text="Quản lý nhân viên"
+        android:textSize="25sp"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:weightSum="3"
+        android:layout_weight="8"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <LinearLayout
+                android:weightSum="3"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:textSize="20sp"
+                    android:text="Mã NV:"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:inputType="text"
+                    android:id="@+id/edittextMaNV"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:textSize="20sp"
+                    android:text="Tên NV:"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:inputType="text"
+                    android:id="@+id/edittextTenNV"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:text="Giới tính:"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <RadioGroup
+                    android:orientation="horizontal"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <RadioButton
+                        android:checked="true"
+                        android:id="@+id/radiobuttonNu"
+                        android:textSize="18sp"
+                        android:text="Nữ"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <RadioButton
+                        android:id="@+id/radiobuttonNam"
+                        android:textSize="18sp"
+                        android:text="Nam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                </RadioGroup>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:weightSum="3"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"></LinearLayout>
+            <Button
+                android:id="@+id/buttonNhapNV"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:text="Nhập NV"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:weightSum="10"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="#4CAF50"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <TextView
+            android:layout_weight="9"
+            android:gravity="center_vertical"
+            android:textSize="25sp"
+            android:text="Danh sách nhân viên:"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <ImageButton
+            android:id="@+id/buttonXoaNV"
+            android:layout_margin="5dp"
+            android:background="@drawable/btndelete"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="12"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <ListView
+            android:id="@+id/listviewDSNV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:weightSum="23"
+    android:orientation="vertical">
+
+    <TextView
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:background="#0CB612"
+        android:gravity="center"
+        android:text="&quot;Chơi chơi&quot; Phone Utility"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+    <LinearLayout
+        android:weightSum="4"
+        android:layout_weight="3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal">
+        <TextView
+            android:textSize="25sp"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="Name:"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <EditText
+            android:id="@+id/edittextName"
+            android:textSize="25sp"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:weightSum="4"
+        android:layout_weight="3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal">
+        <TextView
+            android:textSize="25sp"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="Phone:"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <EditText
+            android:inputType="phone"
+            android:id="@+id/edittextPhone"
+            android:textSize="25sp"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:weightSum="4"
+        android:layout_weight="3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <Button
+            android:textAllCaps="false"
+            android:text="Save Contact"
+            android:id="@+id/butoonSave"
+            android:textSize="30sp"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:background="#0CB612"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <TextView
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:text="Nhấn giữ item listview để thao tác"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <ListView
+        android:id="@+id/listviewDanhBa"
+        android:layout_weight="12"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"></ListView>
+
+</LinearLayout>
