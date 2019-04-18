@@ -58,16 +58,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:background="@drawable/botron_home"
                     android:text="Sản phẩm mới nhất"
-                    android:textColor="@android:color/holo_green_dark"
-                    android:textSize="20sp"
+                    android:textColor="#FFFF1E12"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp">
 
                 </android.support.v7.widget.RecyclerView>
             </LinearLayout>
@@ -81,7 +81,8 @@
             <ListView
                 android:id="@+id/listViewManhinhchinh"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></ListView>
+                android:layout_height="wrap_content"
+                android:listSelector="@drawable/selected"></ListView>
 
         </android.support.design.widget.NavigationView>
     </android.support.v4.widget.DrawerLayout>

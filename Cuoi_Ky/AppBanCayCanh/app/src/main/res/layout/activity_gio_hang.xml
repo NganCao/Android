@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#03A9F4"
+        android:background="#FF249B0F"
         android:orientation="horizontal">
 
         <android.support.v7.widget.Toolbar
@@ -20,7 +20,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#03A9F4"
             app:title="Giỏ hàng"
             app:titleTextColor="@android:color/background_light"></android.support.v7.widget.Toolbar>
 
@@ -28,18 +27,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="40dp"
             android:text="Total: "
             android:textColor="@android:color/background_light"
             android:textSize="24sp" />
 
         <TextView
             android:id="@+id/total"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="1.000.000vnđ"
-            android:textSize="24sp" />
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/spiner"
+            android:gravity="right"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="1.000.000 vnđ"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -76,16 +81,29 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
+            android:id="@+id/btnPrev"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="85dp"
             android:layout_weight="1"
-            android:text="TIẾP TỤC MUA" />
+            android:background="@drawable/button_radius"
+            android:text="&larr;"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp" />
 
         <Button
-            android:layout_width="match_parent"
+            android:id="@+id/btnNext"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginLeft="85dp"
+            android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:text="THANH TOÁN" />
+            android:background="@drawable/button_radius"
+            android:text="&rarr;"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>
