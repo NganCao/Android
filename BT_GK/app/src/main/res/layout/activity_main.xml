@@ -11,15 +11,66 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:background="@android:color/holo_blue_light"
+        android:gravity="center"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:theme="?attr/actionBarTheme"
+        app:title="QUẢN LÝ SINH VIÊN" />
 
-    <android.support.v7.widget.GridLayout
-        android:id="@+id/gv"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-    </android.support.v7.widget.GridLayout>
+        <ImageButton
+            android:id="@+id/btnLop"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:background="@drawable/radiusbutton"
+            android:src="@drawable/class" />
+
+        <ImageButton
+            android:id="@+id/btnSV"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:background="@drawable/radiusbutton"
+            android:src="@drawable/student" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnDiem"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="top"
+            android:layout_margin="20dp"
+            android:background="@drawable/radiusbutton"
+            android:src="@drawable/exam" />
+
+        <ImageButton
+            android:id="@+id/btnMH"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="top"
+            android:layout_margin="20dp"
+            android:background="@drawable/radiusbutton"
+            android:src="@drawable/bookshelf" />
+    </LinearLayout>
+
 </LinearLayout>
