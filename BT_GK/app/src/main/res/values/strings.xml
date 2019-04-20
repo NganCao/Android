@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">QuanLySinhVien</string>
+    <string name="app_name">Quản lý sinh viên</string>
+
+    <string name="phai">
+        <item name="nam">Nam</item>
+        <item name="nu">Nữ</item>
+    </string>
 </resources>

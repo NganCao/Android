@@ -34,7 +34,7 @@
             android:layout_gravity="center"
             android:layout_margin="20dp"
             android:background="@drawable/radiusbutton"
-            android:src="@drawable/class" />
+            android:src="@drawable/img_class" />
 
         <ImageButton
             android:id="@+id/btnSV"
