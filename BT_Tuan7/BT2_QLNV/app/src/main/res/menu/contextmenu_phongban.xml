@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mnuthemnv"
+        android:title="Thêm nhân viên" />
+    <item
+        android:id="@+id/mnudanhsachnv"
+        android:title="Xem danh sách sinh viên" />
+    <item
+        android:id="@+id/mnutruongphong"
+        android:title="Lập trưởng/phó phòng" />
+    <item
+        android:id="@+id/mnuxoapb"
+        android:title="Xóa phòng ban" />
+</menu>

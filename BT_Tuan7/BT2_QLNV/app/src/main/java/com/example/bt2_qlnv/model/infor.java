@@ -35,9 +35,6 @@ public class infor implements Serializable {
 
     @Override
     public String toString() {
-        return "infor{" +
-                "ma='" + ma + '\'' +
-                ", ten='" + ten + '\'' +
-                '}';
+        return ma + " - " + ten;
     }
 }
