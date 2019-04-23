@@ -17,16 +17,21 @@ public class DB extends SQLiteOpenHelper {
     private static final String COL_MONHOC_TENMH = "monhoc_tenmon";
     private static final String COL_MONHOC_HOCKY = "monhoc_hocky";
 
+    private static final String TB_SINHVIEN = "SinhVien";
+    private static final String COL_SINHVIEN_MASV = "masv";
+    private static final String COL_SINHVIEN_HO = "hosv";
+    private static final String COL_SINHVIEN_TEN = "tensv";
+    private static final String COL_SINHVIEN_PHAI = "phai";
+    private static final String COL_SINHVIEN_NOISINH = "noisinh";
+    private static final String COL_SINHVIEN_NGAYSINH = "ngaysing";
+
     public DB (Context context){
         super(context, DB_NAME, null, DB_VERSION);
     }
 
     public void onUpgrade (SQLiteDatabase db, int i, int i1){
-        db.execSQL("DROP TABLE IF EXISTS " + TB_LOP);
-        onCreate(db);
     }
 
     public void onCreate(SQLiteDatabase sqLiteDatabase){
-        String scriptTBLop = "CREATE ";
     }
 }

@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     EditText editId, editName;
     Button btnLoad, btnAdd, btnDel, btnUpdate, btnFind;
     TextView textView;
+    final DB db = new DB(this, null, null, 1);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                add(v);
+                db.addData(createStudent());
+                editId.setText("");
+                editName.setText("");
             }
         });
 
@@ -82,6 +86,13 @@ public class MainActivity extends AppCompatActivity {
         db.addData(student);
         editId.setText("");
         editName.setText("");
+    }
+
+    private Student createStudent (){
+        int id = Integer.parseInt(editId.getText().toString());
+        String name = editName.getText().toString();
+        Student student = new Student(id,name);
+        return student;
     }
 
     public void load(View view){

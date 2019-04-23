@@ -5,12 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DB extends SQLiteOpenHelper {
 
+    private final String TAG = "DBManger";
     private static final int DB_VERSION = 1;
     private static final String DB_NAME = "Student.db";
     private static final String DB_TABLENAME = "Student";
@@ -18,13 +20,18 @@ public class DB extends SQLiteOpenHelper {
     private static final String COLUMN_NAME = "Name";
 
     public DB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+        super(context, DB_NAME, factory, DB_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_STUDENT_TABLE = "CREATE TABLE " + DB_TABLENAME + "(" + COLUMN_ID + " INTEGER PRIMARY KEY, " + COLUMN_NAME + " TEXT )";
-        db.execSQL(CREATE_STUDENT_TABLE);
+        String CREATE_STUDENTS_TABLE = "CREATE TABLE " +
+                DB_TABLENAME + "("
+                + COLUMN_ID + " INTEGER PRIMARY KEY," +
+                COLUMN_NAME + " TEXT )";
+
+        //thực thi truy vấn
+        db.execSQL(CREATE_STUDENTS_TABLE);
     }
 
     @Override
@@ -56,6 +63,7 @@ public class DB extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(DB_TABLENAME, null, values);
         db.close();
+        Log.i(TAG, "addData: ");
     }
 
     public boolean delData(int ID){
