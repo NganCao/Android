@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.quanlysinhvien">
+    package="com.example.myapplication">
 
     <application
         android:allowBackup="true"
@@ -9,15 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
-        <activity android:name=".EditSV"></activity>
-        <activity android:name=".DIEM" />
-        <activity android:name=".SinhVien" />
         <activity android:name=".MainActivity">
-=======
-        <activity android:name=".activity.LopActivity"></activity>
-        <activity android:name=".activity.MainActivity">
->>>>>>> 97badf007ef657c7e454f2dc61bb8cd3bccbd134
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
