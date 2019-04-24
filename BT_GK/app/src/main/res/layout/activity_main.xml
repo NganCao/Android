@@ -60,7 +60,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/btnMH"
                 android:layout_width="102dp"
                 android:layout_height="102dp"
                 android:layout_margin="20dp"
@@ -92,7 +92,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/btnSV"
                 android:layout_width="102dp"
                 android:layout_height="102dp"
                 android:layout_margin="20dp"
