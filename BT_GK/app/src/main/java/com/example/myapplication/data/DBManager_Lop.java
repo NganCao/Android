@@ -74,4 +74,25 @@ public class DBManager_Lop extends SQLiteOpenHelper {
 
         return list;
     }
+
+    public int updateLop(Lop lop){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COL_LOP_MA, lop.getMaLop());
+        values.put(COL_LOP_TEN, lop.getTenLop());
+
+        return db.update(TB_LOPS, values, COL_LOP_MA + "=?", new String[]{String.valueOf(lop.getMaLop())});
+
+    }
+
+    public int searchMaLop(String malop){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("select * from " + TB_LOPS + " where lop_ma =?", new String[]{malop});
+        if (c.moveToFirst()){
+            return 1;
+        }
+        return 0;
+
+    }
 }
