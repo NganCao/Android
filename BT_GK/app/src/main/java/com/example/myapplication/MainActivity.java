@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.myapplication.activity.LopActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     ImageButton btnLop, btnMonhoc, btnSV, btnDiem;
@@ -30,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         btnLop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, LopActivity.class);
+                startActivity(intent);
             }
         });
 
