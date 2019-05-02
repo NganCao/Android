@@ -53,14 +53,14 @@ public class SanPhamService {
                 String hinhSanPham = object.getProperty("HinhAnh").toString();
                 String thongTinSanPham = object.getProperty("ThongTin").toString();
                 String giaSanPham = object.getProperty("Gia").toString();
-                String maMenu = object.getProperty("MaMenu").toString();
+                //String maMenu = object.getProperty("MaMenu").toString();
 
                 sanPham.setMaSp(Integer.parseInt(maSanPham));
                 sanPham.setTenSp(tenSanPham);
                 sanPham.setHinhAnh(hinhSanPham);
                 sanPham.setThongTin(thongTinSanPham);
                 sanPham.setGiaSp(Integer.parseInt(giaSanPham));
-                sanPham.setMaMenu(Integer.parseInt(maMenu));
+                //sanPham.setMaMenu(Integer.parseInt(maMenu));
 
                 list.add(sanPham);
             }
@@ -108,7 +108,7 @@ public class SanPhamService {
                 sanPham.setHinhAnh(hinhSanPham);
                 sanPham.setThongTin(thongTinSanPham);
                 sanPham.setGiaSp(Integer.parseInt(giaSanPham));
-                sanPham.setMaMenu(mamenu);
+                //sanPham.setMaMenu(mamenu);
 
                 list.add(sanPham);
             }
