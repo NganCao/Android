@@ -2,9 +2,11 @@ package com.th.thuhien.plantshop.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -15,6 +17,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.th.thuhien.plantshop.R;
 import com.th.thuhien.plantshop.ultil.Server;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,6 +51,8 @@ public class CheckOut extends AppCompatActivity {
 //        else {
 //            CheckConnection.ShowToast_Short(getApplicationContext(),"Bạn hãy kiểm tra lại kết nối Internet");
 //        }
+
+        EventButton();
     }
 
     private void EventButton() {
@@ -59,8 +67,41 @@ public class CheckOut extends AppCompatActivity {
                     RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.Duongdandonhang, new Response.Listener<String>() {
                         @Override
-                        public void onResponse(String response) {
+                        public void onResponse(final String maddh) {
+                            Log.d("maddh",maddh);
+                            if (Integer.parseInt(maddh) > 0){
+                                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                                StringRequest request = new StringRequest(Request.Method.POST, "", new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
 
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+
+                                    }
+                                }){
+                                    @Override
+                                    protected Map<String, String> getParams() throws AuthFailureError {
+                                        JSONArray jsonArray = new JSONArray();
+                                        for (int i = 0; i<MainActivity.arrayGioHang.size(); i++){
+                                            JSONObject jsonObject = new JSONObject();
+                                            try {
+                                                jsonObject.put("maddh",maddh);
+                                                jsonObject.put("masp",MainActivity.arrayGioHang.get(i).getIdSP());
+                                                jsonObject.put("soluong",MainActivity.arrayGioHang.get(i).getSoluongSP());
+                                                jsonObject.put("dongia",MainActivity.arrayGioHang.get(i).getGiaSP());
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            jsonArray.put(jsonObject);
+                                        }
+                                        HashMap<String, String> hashMap = new HashMap<>();
+                                        return super.getParams();
+                                    }
+                                };
+                            }
                         }
                     }, new Response.ErrorListener() {
                         @Override
@@ -72,9 +113,15 @@ public class CheckOut extends AppCompatActivity {
                         protected Map<String, String> getParams() throws AuthFailureError {
                             HashMap<String, String> hashMap = new HashMap<String, String>();
                             hashMap.put("tenkhachhang",ten);
-                            return super.getParams();
+                            hashMap.put("email",email);
+                            hashMap.put("sdt",sdt);
+                            hashMap.put("diachi",diachi);
+                            return hashMap;
                         }
                     };
+                    requestQueue.add(stringRequest);
+                }else {
+                    Toast.makeText(getApplicationContext(), "Hãy kiểm tra lại kết nối của bạn", Toast.LENGTH_SHORT).show();
                 }
             }
         });
