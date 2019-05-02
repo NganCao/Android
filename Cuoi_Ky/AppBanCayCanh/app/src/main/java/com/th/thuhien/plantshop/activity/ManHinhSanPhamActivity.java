@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -22,7 +23,6 @@ import java.util.List;
 
 public class ManHinhSanPhamActivity extends AppCompatActivity {
 
-    Button btnGH;
     Toolbar toolbar_MHSP;
     List<SanPham> arrayMHSP;
     ListView lv_MHSP;
@@ -39,20 +39,24 @@ public class ManHinhSanPhamActivity extends AppCompatActivity {
         AnhXa();
         GetIdMenu();
         ActionToolbar();
-        GHButtonAction();
         setEvent();
         LoadMoreData();
     }
 
-    private void GHButtonAction() {
-        btnGH.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ManHinhSanPhamActivity.this, GioHangActivity.class);
-//                startActivityForResult(intent, GIOHANGCODE);
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menugiohang:
+                Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
                 startActivity(intent);
-            }
-        });
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void LoadMoreData() {

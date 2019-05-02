@@ -33,14 +33,6 @@
 
                 </android.support.v7.widget.Toolbar>
 
-                <Button
-                    android:id="@+id/btnGH"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/logo"
-                    android:gravity="center" />
             </LinearLayout>
 
             <ViewFlipper

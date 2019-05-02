@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -35,7 +36,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnGH;
     Toolbar toolbar;
     ViewFlipper viewFlipper;
     //ListView lv_SanPhamMoi;
@@ -64,18 +64,23 @@ public class MainActivity extends AppCompatActivity {
         ActionBar();
         ActionViewFlipper();
         ClickItemMenu();
-        GHButtonAction();
         //LoadMoreData(); // đưa về màn hình chi tiết -> chưa làm được
     }
 
-    private void GHButtonAction(){
-        btnGH.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, GioHangActivity.class);
-                startActivityForResult(intent, GIOHANGCODE);
-            }
-        });
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menugiohang:
+                Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void ClickItemMenu() {
@@ -133,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void AnhXa() {
 
-        btnGH = (Button) findViewById(R.id.btnGH);
         toolbar = findViewById(R.id.toolbarmanhinhchinh);
         viewFlipper = findViewById(R.id.viewflipper);
         recyclerViewmanhinhchinh = findViewById(R.id.recyclerview);
@@ -205,5 +209,7 @@ public class MainActivity extends AppCompatActivity {
             sanPhamAdapter.notifyDataSetChanged();
         }
     }
+
+
 
 }
