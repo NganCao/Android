@@ -6,10 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,10 +22,10 @@ import java.util.List;
 public class ManHinhSanPhamActivity extends AppCompatActivity {
 
     Toolbar toolbar_MHSP;
-    List<SanPham> arrayMHSP;
+    ArrayList<SanPham> arrayMHSP;
     ListView lv_MHSP;
     ManHinhSanPhamAdapter manHinhSanPhamAdapter;
-    int maMenu = 0;
+    Integer maMenu = 0;
     String tenmenu = "";
 
     @Override
@@ -39,24 +37,9 @@ public class ManHinhSanPhamActivity extends AppCompatActivity {
         AnhXa();
         GetIdMenu();
         ActionToolbar();
-        setEvent();
+
+        //setEvent();
         LoadMoreData();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.menugiohang:
-                Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
-                startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void LoadMoreData() {
@@ -70,12 +53,12 @@ public class ManHinhSanPhamActivity extends AppCompatActivity {
         });
     }
 
-    private void setEvent() {
-        arrayMHSP = KhoiTao();
-        lv_MHSP.setAdapter(new ManHinhSanPhamAdapter(this, arrayMHSP));
-//        manHinhSanPhamAdapter = new ManHinhSanPhamAdapter(getApplicationContext(), arrayMHSP);
-//        lv_MHSP.setAdapter(manHinhSanPhamAdapter);
-    }
+//    private void setEvent() {
+//        arrayMHSP = KhoiTao();
+//        lv_MHSP.setAdapter(new ManHinhSanPhamAdapter(this, arrayMHSP));
+////        manHinhSanPhamAdapter = new ManHinhSanPhamAdapter(getApplicationContext(), arrayMHSP);
+////        lv_MHSP.setAdapter(manHinhSanPhamAdapter);
+//    }
 
 
     private void ActionToolbar() {
@@ -102,17 +85,19 @@ public class ManHinhSanPhamActivity extends AppCompatActivity {
         toolbar_MHSP = (Toolbar) findViewById(R.id.toolbarMHSanPham);
         lv_MHSP = (ListView) findViewById(R.id.listviewMHSanPham);
 
+        arrayMHSP = new ArrayList<>();
+        manHinhSanPhamAdapter = new ManHinhSanPhamAdapter(this, arrayMHSP);
+        lv_MHSP.setAdapter(manHinhSanPhamAdapter);
 
-//        arrayMHSP = new ArrayList<SanPham>();
 //        //arrayMHSP = KhoiTao();
-//        manHinhSanPhamAdapter = new ManHinhSanPhamAdapter(getApplicationContext(), arrayMHSP);
-//        lv_MHSP.setAdapter(manHinhSanPhamAdapter);
-//
-//
-//
-//
-//        AsynMHSP asysnMHSP = new AsynMHSP();
-//        asysnMHSP.execute(maMenu);
+
+
+////
+////
+////
+////
+        AsynMHSP asysnMHSP = new AsynMHSP();
+        asysnMHSP.execute();
 
 
 
@@ -136,20 +121,23 @@ public class ManHinhSanPhamActivity extends AppCompatActivity {
         return list;
     }
 
-    public class AsynMHSP extends AsyncTask<Integer, Void, List<SanPham>>{
+    public class AsynMHSP extends AsyncTask<Void, Void, List<SanPham>>{
 
         @Override
-        protected List<SanPham> doInBackground(Integer... integers) {
+        protected List<SanPham> doInBackground(Void... voids) {
             SanPhamService sanPhamService = new SanPhamService();
-            return sanPhamService.getSanPhamByMenu(integers[0]);
+            return sanPhamService.getSanPhamByMenu(maMenu);
         }
 
         @Override
         protected void onPostExecute(List<SanPham> sanPhams) {
             super.onPostExecute(sanPhams);
+            Log.d("size: ", String.valueOf(sanPhams.size()));
             for (int i = 0; i < sanPhams.size(); i++){
                 arrayMHSP.add(sanPhams.get(i));
+
             }
+            Log.d("size: ", String.valueOf(arrayMHSP.size()));
             manHinhSanPhamAdapter.notifyDataSetChanged();
         }
     }

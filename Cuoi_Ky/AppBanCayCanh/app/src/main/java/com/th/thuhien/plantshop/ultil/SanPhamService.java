@@ -1,5 +1,7 @@
 package com.th.thuhien.plantshop.ultil;
 
+import android.util.Log;
+
 import com.th.thuhien.plantshop.model.SanPham;
 
 import org.ksoap2.SoapEnvelope;
@@ -74,6 +76,7 @@ public class SanPhamService {
     public List<SanPham> getSanPhamByMenu(int mamenu){
         List<SanPham> list = new ArrayList<SanPham>();
 
+        Log.d("ma menu nhan duoc: ", String.valueOf(mamenu));
         SoapObject soapObject = new SoapObject(NAME_SPACE, METHOD_NAME_SANPHAM_BY_MENU);
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         envelope.dotNet = true;
@@ -98,14 +101,14 @@ public class SanPhamService {
                 String hinhSanPham = object.getProperty("HinhAnh").toString();
                 String thongTinSanPham = object.getProperty("ThongTin").toString();
                 String giaSanPham = object.getProperty("Gia").toString();
-                String maMenu = object.getProperty("MaMenu").toString();
+                //String maMenu = String.valueOf(mamenu);
 
                 sanPham.setMaSp(Integer.parseInt(maSanPham));
                 sanPham.setTenSp(tenSanPham);
                 sanPham.setHinhAnh(hinhSanPham);
                 sanPham.setThongTin(thongTinSanPham);
                 sanPham.setGiaSp(Integer.parseInt(giaSanPham));
-                sanPham.setMaMenu(Integer.parseInt(maMenu));
+                sanPham.setMaMenu(mamenu);
 
                 list.add(sanPham);
             }

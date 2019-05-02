@@ -20,12 +20,12 @@ import java.util.List;
 
 public class ManHinhSanPhamAdapter extends BaseAdapter {
 
-    private List<SanPham> arrayMHSanPHam;
+    private ArrayList<SanPham> arrayMHSanPHam;
     private LayoutInflater layoutInflater;
     private Context context;
 
 
-    public ManHinhSanPhamAdapter(Context context, List<SanPham> arrayMHSanPHam) {
+    public ManHinhSanPhamAdapter(Context context, ArrayList<SanPham> arrayMHSanPHam) {
         this.context = context;
         this.arrayMHSanPHam = arrayMHSanPHam;
         layoutInflater = LayoutInflater.from(context);
@@ -49,14 +49,14 @@ public class ManHinhSanPhamAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
+        MHViewHolder viewHolder;
 
         if (convertView == null){
 
             //LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.dong_manhinh_sanpham, null);
 
-            viewHolder = new ViewHolder();
+            viewHolder = new MHViewHolder();
 
             viewHolder.txtMHTenSP = (TextView) convertView.findViewById(R.id.textviewMHTenSP);
             viewHolder.txtMHGiaSP = (TextView) convertView.findViewById(R.id.textviewMHGiaSP);
@@ -64,7 +64,7 @@ public class ManHinhSanPhamAdapter extends BaseAdapter {
             viewHolder.imgMHSP = (ImageView) convertView.findViewById(R.id.imageviewMHSanPham);
             convertView.setTag(viewHolder);
         }else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (MHViewHolder) convertView.getTag();
         }
 
         SanPham sanPham = arrayMHSanPHam.get(position);
@@ -81,7 +81,7 @@ public class ManHinhSanPhamAdapter extends BaseAdapter {
         return convertView;
     }
 
-    static class ViewHolder{
+    static class MHViewHolder{
         TextView txtMHTenSP, txtMHGiaSP, txtMHMotaSP;
         ImageView imgMHSP;
     }

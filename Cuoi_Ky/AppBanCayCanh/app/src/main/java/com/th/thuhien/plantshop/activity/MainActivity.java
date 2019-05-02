@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBar();
         ActionViewFlipper();
         ClickItemMenu();
-        //LoadMoreData(); // đưa về màn hình chi tiết -> chưa làm được
+
     }
 
     @Override
@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("maMenu", arrayListMenu.get(position).getMaMenu());
                     intent.putExtra("tenmenu", arrayListMenu.get(position).getTenMenu());
                     startActivity(intent);
+                    drawerLayout.closeDrawer(GravityCompat.START);
                 }
             }
         });
