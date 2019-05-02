@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.th.thuhien.plantshop.R;
@@ -67,9 +68,11 @@ public class GioHangActivity extends AppCompatActivity {
 //                startActivity(intent);
                 if (MainActivity.arrayGioHang.size() >0 ){
                     Intent intent = new Intent(getApplicationContext(),CheckOut.class);
+                    startActivity(intent);
                 }
                 else {
 //                    CheckConnection.ShowToast_Short(getApplicationContext(),"Giỏ hàng của bạn trống!");
+                    Toast.makeText(GioHangActivity.this, "Giỏ hàng của bạn đang trống!",Toast.LENGTH_SHORT).show();
                 }
             }
         });
