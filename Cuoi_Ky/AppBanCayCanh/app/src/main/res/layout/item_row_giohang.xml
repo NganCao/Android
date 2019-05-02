@@ -51,14 +51,14 @@
             android:layout_height="35dp"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:text="--" />
+            android:text="-" />
 
-        <EditText
+        <Button
             android:id="@+id/quantity"
             android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number" />
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:background="@drawable/spiner" />
 
         <Button
             android:id="@+id/btncong"

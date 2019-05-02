@@ -42,7 +42,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         ActionToolbar();
         GetInfomation();
         CatchEventSpiner();
-        //EventButton();
+        EventButton();
         EventButtonGioHang(); // dung de show man hinh gio hang thôi
     }
 
@@ -84,6 +84,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                     long giaMoi = soluong * giaChiTiet;
                     MainActivity.arrayGioHang.add(new GioHang(id, tenChiTiet, giaMoi, hinhChiTiet, soluong));
                 }
+                Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
+                startActivity(intent);
             }
         });
     }

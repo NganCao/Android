@@ -68,7 +68,15 @@ public class MainActivity extends AppCompatActivity {
         //LoadMoreData(); // đưa về màn hình chi tiết -> chưa làm được
     }
 
-
+    private void GHButtonAction(){
+        btnGH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GioHangActivity.class);
+                startActivityForResult(intent, GIOHANGCODE);
+            }
+        });
+    }
 
     private void ClickItemMenu() {
         listViewManhinhchinh.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -196,16 +204,6 @@ public class MainActivity extends AppCompatActivity {
             }
             sanPhamAdapter.notifyDataSetChanged();
         }
-    }
-
-    private void GHButtonAction(){
-        btnGH.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, GioHangActivity.class);
-                startActivityForResult(intent, GIOHANGCODE);
-            }
-        });
     }
 
 }
