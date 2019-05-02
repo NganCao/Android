@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import java.util.List;
 
 public class ManHinhSanPhamActivity extends AppCompatActivity {
 
+    Button btnGH;
     Toolbar toolbar_MHSP;
     List<SanPham> arrayMHSP;
     ListView lv_MHSP;
@@ -37,9 +39,20 @@ public class ManHinhSanPhamActivity extends AppCompatActivity {
         AnhXa();
         GetIdMenu();
         ActionToolbar();
-
+        GHButtonAction();
         setEvent();
         LoadMoreData();
+    }
+
+    private void GHButtonAction() {
+        btnGH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ManHinhSanPhamActivity.this, GioHangActivity.class);
+//                startActivityForResult(intent, GIOHANGCODE);
+                startActivity(intent);
+            }
+        });
     }
 
     private void LoadMoreData() {

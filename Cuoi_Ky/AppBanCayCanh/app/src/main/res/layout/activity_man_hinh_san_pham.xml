@@ -7,13 +7,31 @@
     android:orientation="vertical"
     tools:context=".activity.ManHinhSanPhamActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarMHSanPham"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="56dp"
         android:background="#FF249B0F"
-        app:title="Sen đá"
-        app:titleTextColor="#FCFCFA"></android.support.v7.widget.Toolbar>
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarMHSanPham"
+            android:layout_width="wrap_content"
+            android:layout_height="?actionBarSize"
+            android:layout_weight="1"
+            android:background="#FF249B0F"
+            app:title="Sen đá"
+            app:titleTextColor="#FCFCFA"></android.support.v7.widget.Toolbar>
+
+        <Button
+            android:id="@+id/btnGH"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/logo"
+            android:gravity="center" />
+    </LinearLayout>
+
     <ListView
         android:id="@+id/listviewMHSanPham"
         android:layout_width="match_parent"

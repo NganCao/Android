@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBar();
         ActionViewFlipper();
         ClickItemMenu();
+        GHButtonAction();
         //LoadMoreData(); // đưa về màn hình chi tiết -> chưa làm được
     }
 
@@ -197,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void GHButtonAction(){
+    private void GHButtonAction(){
         btnGH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
