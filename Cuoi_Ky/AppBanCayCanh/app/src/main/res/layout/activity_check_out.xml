@@ -4,142 +4,105 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:background="#08628D"
     android:orientation="vertical"
     tools:context=".activity.CheckOut">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:background="#03A9F4"
-        android:minHeight="?attr/actionBarSize"
+        android:minHeight="56dp"
         android:theme="?attr/actionBarTheme"
         app:title="Thông tin thanh toán"
         app:titleTextColor="@android:color/background_light" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/border"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_margin="20dp"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-            <TextView
-                android:id="@+id/textView8"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:gravity="bottom"
-                android:text="Họ Tên:"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:gravity="bottom"
-                android:text="Email:"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                <EditText
+                    android:id="@+id/txtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:ems="10"
+                    android:hint="Họ Tên "
+                    android:inputType="textPersonName" />
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:gravity="bottom"
-                android:text="Phone:"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                <EditText
+                    android:id="@+id/txtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:ems="10"
+                    android:hint="example@xxx.xxx"
+                    android:inputType="textEmailSubject" />
 
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:gravity="bottom"
-                android:text="Địa chỉ:"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                <EditText
+                    android:id="@+id/txtPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:ems="10"
+                    android:hint="Phone number"
+                    android:inputType="textPhonetic" />
+
+                <EditText
+                    android:id="@+id/txtAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:ems="10"
+                    android:hint="Địa chỉ nhận hàng"
+                    android:inputType="text" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-            <EditText
-                android:id="@+id/txtName"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:ems="10"
-                android:hint="Name"
-                android:inputType="textPersonName" />
+                android:layout_marginRight="100dp"
+                android:background="#FF3AA6D8"
+                android:text="Back"
+                android:textColor="@android:color/background_light" />
 
-            <EditText
-                android:id="@+id/txtEmail"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btnDathang"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:ems="10"
-                android:hint="example@xxx.xxx"
-                android:inputType="textEmailSubject" />
-
-            <EditText
-                android:id="@+id/txtPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:ems="10"
-                android:hint="Phone number"
-                android:inputType="textPhonetic" />
-
-            <EditText
-                android:id="@+id/txtAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:ems="10"
-                android:hint="Địa chỉ nhận hàng"
-                android:inputType="text" />
+                android:background="#FFD81B47"
+                android:text="Đặt hàng"
+                android:textColor="@android:color/background_light" />
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Back" />
-
-        <Button
-            android:id="@+id/btnDathang"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Đặt hàng" />
     </LinearLayout>
 
 </LinearLayout>
