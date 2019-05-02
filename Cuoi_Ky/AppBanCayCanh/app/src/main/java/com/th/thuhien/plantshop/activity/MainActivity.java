@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button btnGH;
     Toolbar toolbar;
     ViewFlipper viewFlipper;
     //ListView lv_SanPhamMoi;
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     MenuAdapter menuAdapter;
 
     //String tenMenu = "";
-
+    private static final int GIOHANGCODE = 123;
 
     public static ArrayList<GioHang> arrayGioHang;
 
@@ -121,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void AnhXa() {
+
+        btnGH = (Button) findViewById(R.id.btnGH);
         toolbar = findViewById(R.id.toolbarmanhinhchinh);
         viewFlipper = findViewById(R.id.viewflipper);
         recyclerViewmanhinhchinh = findViewById(R.id.recyclerview);
@@ -191,6 +195,16 @@ public class MainActivity extends AppCompatActivity {
             }
             sanPhamAdapter.notifyDataSetChanged();
         }
+    }
+
+    public void GHButtonAction(){
+        btnGH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GioHangActivity.class);
+                startActivityForResult(intent, GIOHANGCODE);
+            }
+        });
     }
 
 }

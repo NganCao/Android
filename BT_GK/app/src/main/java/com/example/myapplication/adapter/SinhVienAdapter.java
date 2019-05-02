@@ -33,7 +33,7 @@ public class SinhVienAdapter extends ArrayAdapter<SinhVien> {
         holder.icon = (ImageView) convertView.findViewById(R.id.icon);
 
         SinhVien sv = data.get(position);
-        holder.txtMalop.setText("Mã lớp: "+ sv.getLop());
+        holder.txtMalop.setText("Mã lớp: "+ sv.getLop().getMaLop());
         holder.txtMasv.setText("Mã SV: "+ sv.getMa());
         holder.txtTen.setText("Họ tên: "+ sv.getHo()+" "+ sv.getTen());
         holder.icon.setImageResource(R.drawable.boy);
