@@ -32,6 +32,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     int giaChiTiet = 0;
     String hinhChiTiet = "";
     String motaChiTiet = "";
+    int idSp = 0;
     int idMenu = 0;
 
     @Override
@@ -44,7 +45,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         GetInfomation();
         CatchEventSpiner();
         EventButton();
-        EventButtonGioHang(); // dung de show man hinh gio hang thôi
+//        EventButtonGioHang(); // dung de show man hinh gio hang thôi
     }
 
     @Override
@@ -63,24 +64,13 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void EventButtonGioHang() {
-        btnDatMuaCT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ChiTietSanPhamActivity.this, GioHangActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-
     private void EventButton() {
         btnDatMuaCT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (MainActivity.arrayGioHang.size() > 0){
                     int sl = Integer.parseInt(spinnerCT.getSelectedItem().toString());
-                    boolean exits = false;
+                    boolean exists = false;
                     for (int i = 0; i < MainActivity.arrayGioHang.size(); i++){
                         if (MainActivity.arrayGioHang.get(i).getIdSP() == id){
                             MainActivity.arrayGioHang.get(i).setSoluongSP(MainActivity.arrayGioHang.get(i).getSoluongSP() + sl);
@@ -88,10 +78,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                                 MainActivity.arrayGioHang.get(i).setSoluongSP(10);
                             }
                             MainActivity.arrayGioHang.get(i).setGiaSP(giaChiTiet * MainActivity.arrayGioHang.get(i).getSoluongSP());
-                            exits = true;
+                            exists = true;
                         }
                     }
-                    if (exits == false){
+                    if (exists == false){
                         int soluong = Integer.parseInt(spinnerCT.getSelectedItem().toString());
                         long giaMoi = soluong * giaChiTiet;
                         MainActivity.arrayGioHang.add(new GioHang(id, tenChiTiet, giaMoi, hinhChiTiet, soluong));

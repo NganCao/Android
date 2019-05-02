@@ -130,10 +130,9 @@ public class GiohangAdapter extends BaseAdapter {
                 GioHangActivity.EvenUltil();
                 if (slnew < 2 ){
                     finalHolder.del.setVisibility(View.INVISIBLE);
-                    finalHolder.del.setVisibility(View.VISIBLE);
+                    finalHolder.add.setVisibility(View.VISIBLE);
                     finalHolder.quantity.setText(String.valueOf(slnew));
-                }
-                else{
+                }else{
                     finalHolder.add.setVisibility(View.VISIBLE);
                     finalHolder.del.setVisibility(View.VISIBLE);
                     finalHolder.quantity.setText(String.valueOf(slnew));
