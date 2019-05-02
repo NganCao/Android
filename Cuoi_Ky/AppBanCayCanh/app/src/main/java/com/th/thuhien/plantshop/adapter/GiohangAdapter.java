@@ -37,7 +37,7 @@ public class GiohangAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return dataGH.get(position);
+        return this.dataGH.get(position);
     }
 
     @Override
