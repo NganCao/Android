@@ -27,6 +27,7 @@
 
 
         <EditText
+            android:inputType="textPassword"
             android:backgroundTint="#F44336"
             android:textColor="#4CAF50"
             android:id="@+id/edittextDNPass"

@@ -27,7 +27,7 @@ import com.squareup.picasso.Picasso;
 import com.th.thuhien.plantshop.R;
 import com.th.thuhien.plantshop.adapter.MenuAdapter;
 import com.th.thuhien.plantshop.adapter.SanPhamAdapter;
-import com.th.thuhien.plantshop.admin.activity.AdminMainActivity;
+import com.th.thuhien.plantshop.admin.AdminMainActivity;
 import com.th.thuhien.plantshop.model.GioHang;
 import com.th.thuhien.plantshop.model.Menu;
 import com.th.thuhien.plantshop.model.SanPham;
@@ -106,10 +106,10 @@ public class MainActivity extends AppCompatActivity {
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else if (position == arrayListMenu.size()-1){
 
-                    //DialogDangNhap();
+                    DialogDangNhap();
 
-                    Intent intent = new Intent(MainActivity.this, AdminMainActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(MainActivity.this, AdminMainActivity.class);
+//                    startActivity(intent);
                     drawerLayout.closeDrawer(GravityCompat.START);
                 }else
                 {

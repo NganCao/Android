@@ -1,5 +1,6 @@
 package com.th.thuhien.plantshop.ultil;
 
+import android.content.Intent;
 import android.util.Log;
 
 import com.th.thuhien.plantshop.model.Menu;
@@ -21,10 +22,12 @@ public class MenuService {
     private final String METHOD_NAME_LIST_MENU = "GetListMenu";
     private final String METHOD_NAME_INSERT_MENU = "InsertMenu";
     private final String METHOD_NAME_DELETE_MENU = "DeleteMenu";
+    private final String METHOD_NAME_UPDATE_MENU = "UpdateMenu";
 
     private final String SOAP_ACTION_LIST_MENU = NAME_SPACE + METHOD_NAME_LIST_MENU;
     private final String SOAP_ACTION_INSERT_MENU = NAME_SPACE + METHOD_NAME_INSERT_MENU;
     private final String SOAP_ACTION_DELETE_MENU = NAME_SPACE + METHOD_NAME_DELETE_MENU;
+    private final String SOAP_ACTION_UPDATE_MENU = NAME_SPACE + METHOD_NAME_UPDATE_MENU;
 
     private final String URL = "http://plantshop.somee.com/Service.asmx?WSDL";
 
@@ -62,7 +65,7 @@ public class MenuService {
         return list;
     }
 
-    public Boolean insetMenu(String tenmenu){
+    public boolean insetMenu(String tenmenu){
         SoapObject request = new SoapObject(NAME_SPACE, METHOD_NAME_INSERT_MENU);
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         envelope.dotNet = true;
@@ -90,6 +93,39 @@ public class MenuService {
         }
         return result;
     }
+
+    public boolean updateMenu(String mamenu, String tenmenu){
+        boolean result = false;
+        SoapObject request = new SoapObject(NAME_SPACE, METHOD_NAME_UPDATE_MENU);
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = true;
+        envelope.setOutputSoapObject(request);
+
+        int ma = Integer.parseInt(mamenu);
+
+        request.addProperty("maMenu", ma);
+        request.addProperty("menu", tenmenu);
+
+        MarshalFloat marshalFloat = new MarshalFloat();
+        marshalFloat.register(envelope);
+
+        HttpTransportSE httpTransportSE = new HttpTransportSE(URL);
+        try {
+            httpTransportSE.call(SOAP_ACTION_UPDATE_MENU, envelope);
+
+            SoapPrimitive item = (SoapPrimitive) envelope.getResponse();
+            String a = item.toString();
+
+            result = Boolean.parseBoolean(a);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 
     public boolean deleteMenu(int mamenu){
 

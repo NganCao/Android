@@ -1,4 +1,4 @@
-package com.th.thuhien.plantshop.admin.activity;
+package com.th.thuhien.plantshop.admin;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
