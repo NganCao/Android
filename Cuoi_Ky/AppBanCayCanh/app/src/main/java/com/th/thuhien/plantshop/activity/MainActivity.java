@@ -1,5 +1,7 @@
 package com.th.thuhien.plantshop.activity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
@@ -10,12 +12,14 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -25,9 +29,12 @@ import com.squareup.picasso.Picasso;
 import com.th.thuhien.plantshop.R;
 import com.th.thuhien.plantshop.adapter.MenuAdapter;
 import com.th.thuhien.plantshop.adapter.SanPhamAdapter;
+import com.th.thuhien.plantshop.admin.TestActivity;
+import com.th.thuhien.plantshop.admin.activity.AdminMainActivity;
 import com.th.thuhien.plantshop.model.GioHang;
 import com.th.thuhien.plantshop.model.Menu;
 import com.th.thuhien.plantshop.model.SanPham;
+import com.th.thuhien.plantshop.ultil.DangNhapService;
 import com.th.thuhien.plantshop.ultil.MenuService;
 import com.th.thuhien.plantshop.ultil.SanPhamService;
 
@@ -36,6 +43,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Khai báo
     Toolbar toolbar;
     ViewFlipper viewFlipper;
     //ListView lv_SanPhamMoi;
@@ -44,11 +52,20 @@ public class MainActivity extends AppCompatActivity {
     ListView listViewManhinhchinh;
     DrawerLayout drawerLayout;
 
+    //test
+    Button btnTest;
+
+    // Khai báo cho phần Menu
     ArrayList<Menu> arrayListMenu = new ArrayList<Menu>();
+    MenuAdapter menuAdapter;
+
+    // Khai báo cho phần SanPham mới
     ArrayList<SanPham> mangSanPham;
     SanPhamAdapter sanPhamAdapter;
 
-    MenuAdapter menuAdapter;
+    // Khai báo biến
+
+
 
     //String tenMenu = "";
     private static final int GIOHANGCODE = 123;
@@ -65,6 +82,14 @@ public class MainActivity extends AppCompatActivity {
         ActionViewFlipper();
         ClickItemMenu();
 
+        // test -> Hiền
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, TestActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -83,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Điều khiển menu: click item menu -> Hiền
     private void ClickItemMenu() {
         listViewManhinhchinh.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -91,7 +117,15 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, MainActivity.class);
                     startActivity(intent);
                     drawerLayout.closeDrawer(GravityCompat.START);
-                }else {
+                } else if (position == arrayListMenu.size()-1){
+
+                    //DialogDangNhap();
+
+                    Intent intent = new Intent(MainActivity.this, AdminMainActivity.class);
+                    startActivity(intent);
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }else
+                {
                     Intent intent = new Intent(MainActivity.this, ManHinhSanPhamActivity.class);
                     intent.putExtra("maMenu", arrayListMenu.get(position).getMaMenu());
                     intent.putExtra("tenmenu", arrayListMenu.get(position).getTenMenu());
@@ -102,6 +136,50 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void DialogDangNhap(){
+        final Dialog dialog = new Dialog(MainActivity.this);
+        dialog.setContentView(R.layout.dialog_dangnhap);
+        //dialog.show();
+
+        //Anh xa
+        final EditText edt_user_dn = (EditText) dialog.findViewById(R.id.edittextDNUser);
+        final EditText edt_pass_dn = (EditText) dialog.findViewById(R.id.edittextDNPass);
+        Button btn_DongY = (Button) dialog.findViewById(R.id.buttonDNDongY);
+        Button btn_Huy = (Button) dialog.findViewById(R.id.buttonDNHuy);
+
+        btn_DongY.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String ten = edt_user_dn.getText().toString().trim();
+                String matkhau = edt_pass_dn.getText().toString().trim();
+
+                if (ten.equals("")){
+                    Toast.makeText(MainActivity.this, "Tên đăng nhập không được rỗng", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (matkhau.equals("")){
+                    Toast.makeText(MainActivity.this, "Mật không được rỗng", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                AsynDangNhap asynDangNhap = new AsynDangNhap();
+                asynDangNhap.execute(ten, matkhau);
+
+                dialog.cancel();
+            }
+        });
+
+        btn_Huy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+        dialog.show();
+    }
+
+    // ViewFlipper banner cho app -> Hiền
     private void ActionViewFlipper() {
         ArrayList<String> mangquangcao = new ArrayList<>();
         mangquangcao.add("https://1.bp.blogspot.com/-xA1DQYrcADo/XJcgoCV5NpI/AAAAAAAAF3k/f8UlgDDuYtMZzF3kF7-1JY7ITExYSgLzgCLcBGAs/s1600/banner-23.png");
@@ -124,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
         viewFlipper.setInAnimation(animation_slide_out_right);
     }
 
+    // Điều khiển actionbar, set icon menu, mở khi click -> Hiền
     private void ActionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -147,7 +226,10 @@ public class MainActivity extends AppCompatActivity {
         listViewManhinhchinh = findViewById(R.id.listViewManhinhchinh);
         drawerLayout = findViewById(R.id.drawerLayout);
 
-        //arrayListMenu.add(0, new Menu(0, "Trang chá»§"));
+        //test
+        btnTest = (Button) findViewById(R.id.buttonTest);
+
+        // Menu -> Hiền
         menuAdapter = new MenuAdapter(arrayListMenu, getApplicationContext());
         listViewManhinhchinh.setAdapter(menuAdapter);
 
@@ -155,15 +237,19 @@ public class MainActivity extends AppCompatActivity {
 
         AsynListMenu asynListMenu = new AsynListMenu();
         asynListMenu.execute();
+        // -- Ket thuc Menu
 
+        // SanPham moi -> HIền
         mangSanPham = new ArrayList<>();
-        sanPhamAdapter = new SanPhamAdapter(getApplicationContext(),mangSanPham);
+        sanPhamAdapter = new SanPhamAdapter(getApplicationContext(), R.layout.dong_sanpham_moinhat,mangSanPham);
         recyclerViewmanhinhchinh.setHasFixedSize(true);
         recyclerViewmanhinhchinh.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerViewmanhinhchinh.setAdapter(sanPhamAdapter);
 
         AsysListSanPhamMoi asysListSanPhamMoi = new AsysListSanPhamMoi();
         asysListSanPhamMoi.execute(6);
+
+        // --Ket thuc SanPham moi
 
         if (arrayGioHang != null){
 
@@ -174,6 +260,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // Asyn cho Menu -> Hien
     public class AsynListMenu extends AsyncTask<Void, Void, List<Menu>>{
 
 
@@ -189,10 +276,12 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < menu.size(); i++){
                 arrayListMenu.add(menu.get(i));
             }
+            arrayListMenu.add(new Menu("QUẢN TRỊ"));
             menuAdapter.notifyDataSetChanged();
         }
     }
 
+    // Aysn cho SanPhamMoi -> Hien
     public class AsysListSanPhamMoi extends AsyncTask<Integer, Void, List<SanPham>>{
 
         @Override
@@ -211,6 +300,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public class AsynDangNhap extends AsyncTask<String, Void, Integer>{
 
+        @Override
+        protected Integer doInBackground(String... strings) {
+            DangNhapService dangNhapService = new DangNhapService();
+            return dangNhapService.kiemTraDangNhap(strings[0], strings[1]);
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+
+            if (integer == 1){
+                Intent intent = new Intent(MainActivity.this, AdminMainActivity.class);
+                startActivity(intent);
+            }else {
+                Toast.makeText(MainActivity.this, "Sai tên đăng nhập hoặc mật khẩu", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+    }
 
 }

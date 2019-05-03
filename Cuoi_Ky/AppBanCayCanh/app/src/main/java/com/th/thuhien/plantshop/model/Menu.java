@@ -8,6 +8,10 @@ public class Menu {
 
     }
 
+    public Menu(String tenMenu) {
+        this.tenMenu = tenMenu;
+    }
+
     public Menu(int maMenu, String tenMenu) {
         this.maMenu = maMenu;
         this.tenMenu = tenMenu;

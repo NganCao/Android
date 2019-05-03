@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.CheckOut"></activity>
+        <activity android:name=".admin.activity.AdminMenuActivity"></activity>
+        <activity android:name=".admin.activity.AdminMainActivity" />
+        <activity android:name=".admin.TestActivity" />
+        <activity android:name=".activity.CheckOut" />
         <activity android:name=".activity.GioHangActivity" />
         <activity android:name=".activity.ManHinhSanPhamActivity" />
         <activity android:name=".activity.ChiTietSanPhamActivity" />

@@ -3,6 +3,7 @@ package com.th.thuhien.plantshop.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     TextView txtTenCT, txtGiaCT, txtMoTaCT;
     Spinner spinnerCT;
     Button btnDatMuaCT;
+    //RecyclerView recyclerViewSPCungLoai;
 
     int id = 0;
     String tenChiTiet = "";
@@ -45,7 +47,12 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         GetInfomation();
         CatchEventSpiner();
         EventButton();
+        //EventRecyclerViewSPCungLoai();
 //        EventButtonGioHang(); // dung de show man hinh gio hang thôi
+    }
+
+    private void EventRecyclerViewSPCungLoai() {
+        
     }
 
     @Override
@@ -104,8 +111,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     }
 
     private void GetInfomation() {
-
-
         SanPham sanPham = (SanPham) getIntent().getSerializableExtra("thongtinsanpham");
         id = sanPham.getMaSp();
         tenChiTiet = sanPham.getTenSp();
@@ -143,6 +148,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         txtMoTaCT = (TextView) findViewById(R.id.textviewMoTaCTSP);
         spinnerCT = (Spinner) findViewById(R.id.spinerSoLuongCTSP);
         btnDatMuaCT = (Button) findViewById(R.id.buttonDatMuaCT);
+        //recyclerViewSPCungLoai = (RecyclerView) findViewById(R.id.recyclerviewSPCungLoai);
     }
 
 }
