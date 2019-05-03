@@ -62,7 +62,7 @@ public class MenuService {
         return list;
     }
 
-    public int insetMenu(String tenmenu){
+    public Boolean insetMenu(String tenmenu){
         SoapObject request = new SoapObject(NAME_SPACE, METHOD_NAME_INSERT_MENU);
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         envelope.dotNet = true;
@@ -70,21 +70,17 @@ public class MenuService {
 
         request.addProperty("menu", tenmenu);
 
-        int a = 0;
+        boolean result = false;
 
         HttpTransportSE httpTransportSE = new HttpTransportSE(URL);
         try {
             httpTransportSE.call(SOAP_ACTION_INSERT_MENU, envelope);
 
             SoapPrimitive item = (SoapPrimitive) envelope.getResponse();
-            String result = item.toString();
+            String a = item.toString();
 
-            boolean b = Boolean.parseBoolean(result);
-            if (b == true){
-                a = 1;
-            }else {
-                a = 0;
-            }
+            result = Boolean.parseBoolean(a);
+
 
 
         } catch (IOException e) {
@@ -92,7 +88,7 @@ public class MenuService {
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
-        return a;
+        return result;
     }
 
     public boolean deleteMenu(int mamenu){

@@ -1,6 +1,5 @@
 package com.th.thuhien.plantshop.activity;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -12,7 +11,6 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -29,7 +27,6 @@ import com.squareup.picasso.Picasso;
 import com.th.thuhien.plantshop.R;
 import com.th.thuhien.plantshop.adapter.MenuAdapter;
 import com.th.thuhien.plantshop.adapter.SanPhamAdapter;
-import com.th.thuhien.plantshop.admin.TestActivity;
 import com.th.thuhien.plantshop.admin.activity.AdminMainActivity;
 import com.th.thuhien.plantshop.model.GioHang;
 import com.th.thuhien.plantshop.model.Menu;
@@ -51,9 +48,6 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ListView listViewManhinhchinh;
     DrawerLayout drawerLayout;
-
-    //test
-    Button btnTest;
 
     // Khai báo cho phần Menu
     ArrayList<Menu> arrayListMenu = new ArrayList<Menu>();
@@ -82,14 +76,7 @@ public class MainActivity extends AppCompatActivity {
         ActionViewFlipper();
         ClickItemMenu();
 
-        // test -> Hiền
-        btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TestActivity.class);
-                startActivity(intent);
-            }
-        });
+
     }
 
     @Override
@@ -225,9 +212,6 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.navigationView);
         listViewManhinhchinh = findViewById(R.id.listViewManhinhchinh);
         drawerLayout = findViewById(R.id.drawerLayout);
-
-        //test
-        btnTest = (Button) findViewById(R.id.buttonTest);
 
         // Menu -> Hiền
         menuAdapter = new MenuAdapter(arrayListMenu, getApplicationContext());

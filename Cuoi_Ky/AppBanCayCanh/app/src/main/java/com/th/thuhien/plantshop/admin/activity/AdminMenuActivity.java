@@ -7,11 +7,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,6 +36,8 @@ public class AdminMenuActivity extends AppCompatActivity {
 
     Menu select_menu;
     int index = 0;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +91,7 @@ public class AdminMenuActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.context_admin_menu, menu);
         menu.getItem(0).setTitle("Sửa menu " + select_menu.getTenMenu());
         menu.getItem(1).setTitle("Xóa menu " + select_menu.getTenMenu());
+        menu.getItem(2).setTitle("Thêm menu " + select_menu.getTenMenu());
     }
 
     @Override
@@ -97,8 +102,52 @@ public class AdminMenuActivity extends AppCompatActivity {
             case R.id.admin_menu_xoaMenu:
                 XoaMenu();
                 break;
+            case R.id.admin_menu_themMenu:
+                ThemMenu();
+                break;
         }
         return super.onContextItemSelected(item);
+    }
+
+    private void ThemMenu() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Thêm menu");
+
+        // Set up the input
+        final EditText input = new EditText(this);
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String m_Text = input.getText().toString();
+                Log.d("m_Text: ", m_Text);
+                if (m_Text.equals("")){
+                    Toast.makeText(getApplicationContext(), "Phải nhập tên menu. Thêm thất bại", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                AsynInsertMenu asynInsertMenu = new AsynInsertMenu();
+                asynInsertMenu.execute(m_Text);
+
+                // load lại listview
+                data.clear();
+                AsynAdminListMenu asynAdminListMenu = new AsynAdminListMenu();
+                asynAdminListMenu.execute();
+
+
+            }
+        });
+        builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
     private void XoaMenu() {
@@ -122,6 +171,24 @@ public class AdminMenuActivity extends AppCompatActivity {
                 data.add(menus.get(i));
             }
             menuAdapter.notifyDataSetChanged();
+            lv_AdminMenu.setSelection(menuAdapter.getCount()-1);
+        }
+    }
+
+    public class AsynInsertMenu extends AsyncTask<String, Void, Boolean>{
+
+        @Override
+        protected Boolean doInBackground(String... strings) {
+            MenuService menuService = new MenuService();
+            return menuService.insetMenu(strings[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+
+            Log.d("trave: ", String.valueOf(aBoolean));
+
         }
     }
 
