@@ -31,6 +31,7 @@
         android:layout_height="wrap_content"></Spinner>
 
     <TextView
+        android:id="@+id/textviewAdminTenMenu"
         android:textStyle="bold"
         android:textSize="20sp"
         android:text="Danh sách sản phẩm"
