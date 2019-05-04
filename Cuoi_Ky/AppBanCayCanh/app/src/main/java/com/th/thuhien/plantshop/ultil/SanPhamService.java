@@ -24,7 +24,7 @@ public class SanPhamService {
     private final String SOAP_ACTION_LIST_MENU = NAME_SPACE + METHOD_NAME_SANPHAM_MOI;
     private final String SOAP_ACTION_SANPHAM_BY_MENU = NAME_SPACE + METHOD_NAME_SANPHAM_BY_MENU;
 
-    private final String URL = "http://plantshop.somee.com/Service.asmx?WSDL";
+    private final String URL = "http://plantshop.somee.com/SanPhamService.asmx?WSDL";
 
     public List<SanPham> getListSpMoi(int n){
         List<SanPham> list = new ArrayList<SanPham>();

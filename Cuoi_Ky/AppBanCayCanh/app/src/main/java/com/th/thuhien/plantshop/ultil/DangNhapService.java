@@ -18,7 +18,7 @@ public class DangNhapService {
 
     private final String SOAP_ACTION_DANG_NHAP = NAME_SPACE + METHOD_NAME_DANG_NHAP;
 
-    private final String URL = "http://plantshop.somee.com/Service.asmx?WSDL";
+    private final String URL = "http://plantshop.somee.com/TaiKhoanService.asmx?WSDL";
 
     public int kiemTraDangNhap(String username, String password){
 

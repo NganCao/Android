@@ -29,7 +29,7 @@ public class MenuService {
     private final String SOAP_ACTION_DELETE_MENU = NAME_SPACE + METHOD_NAME_DELETE_MENU;
     private final String SOAP_ACTION_UPDATE_MENU = NAME_SPACE + METHOD_NAME_UPDATE_MENU;
 
-    private final String URL = "http://plantshop.somee.com/Service.asmx?WSDL";
+    private final String URL = "http://plantshop.somee.com/MenuService.asmx?WSDL";
 
     public List<Menu> getListMenu(){
         List<Menu> list = new ArrayList<Menu>();
