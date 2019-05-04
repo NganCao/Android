@@ -19,6 +19,17 @@ public class AdminMainActivity extends AppCompatActivity {
 
         AnhXa();
         EventButtonMenu();
+        EventButtonSanPham();
+    }
+
+    private void EventButtonSanPham() {
+        btn_AdminSanPham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminMainActivity.this, AdminSanPhamActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void EventButtonMenu() {
