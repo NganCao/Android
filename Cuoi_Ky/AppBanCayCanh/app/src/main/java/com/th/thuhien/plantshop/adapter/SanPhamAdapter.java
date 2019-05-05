@@ -1,6 +1,7 @@
 package com.th.thuhien.plantshop.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.th.thuhien.plantshop.R;
+import com.th.thuhien.plantshop.activity.ChiTietSanPhamActivity;
 import com.th.thuhien.plantshop.model.SanPham;
 
 import java.text.DecimalFormat;
@@ -19,17 +21,19 @@ import java.util.ArrayList;
 public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ItemHolder> {
 
     Context context;
+    int layoutResourceId;
     ArrayList<SanPham> arraySanPham;
 
-    public SanPhamAdapter(Context context, ArrayList<SanPham> arraySanPham) {
+    public SanPhamAdapter(Context context, int layoutResourceId, ArrayList<SanPham> arraySanPham) {
         this.context = context;
+        this.layoutResourceId = layoutResourceId;
         this.arraySanPham = arraySanPham;
     }
 
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.dong_sanpham_moinhat, null);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(layoutResourceId, null);
         ItemHolder itemHolder = new ItemHolder(v);
         return itemHolder;
     }
@@ -55,11 +59,21 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ItemHold
         public ImageView imageSanPham;
         public TextView txtTenSanPham, txtGiaSanPham;
 
-        public ItemHolder(@NonNull View itemView) {
+        public ItemHolder(View itemView) {
             super(itemView);
             imageSanPham = itemView.findViewById(R.id.imageviewSanPham);
             txtTenSanPham = itemView.findViewById(R.id.textviewTenSanPham);
             txtGiaSanPham = itemView.findViewById(R.id.textviewGiaSanPham);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ChiTietSanPhamActivity.class);
+                    intent.putExtra("thongtinsanpham", arraySanPham.get(getAdapterPosition()));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }
