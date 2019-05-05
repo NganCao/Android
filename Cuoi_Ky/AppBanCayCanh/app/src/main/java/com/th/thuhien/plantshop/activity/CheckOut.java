@@ -1,41 +1,31 @@
 package com.th.thuhien.plantshop.activity;
 
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.th.thuhien.plantshop.R;
-import com.th.thuhien.plantshop.ultil.Server;
+import com.th.thuhien.plantshop.admin.AdminMainActivity;
+import com.th.thuhien.plantshop.ultil.DDH;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CheckOut extends AppCompatActivity {
 
     EditText editName, editEmail, editPhone, editDiachi;
     Button btnBack, btnDathang;
+    public static final String METHOD_NAME = "InsertDDH";
+    public static final String NAMESPACE = "http://tempuri.org/";
+    public static final String SOAP_ACTION = NAMESPACE + METHOD_NAME;
+    String URL = "http://plantshop.somee.com/Service.asmx";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,118 +36,149 @@ public class CheckOut extends AppCompatActivity {
     }
 
     private void setEvent() {
+
+        int dem = 0;
+
+        editName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (editName.getText().toString().length() <= 0) {
+                    editName.setError("Bạn không thể bỏ trống tên");
+                } else {
+                    editName.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (editName.getText().toString().length() <= 0) {
+                    editName.setError("Bạn không thể bỏ trống tên");
+                } else {
+                    editName.setError(null);
+                }
+            }
+        });
+
+        editPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (editEmail.getText().toString().length() <= 0) {
+                    editEmail.setError("Bạn không thể bỏ trống số điện thoại");
+                } else {
+                    editEmail.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (editPhone.getText().toString().length() <= 0) {
+                    editPhone.setError("Enter FirstName");
+                } else {
+                    editPhone.setError(null);
+                }
+            }
+        });
+
+        editEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (editEmail.getText().toString().length() <= 0) {
+                    editEmail.setError("Enter FirstName");
+                } else {
+                    editEmail.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (editEmail.getText().toString().length() <= 0) {
+                    editEmail.setError("Enter FirstName");
+                } else {
+                    editEmail.setError(null);
+                }
+            }
+        });
+
+        editDiachi.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (editEmail.getText().toString().length() <= 0) {
+                    editEmail.setError("Enter FirstName");
+                } else {
+                    editEmail.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (editDiachi.getText().toString().length() <= 0) {
+                    editDiachi.setError("Enter FirstName");
+                } else {
+                    editDiachi.setError(null);
+                }
+            }
+        });
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-//        if (CheckConnection.haveNetworkConnection(getApplicationContext())){
-//            EventButton();
-//        }
-//        else {
-//            CheckConnection.ShowToast_Short(getApplicationContext(),"Bạn hãy kiểm tra lại kết nối Internet");
-//        }
 
-        EventButton();
-    }
 
-    private void EventButton() {
+
         btnDathang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String ten = editName.getText().toString().trim();
-                String email = editEmail.getText().toString().trim();
-                String sdt = editPhone.getText().toString().trim();
-                String diachi = editDiachi.getText().toString().trim();
+                String email = editEmail.getText().toString();
+                String sdt = editPhone.getText().toString();
+                String diachi = editDiachi.getText().toString();
 
-
-                SoapObject request = new SoapObject("http://tempuri.org","InsertDDH");
-                request.addProperty("tenKH",ten);
-                request.addProperty("sdt",sdt);
-                request.addProperty("email",email);
-                request.addProperty("diachi",diachi);
-
-                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-                envelope.dotNet = true;
-                envelope.setOutputSoapObject(request);
-                HttpTransportSE httpTransportSE = new HttpTransportSE("http://plantshop.somee.com/Service.asmx");
-                try {
-                    httpTransportSE.call("http://tempuri.org/InsertDDH",envelope);
-                    SoapPrimitive objs = (SoapPrimitive) envelope.getResponse();
-                    if (objs.equals("true")){
-                        Toast.makeText(getApplicationContext(), "Send success!", Toast.LENGTH_SHORT);
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(), "Send fail!", Toast.LENGTH_SHORT);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (XmlPullParserException e) {
-                    e.printStackTrace();
+                if (ten.equals("")){
+                    Toast.makeText(getApplicationContext(), "Không được để trống!", Toast.LENGTH_SHORT).show();
                 }
 
+                else if (sdt.equals("")){
+                    Toast.makeText(getApplicationContext(), "Không được để trống!", Toast.LENGTH_SHORT).show();
+                }
 
-//                if (ten.length() > 0 && sdt.length() >0 && email.length() >0 && diachi.length() >0){
-//                    RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-//                    StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.Duongdandonhang, new Response.Listener<String>() {
-//                        @Override
-//                        public void onResponse(final String maddh) {
-//                            Log.d("maddh",maddh);
-//                            if (Integer.parseInt(maddh) > 0){
-//                                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-//                                StringRequest request = new StringRequest(Request.Method.POST, "", new Response.Listener<String>() {
-//                                    @Override
-//                                    public void onResponse(String response) {
-//
-//                                    }
-//                                }, new Response.ErrorListener() {
-//                                    @Override
-//                                    public void onErrorResponse(VolleyError error) {
-//
-//                                    }
-//                                }){
-//                                    @Override
-//                                    protected Map<String, String> getParams() throws AuthFailureError {
-//                                        JSONArray jsonArray = new JSONArray();
-//                                        for (int i = 0; i<MainActivity.arrayGioHang.size(); i++){
-//                                            JSONObject jsonObject = new JSONObject();
-//                                            try {
-//                                                jsonObject.put("maddh",maddh);
-//                                                jsonObject.put("masp",MainActivity.arrayGioHang.get(i).getIdSP());
-//                                                jsonObject.put("soluong",MainActivity.arrayGioHang.get(i).getSoluongSP());
-//                                                jsonObject.put("dongia",MainActivity.arrayGioHang.get(i).getGiaSP());
-//                                            } catch (JSONException e) {
-//                                                e.printStackTrace();
-//                                            }
-//                                            jsonArray.put(jsonObject);
-//                                        }
-//                                        HashMap<String, String> hashMap = new HashMap<>();
-//                                        return super.getParams();
-//                                    }
-//                                };
-//                            }
-//                        }
-//                    }, new Response.ErrorListener() {
-//                        @Override
-//                        public void onErrorResponse(VolleyError error) {
-//
-//                        }
-//                    }){
-//                        @Override
-//                        protected Map<String, String> getParams() throws AuthFailureError {
-//                            HashMap<String, String> hashMap = new HashMap<String, String>();
-//                            hashMap.put("tenkhachhang",ten);
-//                            hashMap.put("email",email);
-//                            hashMap.put("sdt",sdt);
-//                            hashMap.put("diachi",diachi);
-//                            return hashMap;
-//                        }
-//                    };
-//                    requestQueue.add(stringRequest);
-//                }else {
-//                    Toast.makeText(getApplicationContext(), "Hãy kiểm tra lại kết nối của bạn", Toast.LENGTH_SHORT).show();
-//                }
+                else if (diachi.equals("")){
+                    Toast.makeText(getApplicationContext(), "Không được để trống!", Toast.LENGTH_SHORT).show();
+                }
+
+                else if (email.equals("")){
+                    Toast.makeText(getApplicationContext(), "Không được để trống!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    AsyncDDH asyncDDH = new AsyncDDH();
+                    asyncDDH.execute(ten, sdt, email, diachi);
+                    Toast.makeText(getApplicationContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                    MainActivity.arrayGioHang = null;
+                    Intent intent = new Intent(CheckOut.this, MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -170,4 +191,28 @@ public class CheckOut extends AppCompatActivity {
         btnBack = (Button) findViewById(R.id.btnBack);
         btnDathang = (Button) findViewById(R.id.btnDathang);
     }
+
+    public class AsyncDDH extends AsyncTask<String, Void, Integer>{
+
+        int rs = 0;
+        @Override
+        protected Integer doInBackground(String... strings) {
+            DDH createDDH = new DDH();
+            return rs = createDDH.insertDDH(strings[0], strings[1], strings[2], strings[3]);
+        }
+    }
+
+    private int checkEmail(String email) {
+        String emailPattern = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+        Pattern regex = Pattern.compile(emailPattern);
+        Matcher matcher = regex.matcher(email);
+        if (matcher.find()) {
+            System.out.println("Email của bạn hợp lệ!");
+            return 1;
+        } else {
+            System.out.println("Email của bạn chưa hợp lệ!");
+            return 0;
+        }
+    }
+
 }

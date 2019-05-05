@@ -95,16 +95,15 @@ public class GioHangActivity extends AppCompatActivity {
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+//                Intent intent =new Intent(getApplicationContext(), MainActivity.class);
+//                startActivity(intent);
+                finish();
             }
         });
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(GioHangActivity.this, CheckOut.class);
-//                startActivity(intent);
                 if (MainActivity.arrayGioHang.size() >0 ){
                     Intent intent = new Intent(getApplicationContext(),CheckOut.class);
                     startActivity(intent);
