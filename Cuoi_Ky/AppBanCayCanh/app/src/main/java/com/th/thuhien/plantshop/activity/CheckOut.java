@@ -21,10 +21,6 @@ public class CheckOut extends AppCompatActivity {
 
     EditText editName, editEmail, editPhone, editDiachi;
     Button btnBack, btnDathang;
-    public static final String METHOD_NAME = "InsertDDH";
-    public static final String NAMESPACE = "http://tempuri.org/";
-    public static final String SOAP_ACTION = NAMESPACE + METHOD_NAME;
-    String URL = "http://plantshop.somee.com/Service.asmx";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +44,7 @@ public class CheckOut extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (editName.getText().toString().length() <= 0) {
-                    editName.setError("Bạn không thể bỏ trống tên");
+                    editName.setError("Enter Name");
                 } else {
                     editName.setError(null);
                 }
@@ -57,7 +53,7 @@ public class CheckOut extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (editName.getText().toString().length() <= 0) {
-                    editName.setError("Bạn không thể bỏ trống tên");
+                    editName.setError("Enter Name");
                 } else {
                     editName.setError(null);
                 }
@@ -73,7 +69,7 @@ public class CheckOut extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (editEmail.getText().toString().length() <= 0) {
-                    editEmail.setError("Bạn không thể bỏ trống số điện thoại");
+                    editEmail.setError("Enter PhoneNumber");
                 } else {
                     editEmail.setError(null);
                 }
@@ -82,7 +78,7 @@ public class CheckOut extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (editPhone.getText().toString().length() <= 0) {
-                    editPhone.setError("Enter FirstName");
+                    editPhone.setError("Enter PhoneNumber");
                 } else {
                     editPhone.setError(null);
                 }
@@ -98,7 +94,7 @@ public class CheckOut extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (editEmail.getText().toString().length() <= 0) {
-                    editEmail.setError("Enter FirstName");
+                    editEmail.setError("Enter Email");
                 } else {
                     editEmail.setError(null);
                 }
@@ -107,7 +103,7 @@ public class CheckOut extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (editEmail.getText().toString().length() <= 0) {
-                    editEmail.setError("Enter FirstName");
+                    editEmail.setError("Enter Email");
                 } else {
                     editEmail.setError(null);
                 }
@@ -123,7 +119,7 @@ public class CheckOut extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (editEmail.getText().toString().length() <= 0) {
-                    editEmail.setError("Enter FirstName");
+                    editEmail.setError("Enter Address");
                 } else {
                     editEmail.setError(null);
                 }
@@ -132,7 +128,7 @@ public class CheckOut extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (editDiachi.getText().toString().length() <= 0) {
-                    editDiachi.setError("Enter FirstName");
+                    editDiachi.setError("Enter Address");
                 } else {
                     editDiachi.setError(null);
                 }
@@ -157,19 +153,19 @@ public class CheckOut extends AppCompatActivity {
                 String diachi = editDiachi.getText().toString();
 
                 if (ten.equals("")){
-                    Toast.makeText(getApplicationContext(), "Không được để trống!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Không được để trống tên!", Toast.LENGTH_SHORT).show();
                 }
 
                 else if (sdt.equals("")){
-                    Toast.makeText(getApplicationContext(), "Không được để trống!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Không được để trống số điện thoại!", Toast.LENGTH_SHORT).show();
                 }
 
                 else if (diachi.equals("")){
-                    Toast.makeText(getApplicationContext(), "Không được để trống!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Không được để trống địa chỉ!", Toast.LENGTH_SHORT).show();
                 }
 
                 else if (email.equals("")){
-                    Toast.makeText(getApplicationContext(), "Không được để trống!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Không được để trống email!", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     AsyncDDH asyncDDH = new AsyncDDH();
