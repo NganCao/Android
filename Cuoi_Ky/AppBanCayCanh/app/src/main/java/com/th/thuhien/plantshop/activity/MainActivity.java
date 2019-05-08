@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     SanPhamAdapter sanPhamAdapter;
 
     // Khai báo biến
-
+    String user = "";
 
 
     //String tenMenu = "";
@@ -121,10 +121,10 @@ public class MainActivity extends AppCompatActivity {
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else if (position == arrayListMenu.size()-1){
 
-                    //DialogDangNhap();
+                    DialogDangNhap();
 
-                    Intent intent = new Intent(MainActivity.this, AdminMainActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(MainActivity.this, AdminMainActivity.class);
+//                    startActivity(intent);
                     drawerLayout.closeDrawer(GravityCompat.START);
                 }else
                 {
@@ -164,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Mật không được rỗng", Toast.LENGTH_LONG).show();
                     return;
                 }
+
+                user = ten;
 
                 AsynDangNhap asynDangNhap = new AsynDangNhap();
                 asynDangNhap.execute(ten, matkhau);
@@ -315,7 +317,9 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(integer);
 
             if (integer == 1){
+                //Toast.makeText(getApplicationContext(), user, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MainActivity.this, AdminMainActivity.class);
+                intent.putExtra("username", user);
                 startActivity(intent);
             }else {
                 Toast.makeText(MainActivity.this, "Sai tên đăng nhập hoặc mật khẩu", Toast.LENGTH_LONG).show();

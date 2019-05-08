@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.th.thuhien.plantshop.R;
 
@@ -20,6 +21,7 @@ public class AdminMainActivity extends AppCompatActivity {
     NavigationView navigationViewQuanTri;
     Toolbar toolbarMainQuanTri;
     ImageButton btn_AdminMenu, btn_AdminSanPham;
+    TextView txt_tenAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class AdminMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_main);
 
         AnhXa();
+        NhanUsernameDangNhap();
         ActionBar();
         NavigationItemClick();
         EventButtonMenu();
@@ -93,12 +96,22 @@ public class AdminMainActivity extends AppCompatActivity {
         });
     }
 
+    private void NhanUsernameDangNhap() {
+        Intent intent = getIntent();
+        txt_tenAdmin.setText(intent.getStringExtra("username"));
+
+    }
+
     private void AnhXa() {
         drawerLayoutQuanTri = (DrawerLayout) findViewById(R.id.drawerLayoutQuanTri);
         navigationViewQuanTri = (NavigationView) findViewById(R.id.navigationViewQuanTri);
         toolbarMainQuanTri = (Toolbar) findViewById(R.id.toolbarMainQuanTri);
 
+        View headView = navigationViewQuanTri.getHeaderView(0);
+        txt_tenAdmin = (TextView) headView.findViewById(R.id.textviewTenUsser);
+
         btn_AdminMenu = (ImageButton) findViewById(R.id.imgbuttonAdminMenu);
         btn_AdminSanPham = (ImageButton) findViewById(R.id.imgbuttonAdminSanPham);
+
     }
 }
