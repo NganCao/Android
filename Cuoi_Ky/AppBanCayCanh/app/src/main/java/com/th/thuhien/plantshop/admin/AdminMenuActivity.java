@@ -44,8 +44,10 @@ public class AdminMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_menu);
 
         AnhXa();
+        ActionBar();
         setEventItemListview();
     }
+
 
     private void AnhXa() {
         toolbarAdminMenu = (Toolbar) findViewById(R.id.toolbarAdminMenu);
@@ -59,6 +61,17 @@ public class AdminMenuActivity extends AppCompatActivity {
 
         AsynAdminListMenu asynAdminListMenu = new AsynAdminListMenu();
         asynAdminListMenu.execute();
+    }
+
+    private void ActionBar() {
+        setSupportActionBar(toolbarAdminMenu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbarAdminMenu.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void setEventItemListview() {

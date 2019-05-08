@@ -2,6 +2,7 @@ package com.th.thuhien.plantshop.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,9 +10,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -20,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ListView listViewManhinhchinh;
     DrawerLayout drawerLayout;
+    TextView txt_XemThemSPMoi;
 
     // Khai báo cho phần Menu
     ArrayList<Menu> arrayListMenu = new ArrayList<Menu>();
@@ -75,8 +80,18 @@ public class MainActivity extends AppCompatActivity {
         ActionBar();
         ActionViewFlipper();
         ClickItemMenu();
+        XemThemSPMoi();
 
+    }
 
+    private void XemThemSPMoi() {
+        txt_XemThemSPMoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SapXepSanPhamActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -106,10 +121,10 @@ public class MainActivity extends AppCompatActivity {
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else if (position == arrayListMenu.size()-1){
 
-                    DialogDangNhap();
+                    //DialogDangNhap();
 
-//                    Intent intent = new Intent(MainActivity.this, AdminMainActivity.class);
-//                    startActivity(intent);
+                    Intent intent = new Intent(MainActivity.this, AdminMainActivity.class);
+                    startActivity(intent);
                     drawerLayout.closeDrawer(GravityCompat.START);
                 }else
                 {
@@ -212,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.navigationView);
         listViewManhinhchinh = findViewById(R.id.listViewManhinhchinh);
         drawerLayout = findViewById(R.id.drawerLayout);
+        txt_XemThemSPMoi = (TextView) findViewById(R.id.textviewXemThemSPMoi);
 
         // Menu -> Hiền
         menuAdapter = new MenuAdapter(arrayListMenu, getApplicationContext());
@@ -227,7 +243,9 @@ public class MainActivity extends AppCompatActivity {
         mangSanPham = new ArrayList<>();
         sanPhamAdapter = new SanPhamAdapter(getApplicationContext(), R.layout.dong_sanpham_moinhat,mangSanPham);
         recyclerViewmanhinhchinh.setHasFixedSize(true);
-        recyclerViewmanhinhchinh.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewmanhinhchinh.setLayoutManager(linearLayoutManager);
+        //recyclerViewmanhinhchinh.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerViewmanhinhchinh.setAdapter(sanPhamAdapter);
 
         AsysListSanPhamMoi asysListSanPhamMoi = new AsysListSanPhamMoi();
@@ -260,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < menu.size(); i++){
                 arrayListMenu.add(menu.get(i));
             }
-            arrayListMenu.add(new Menu("QUẢN TRỊ"));
+            arrayListMenu.add(new Menu("Quản trị"));
             menuAdapter.notifyDataSetChanged();
         }
     }

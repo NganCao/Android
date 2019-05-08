@@ -8,6 +8,7 @@ import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.Marshal;
 import org.ksoap2.serialization.MarshalFloat;
 import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
@@ -21,10 +22,12 @@ public class SanPhamService {
     private final String METHOD_NAME_SANPHAM_MOI = "GetListSanPhamMoiNhat";
     private final String METHOD_NAME_SANPHAM_BY_MENU = "GetListSanPhamTheoMenu";
     private final String METHOD_NAME_LIST_SANPHAM = "GetListSanPham";
+    private final String METHOD_NAME_SAPXEP_SANPHAM_MOI = "FilterListSanPhamMoiNhat";
 
     private final String SOAP_ACTION_LIST_SANPHAM_MOI = NAME_SPACE + METHOD_NAME_SANPHAM_MOI;
     private final String SOAP_ACTION_SANPHAM_BY_MENU = NAME_SPACE + METHOD_NAME_SANPHAM_BY_MENU;
     private final String SOAP_ACTION_LIST_SANPHAM = NAME_SPACE + METHOD_NAME_LIST_SANPHAM;
+    private final String SOAP_ACTION_SAPXEP_SANPHAM_MOI = NAME_SPACE + METHOD_NAME_SAPXEP_SANPHAM_MOI;
 
     private final String URL = "http://plantshop.somee.com/SanPhamService.asmx?WSDL";
 
@@ -163,6 +166,49 @@ public class SanPhamService {
             e.printStackTrace();
         }
 
+        return list;
+    }
+
+    public List<SanPham> sapXepSanPhamMoiNhat(){
+        List<SanPham> list = new ArrayList<>();
+        SoapObject request = new SoapObject(NAME_SPACE, METHOD_NAME_SAPXEP_SANPHAM_MOI);
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = true;
+        envelope.setOutputSoapObject(request);
+
+        HttpTransportSE httpTransportSE = new HttpTransportSE(URL);
+
+        try {
+            httpTransportSE.call(SOAP_ACTION_SAPXEP_SANPHAM_MOI, envelope);
+            SoapObject object = (SoapObject) envelope.getResponse();
+
+            for (int i = 0; i < object.getPropertyCount(); i++){
+                SoapObject item = (SoapObject) object.getProperty(i);
+
+                SanPham sanPham = new SanPham();
+
+                String maSanPham = item.getProperty("MaSP").toString();
+                String tenSanPham = item.getProperty("TenSP").toString();
+                String hinhSanPham = item.getProperty("HinhAnh").toString();
+                String thongTinSanPham = item.getProperty("ThongTin").toString();
+                String giaSanPham = item.getProperty("Gia").toString();
+//                String maMenu = item.getProperty("MaMenu").toString();
+
+                sanPham.setMaSp(Integer.parseInt(maSanPham));
+                sanPham.setTenSp(tenSanPham);
+                sanPham.setHinhAnh(hinhSanPham);
+                sanPham.setThongTin(thongTinSanPham);
+                sanPham.setGiaSp(Integer.parseInt(giaSanPham));
+                //               sanPham.setMaMenu(Integer.parseInt(maMenu));
+
+                list.add(sanPham);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
         return list;
     }
 }

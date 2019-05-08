@@ -42,6 +42,7 @@ public class AdminSanPhamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_san_pham);
 
         AnhXa();
+        ActionBar();
         setEventSelectItemSpinner();
         getListMenu();
 
@@ -87,6 +88,18 @@ public class AdminSanPhamActivity extends AppCompatActivity {
         AsynAdminSanPhamTheoMenu asynAdminSanPhamTheoMenu = new AsynAdminSanPhamTheoMenu();
         asynAdminSanPhamTheoMenu.execute(pos);
     }
+
+    private void ActionBar() {
+        setSupportActionBar(toolbarAdminSanPham);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbarAdminSanPham.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
     private void AnhXa() {
         toolbarAdminSanPham = (Toolbar) findViewById(R.id.toolbarAdminSanPham);
         tv_AdminTenMenu = (TextView) findViewById(R.id.textviewAdminTenMenu);
@@ -158,4 +171,6 @@ public class AdminSanPhamActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }
     }
+
+
 }
