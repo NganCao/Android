@@ -117,48 +117,6 @@ public class GioHangActivity extends AppCompatActivity {
     }
 
 
-    private void CatchOnItemLV() {
-        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(GioHangActivity.this);
-                builder.setTitle("Xác nhận xóa sản phẩm");
-                builder.setMessage("Bạn có chắc muốn xóa sản phẩm này");
-                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (MainActivity.arrayGioHang.size() <=0){
-                            txtThongBaoGH.setVisibility(View.VISIBLE);
-                        }
-                        else {
-                            MainActivity.arrayGioHang.remove(position);
-                            giohangAdapter.notifyDataSetChanged();
-                            EvenUltil();
-                            if (MainActivity.arrayGioHang.size() <= 0){
-                                txtThongBaoGH.setVisibility(View.VISIBLE);
-                            }
-                            else {
-                                txtThongBaoGH.setVisibility(View.INVISIBLE);
-                                giohangAdapter.notifyDataSetChanged();
-                                EvenUltil();
-                            }
-                        }
-                    }
-                });
-
-                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        giohangAdapter.notifyDataSetChanged();
-                        EvenUltil();
-                    }
-                });
-                builder.show();
-                return true;
-            }
-        });
-    }
-
     private void toolbarAction(){
         setSupportActionBar(toolbarGioHang);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

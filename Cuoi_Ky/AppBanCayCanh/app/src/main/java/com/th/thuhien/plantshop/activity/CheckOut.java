@@ -14,6 +14,7 @@ import com.th.thuhien.plantshop.R;
 import com.th.thuhien.plantshop.admin.AdminMainActivity;
 import com.th.thuhien.plantshop.ultil.DDH;
 
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,6 +22,7 @@ public class CheckOut extends AppCompatActivity {
 
     EditText editName, editEmail, editPhone, editDiachi;
     Button btnBack, btnDathang;
+    Integer result, masanpham, slSP, giaSP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,10 +172,20 @@ public class CheckOut extends AppCompatActivity {
                 else {
                     AsyncDDH asyncDDH = new AsyncDDH();
                     asyncDDH.execute(ten, sdt, email, diachi);
+                    insertCTDDH();
                     Toast.makeText(getApplicationContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
-                    MainActivity.arrayGioHang = null;
-                    Intent intent = new Intent(CheckOut.this, MainActivity.class);
-                    startActivity(intent);
+
+                    try {
+                        Thread.sleep(2000);
+                    } catch (Exception e) {
+
+                    }
+                    finally
+                    {
+                        MainActivity.arrayGioHang = null;
+                        Intent intent = new Intent(CheckOut.this, MainActivity.class);
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -195,6 +207,40 @@ public class CheckOut extends AppCompatActivity {
         protected Integer doInBackground(String... strings) {
             DDH createDDH = new DDH();
             return rs = createDDH.insertDDH(strings[0], strings[1], strings[2], strings[3]);
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            result = integer;
+        }
+    }
+
+    public void insertCTDDH(){
+        AsyncCT_DDH asyncCT_ddh = new AsyncCT_DDH();
+        for (int i= 0; i<MainActivity.arrayGioHang.size(); i++){
+            int masp = MainActivity.arrayGioHang.get(i).idSP;
+            int slsp = MainActivity.arrayGioHang.get(i).soluongSP;
+            int giasp = Integer.parseInt(String.valueOf(MainActivity.arrayGioHang.get(i).giaSP));
+
+            asyncCT_ddh.execute(result, masp, slsp, giasp);
+        }
+    }
+
+//    protected Map<Integer,Integer> getParam() throws {}
+
+    public class AsyncCT_DDH extends AsyncTask<Integer, Void, Integer>{
+        int rs = 0;
+
+        @Override
+        protected Integer doInBackground(Integer... Integer) {
+            DDH createBill = new DDH();
+            return rs = createBill.insertCT_DDH(result, masanpham, slSP, giaSP);
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
         }
     }
 
