@@ -7,10 +7,12 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.myapplication.activity.LopActivity;
+import com.example.myapplication.activity.MonHocActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageButton btnLop, btnMonhoc, btnSV, btnDiem;
+    ImageButton btnLop, btnMonhoc;
+    //ImageButton btnSV, btnDiem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
     public void setControl(){
         btnLop = (ImageButton) findViewById(R.id.btnLop);
         btnMonhoc = (ImageButton) findViewById(R.id.btnMH);
-        btnSV = (ImageButton) findViewById(R.id.btnSV);
-        btnDiem = (ImageButton) findViewById(R.id.btnDiem);
+//        btnSV = (ImageButton) findViewById(R.id.btnSV);
+//        btnDiem = (ImageButton) findViewById(R.id.btnDiem);
     }
 
     public void setEvent(){
@@ -40,24 +42,25 @@ public class MainActivity extends AppCompatActivity {
         btnMonhoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-            }
-        });
-
-        btnSV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DSSV.class);
+                Intent intent = new Intent(MainActivity.this, MonHocActivity.class);
                 startActivity(intent);
             }
         });
 
-        btnDiem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DSDiem.class);
-                startActivity(intent);
-            }
-        });
+//        btnSV.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, DSSV.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        btnDiem.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, DSDiem.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 }

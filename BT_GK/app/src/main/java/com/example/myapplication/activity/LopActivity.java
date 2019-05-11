@@ -1,7 +1,13 @@
 package com.example.myapplication.activity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.LopAdapter;
 import com.example.myapplication.data.DBManager_Lop;
@@ -20,24 +27,26 @@ import java.util.ArrayList;
 
 public class LopActivity extends AppCompatActivity {
 
-    EditText edt_maLop, edt_tenLop;
-    Button btnNhapLop;
-    ListView lv_Lop;
+    private Toolbar toolbarLop;
+    private EditText edt_maLop, edt_tenLop;
+    private Button btnNhapLop;
+    private ListView lv_Lop;
 
     ArrayList<Lop> data_lop;
     LopAdapter lopAdapter;
 
     Lop selected_lop;
     int index = -1;
+    DBManager_Lop dbManager_lop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lop);
-        final DBManager_Lop dbManager_lop = new DBManager_Lop(this);
+        dbManager_lop = new DBManager_Lop(this);
 
         setControl();
-
+        ActionBar();
         data_lop = dbManager_lop.getAllLop();
         setAdapter();
         registerForContextMenu(lv_Lop);
@@ -75,10 +84,7 @@ public class LopActivity extends AppCompatActivity {
                 }
                 edt_maLop.setText("");
                 edt_tenLop.setText("");
-                data_lop.clear();
-                data_lop.addAll(dbManager_lop.getAllLop());
-                setAdapter();
-
+                uploadList();
             }
         });
 
@@ -104,11 +110,29 @@ public class LopActivity extends AppCompatActivity {
         });
     }
 
+    private void uploadList(){
+        data_lop.clear();
+        data_lop.addAll(dbManager_lop.getAllLop());
+        setAdapter();
+    }
     private void setControl() {
+        toolbarLop = (Toolbar) findViewById(R.id.toolbarLop);
         edt_maLop = (EditText) findViewById(R.id.edittextMaLop);
         edt_tenLop = (EditText) findViewById(R.id.edittextTenLop);
         btnNhapLop = (Button) findViewById(R.id.buttonNhapLop);
         lv_Lop = (ListView) findViewById(R.id.listviewLop);
+
+        edt_maLop.setFocusable(true);
+    }
+
+    private void ActionBar(){
+        toolbarLop.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbarLop.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LopActivity.this, MainActivity.class));
+            }
+        });
     }
 
     private Lop createLop(){
@@ -152,8 +176,37 @@ public class LopActivity extends AppCompatActivity {
 
             case R.id.menu_xoaLop:
                 // phương thức xóa lớp - Hiến
+                deleteLop();
+
                 break;
         }
         return super.onContextItemSelected(item);
+    }
+    private void deleteLop(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(LopActivity.this);
+        builder.setTitle("Hỏi xóa");
+        builder.setMessage("Bạn chắc chắn muốn xóa Lớp?");
+        //builder.setCancelable(false);
+        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                int result = dbManager_lop.deleteLop(selected_lop.getMaLop());
+                if (result > 0){
+                    Toast.makeText(getApplicationContext(), "Xóa thành công", Toast.LENGTH_LONG).show();
+                    uploadList();
+                }else {
+                    Toast.makeText(getApplicationContext(), "Xóa thất bại", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.show();
     }
 }

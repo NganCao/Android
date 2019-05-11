@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context=".admin.AdminSanPhamActivity">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -24,6 +26,7 @@
 
     </LinearLayout>
 
+
     <Spinner
         android:layout_gravity="center"
         android:id="@+id/spinnerListMenu"
@@ -37,8 +40,13 @@
         android:text="Danh sách sản phẩm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+
+
     <ListView
         android:id="@+id/listviewAdminSanPham"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>
+
+
 </LinearLayout>

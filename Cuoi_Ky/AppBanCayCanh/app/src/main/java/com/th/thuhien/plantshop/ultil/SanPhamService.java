@@ -1,5 +1,6 @@
 package com.th.thuhien.plantshop.ultil;
 
+import android.content.Intent;
 import android.util.Log;
 
 import com.th.thuhien.plantshop.model.SanPham;
@@ -23,11 +24,13 @@ public class SanPhamService {
     private final String METHOD_NAME_SANPHAM_BY_MENU = "GetListSanPhamTheoMenu";
     private final String METHOD_NAME_LIST_SANPHAM = "GetListSanPham";
     private final String METHOD_NAME_SAPXEP_SANPHAM_MOI = "FilterListSanPhamMoiNhat";
+    private final String METHOD_NAME_INSERT_SANPHAM = "InsertSanPham ";
 
     private final String SOAP_ACTION_LIST_SANPHAM_MOI = NAME_SPACE + METHOD_NAME_SANPHAM_MOI;
     private final String SOAP_ACTION_SANPHAM_BY_MENU = NAME_SPACE + METHOD_NAME_SANPHAM_BY_MENU;
     private final String SOAP_ACTION_LIST_SANPHAM = NAME_SPACE + METHOD_NAME_LIST_SANPHAM;
     private final String SOAP_ACTION_SAPXEP_SANPHAM_MOI = NAME_SPACE + METHOD_NAME_SAPXEP_SANPHAM_MOI;
+    private final String SOAP_ACTION_INSERT_SANPHAM = NAME_SPACE + METHOD_NAME_INSERT_SANPHAM;
 
     private final String URL = "http://plantshop.somee.com/SanPhamService.asmx?WSDL";
 
@@ -210,5 +213,41 @@ public class SanPhamService {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public boolean insetSanPham(String name, String img, String info, String price, String type){
+        boolean result = false;
+
+        SoapObject request = new SoapObject(NAME_SPACE, METHOD_NAME_INSERT_SANPHAM);
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = true;
+        envelope.setOutputSoapObject(request);
+
+        int gia = Integer.parseInt(price);
+        int mamenu = Integer.parseInt(type);
+
+        request.addProperty("name", name);
+        request.addProperty("img", img);
+        request.addProperty("info", info);
+        request.addProperty("price", gia);
+        request.addProperty("type", mamenu);
+
+        MarshalFloat marshalFloat = new MarshalFloat();
+        marshalFloat.register(envelope);
+
+        HttpTransportSE httpTransportSE = new HttpTransportSE(URL);
+
+        try {
+            httpTransportSE.call(SOAP_ACTION_INSERT_SANPHAM, envelope);
+
+            SoapPrimitive item = (SoapPrimitive) envelope.getResponse();
+            String a = item.toString();
+            result = Boolean.parseBoolean(a);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

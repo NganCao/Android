@@ -1,11 +1,13 @@
 package com.th.thuhien.plantshop.admin;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.ToolbarWidgetWrapper;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -23,12 +25,15 @@ import com.th.thuhien.plantshop.ultil.SanPhamService;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class AdminSanPhamActivity extends AppCompatActivity {
 
     Toolbar toolbarAdminSanPham;
     TextView tv_AdminTenMenu;
     ListView lv_AdminSanPham;
     Spinner spinnerListMenu;
+    CircleImageView img_themSp;
 
     ArrayList<SanPham> data;
     ManHinhSanPhamAdapter adapter;
@@ -45,10 +50,42 @@ public class AdminSanPhamActivity extends AppCompatActivity {
         ActionBar();
         setEventSelectItemSpinner();
         getListMenu();
-
+        //setEventThemSp();
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_them_sanpham, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_them_sanpham:
+                Intent intent = new Intent(AdminSanPhamActivity.this, AdminThemSanPhamActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+//    private void setEventThemSp() {
+//        img_themSp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(AdminSanPhamActivity.this, AdminThemSanPhamActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//    }
+
+    private void getListMenu() {
+        listMenu.add(new Menu("All"));
+        AsynListAdminMenu asynListAdminMenu = new AsynListAdminMenu();
+        asynListAdminMenu.execute();
+    }
 
     private void setEventSelectItemSpinner() {
         spinnerListMenu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -73,11 +110,7 @@ public class AdminSanPhamActivity extends AppCompatActivity {
         });
     }
 
-    private void getListMenu() {
-        listMenu.add(new Menu("All"));
-        AsynListAdminMenu asynListAdminMenu = new AsynListAdminMenu();
-        asynListAdminMenu.execute();
-    }
+
 
     private void getListSP() {
         AsynAdminListSanPham asynAdminListSanPham = new AsynAdminListSanPham();
@@ -105,6 +138,7 @@ public class AdminSanPhamActivity extends AppCompatActivity {
         tv_AdminTenMenu = (TextView) findViewById(R.id.textviewAdminTenMenu);
         lv_AdminSanPham = (ListView) findViewById(R.id.listviewAdminSanPham);
         spinnerListMenu = (Spinner) findViewById(R.id.spinnerListMenu);
+        //img_themSp = (CircleImageView) findViewById(R.id.imageviewThemSp);
 
         data = new ArrayList<>();
         adapter = new ManHinhSanPhamAdapter(getApplicationContext(), data);

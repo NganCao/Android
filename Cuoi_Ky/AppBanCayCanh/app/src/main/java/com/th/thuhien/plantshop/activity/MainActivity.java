@@ -245,9 +245,9 @@ public class MainActivity extends AppCompatActivity {
         mangSanPham = new ArrayList<>();
         sanPhamAdapter = new SanPhamAdapter(getApplicationContext(), R.layout.dong_sanpham_moinhat,mangSanPham);
         recyclerViewmanhinhchinh.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewmanhinhchinh.setLayoutManager(linearLayoutManager);
-        //recyclerViewmanhinhchinh.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        //LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        //recyclerViewmanhinhchinh.setLayoutManager(linearLayoutManager);
+        recyclerViewmanhinhchinh.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerViewmanhinhchinh.setAdapter(sanPhamAdapter);
 
         AsysListSanPhamMoi asysListSanPhamMoi = new AsysListSanPhamMoi();

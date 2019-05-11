@@ -1,6 +1,7 @@
 package com.th.thuhien.plantshop.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.th.thuhien.plantshop.R;
+import com.th.thuhien.plantshop.activity.ChiTietSanPhamActivity;
 import com.th.thuhien.plantshop.model.SanPham;
 
 import java.text.DecimalFormat;
@@ -62,6 +64,16 @@ public class RecyclerViewSPAdapter extends RecyclerView.Adapter<RecyclerViewSPAd
             img_hinh = (ImageView) itemView.findViewById(R.id.imageviewSapXepSpMoi);
             tenSp = (TextView) itemView.findViewById(R.id.textviewSapXepTenSpMoi);
             giaSp = (TextView) itemView.findViewById(R.id.textviewSapXepGiaSpMoi);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ChiTietSanPhamActivity.class);
+                    intent.putExtra("thongtinsanpham", arraySanPham.get(getAdapterPosition()));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

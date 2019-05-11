@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.LopActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activity.MonHocActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarLop"
+        android:id="@+id/toolbarMonHoc"
         app:navigationIcon="@drawable/ic_arrow_back"
-        app:title="Lớp"
+        app:title="Môn học"
         android:background="#4CAF50"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
@@ -26,15 +26,15 @@
             android:gravity="center_vertical"
             android:textColor="#000"
             android:textSize="18sp"
-            android:text="Mã lớp"
+            android:text="Mã môn học"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
         <EditText
-            android:id="@+id/edittextMaLop"
+            android:id="@+id/edittextMaMH"
             android:textSize="18sp"
             android:textColor="#000"
-            android:hint="Nhập mã lớp"
+            android:hint="Nhập mã môn học"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
@@ -50,15 +50,40 @@
             android:gravity="center_vertical"
             android:textColor="#000"
             android:textSize="18sp"
-            android:text="Tên lớp"
+            android:text="Tên môn học"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
         <EditText
-            android:id="@+id/edittextTenLop"
+            android:id="@+id/edittextTenMH"
             android:textSize="18sp"
             android:textColor="#000"
-            android:hint="Nhập tên lớp"
+            android:hint="Nhập tên môn học"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:weightSum="3"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:paddingLeft="5dp"
+            android:gravity="center_vertical"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:text="Học kỳ"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <EditText
+            android:id="@+id/edittextHocKyMH"
+            android:inputType="number"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:hint="Nhập học kỳ"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
@@ -74,7 +99,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"></LinearLayout>
         <Button
-            android:id="@+id/buttonNhapLop"
+            android:id="@+id/buttonNhapMH"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:layout_weight="2"
@@ -87,11 +112,11 @@
         android:paddingLeft="6dp"
         android:background="#4CAF50"
         android:textSize="20sp"
-        android:text="Danh sách lớp học"
+        android:text="Danh sách môn học"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <ListView
-        android:id="@+id/listviewLop"
+        android:id="@+id/listviewMonHoc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>
 </LinearLayout>
