@@ -82,6 +82,7 @@ public class MonHocActivity extends AppCompatActivity {
         btn_NhapMH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int search = 0;
                 if (edt_maMH.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(), "Mã môn học không được trống", Toast.LENGTH_LONG).show();
                     return;
@@ -94,22 +95,25 @@ public class MonHocActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Học kỳ không được trống", Toast.LENGTH_LONG).show();
                     return;
                 }
-                MonHoc monHoc = createMonHoc();
-                if (btn_NhapMH.getText().equals("Nhập")){
-                    // gọi phương thức nhập môn học
-                    dbManager_lop.insertMonHoc(monHoc);
 
-                }else{
+                MonHoc monHoc = createMonHoc();
+                search = dbManager_lop.searchMonHoc(edt_maMH.getText().toString());
+                if (search == 1){
                     int result = dbManager_lop.updateMonHoc(monHoc);
                     if (result > 0){
                         Toast.makeText(getApplicationContext(), "Sửa thành công", Toast.LENGTH_LONG).show();
                         btn_NhapMH.setText("Nhập");
                     }
+                }else {
+                    // gọi phương thức nhập môn học
+                    dbManager_lop.insertMonHoc(monHoc);
+
                 }
                 uploadListMonHOc();
                 edt_maMH.setText("");
                 edt_tenMH.setText("");
                 edt_hocKyMH.setText("");
+                edt_maMH.setEnabled(true);
                 edt_maMH.isFocused();
             }
         });

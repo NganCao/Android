@@ -155,4 +155,13 @@ public class DBManager_Lop extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_MONHOC, COL_MA_MONHOC + "=?", new String[]{maMonhoc});
     }
+
+    public int searchMonHoc(String maMonhoc){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_MONHOC + " WHERE " + COL_MA_MONHOC + " =?", new String[]{maMonhoc});
+        if (cursor.moveToFirst()){
+            return 1;
+        }
+        return 0;
+    }
 }
