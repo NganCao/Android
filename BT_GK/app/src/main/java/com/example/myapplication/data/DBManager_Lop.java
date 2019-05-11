@@ -140,4 +140,19 @@ public class DBManager_Lop extends SQLiteOpenHelper {
         }
         return list;
     }
+
+    public int updateMonHoc(MonHoc monHoc){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        //values.put(COL_MA_MONHOC, monHoc.getMaMH());
+        values.put(COL_TEN_MONHOC, monHoc.getTenMH());
+        values.put(COL_HOCKY_MONHOC, monHoc.getHocKyMH());
+
+        return db.update(TABLE_MONHOC, values, COL_MA_MONHOC + "=?", new String[]{String.valueOf(monHoc.getMaMH())});
+    }
+
+    public int deleteMonHoc(String maMonhoc){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_MONHOC, COL_MA_MONHOC + "=?", new String[]{maMonhoc});
+    }
 }
