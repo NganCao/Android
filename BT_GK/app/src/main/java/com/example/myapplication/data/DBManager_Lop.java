@@ -79,6 +79,7 @@ public class DBManager_Lop extends SQLiteOpenHelper {
                 Lop lop = new Lop();
                 lop.setMaLop(cursor.getString(0));
                 lop.setTenLop(cursor.getString(1));
+                lop.setSelected(false);
                 list.add(lop);
             }while (cursor.moveToNext());
         }

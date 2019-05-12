@@ -82,14 +82,29 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <TextView
-        android:layout_marginTop="5dp"
-        android:paddingLeft="6dp"
+    <LinearLayout
         android:background="#4CAF50"
-        android:textSize="20sp"
-        android:text="Danh sách lớp học"
+        android:weightSum="10"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="40dp">
+        <TextView
+            android:layout_weight="9"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="6dp"
+
+            android:textSize="20sp"
+            android:text="Danh sách lớp học"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <ImageButton
+            android:id="@+id/imagebuttonXoaLop"
+            android:src="@drawable/btndelete"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="40dp" />
+    </LinearLayout>
+
     <ListView
         android:id="@+id/listviewLop"
         android:layout_width="match_parent"

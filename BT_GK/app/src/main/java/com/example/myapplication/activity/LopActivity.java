@@ -13,7 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ public class LopActivity extends AppCompatActivity {
     private EditText edt_maLop, edt_tenLop;
     private Button btnNhapLop;
     private ListView lv_Lop;
+    private ImageButton imgbutton_xoaLop;
 
     ArrayList<Lop> data_lop;
     LopAdapter lopAdapter;
@@ -108,6 +111,49 @@ public class LopActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        imgbutton_xoaLop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(LopActivity.this);
+                builder.setTitle("Hỏi xóa");
+                builder.setMessage("Bạn chắc chắn muốn xóa các Lớp đã chọn?");
+                //builder.setCancelable(false);
+                builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteNhieuLop();
+
+                    }
+                });
+                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.show();
+
+            }
+        });
+    }
+
+    private void deleteNhieuLop(){
+        int dem = 0;
+        for (int i = lv_Lop.getChildCount()-1; i >= 0; i--){
+            View v = lv_Lop.getChildAt(i);
+            CheckBox checkBox = (CheckBox) v.findViewById(R.id.checkboxLop);
+            if (checkBox.isChecked()){
+                int result = dbManager_lop.deleteLop(data_lop.get(i).getMaLop());
+                if (result > 0){
+                    dem++;
+                    //data_lop.get(i).setSelected(false);
+                }
+            }
+        }
+        uploadList();
+        Toast.makeText(getApplicationContext(), "Đã xóa " + dem + " lớp.", Toast.LENGTH_LONG).show();
     }
 
     private void uploadList(){
@@ -121,6 +167,7 @@ public class LopActivity extends AppCompatActivity {
         edt_tenLop = (EditText) findViewById(R.id.edittextTenLop);
         btnNhapLop = (Button) findViewById(R.id.buttonNhapLop);
         lv_Lop = (ListView) findViewById(R.id.listviewLop);
+        imgbutton_xoaLop = (ImageButton) findViewById(R.id.imagebuttonXoaLop);
 
         edt_maLop.setFocusable(true);
     }

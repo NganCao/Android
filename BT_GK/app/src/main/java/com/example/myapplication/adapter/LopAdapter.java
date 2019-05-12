@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
@@ -52,6 +53,9 @@ public class LopAdapter extends BaseAdapter {
 
             holder.item_malop = (TextView) convertView.findViewById(R.id.textviewMaLop);
             holder.item_tenlop = (TextView) convertView.findViewById(R.id.textviewTenLop);
+            holder.isCheckbox = (CheckBox) convertView.findViewById(R.id.checkboxLop);
+
+            //holder.isCheckbox = (CheckBox) convertView.findViewById(R.id.checkboxLop);
 
             convertView.setTag(holder);
         }else {
@@ -62,6 +66,7 @@ public class LopAdapter extends BaseAdapter {
 
         holder.item_malop.setText(lop.getMaLop());
         holder.item_tenlop.setText(lop.getTenLop());
+        holder.isCheckbox.setSelected(false);
 
         return convertView;
     }
@@ -69,5 +74,6 @@ public class LopAdapter extends BaseAdapter {
     static class LopViewHolder{
         TextView item_malop;
         TextView item_tenlop;
+        CheckBox isCheckbox;
     }
 }

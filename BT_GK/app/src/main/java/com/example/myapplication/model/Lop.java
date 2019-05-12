@@ -3,6 +3,7 @@ package com.example.myapplication.model;
 public class Lop {
     private String maLop;
     private String tenLop;
+    private boolean selected = false;
 
     public Lop() {
     }
@@ -26,5 +27,13 @@ public class Lop {
 
     public void setTenLop(String tenLop) {
         this.tenLop = tenLop;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }
