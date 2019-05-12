@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".admin.AdminThemSanPhamActivity"></activity>
+        <activity android:name=".admin.AdminCT_DDHActivity"></activity>
+        <activity android:name=".admin.AdminDDHActivity" />
+        <activity android:name=".admin.AdminThemSanPhamActivity" />
         <activity android:name=".activity.SapXepSanPhamActivity" />
         <activity android:name=".admin.AdminSanPhamActivity" />
         <activity android:name=".admin.AdminMainActivity" />

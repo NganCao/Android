@@ -38,4 +38,3 @@ dependencies {
     implementation project(':ksoap2-android-assembly-2.6.0-jar-with-dependencies')
 
 }
-

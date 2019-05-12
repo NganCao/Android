@@ -4,6 +4,7 @@ public class MonHoc {
     private String maMH;
     private String tenMH;
     private int hocKyMH;
+    private boolean selected = false;
 
     public MonHoc() {
     }
@@ -36,5 +37,13 @@ public class MonHoc {
 
     public void setHocKyMH(int hocKyMH) {
         this.hocKyMH = hocKyMH;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }

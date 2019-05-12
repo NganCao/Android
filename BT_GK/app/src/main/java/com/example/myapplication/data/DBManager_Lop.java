@@ -118,6 +118,7 @@ public class DBManager_Lop extends SQLiteOpenHelper {
                 Lop lop = new Lop();
                 lop.setMaLop(cursor.getString(0));
                 lop.setTenLop(cursor.getString(1));
+                lop.setSelected(false);
                 list.add(lop);
             }while (cursor.moveToNext());
         }
@@ -174,6 +175,7 @@ public class DBManager_Lop extends SQLiteOpenHelper {
                 monHoc.setMaMH(cursor.getString(0));
                 monHoc.setTenMH(cursor.getString(1));
                 monHoc.setHocKyMH(cursor.getInt(2));
+                monHoc.setSelected(false);
                 list.add(monHoc);
             }while (cursor.moveToNext());
         }

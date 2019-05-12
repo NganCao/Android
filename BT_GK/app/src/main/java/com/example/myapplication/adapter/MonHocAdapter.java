@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
@@ -54,6 +55,7 @@ public class MonHocAdapter extends BaseAdapter {
             holder.item_maMH = (TextView) convertView.findViewById(R.id.textviewMaMH);
             holder.item_tenMH = (TextView) convertView.findViewById(R.id.textviewTenMH);
             holder.item_hocKyMH = (TextView) convertView.findViewById(R.id.textviewHocKyMH);
+            holder.item_checkMH = (CheckBox) convertView.findViewById(R.id.checkboxMonHoc);
 
             convertView.setTag(holder);
         }else {
@@ -65,6 +67,7 @@ public class MonHocAdapter extends BaseAdapter {
         holder.item_maMH.setText(monHoc.getMaMH());
         holder.item_tenMH.setText(monHoc.getTenMH());
         holder.item_hocKyMH.setText(String.valueOf(monHoc.getHocKyMH()));
+        holder.item_checkMH.setSelected(false);
 
         return convertView;
     }
@@ -73,5 +76,6 @@ public class MonHocAdapter extends BaseAdapter {
         TextView item_maMH;
         TextView item_tenMH;
         TextView item_hocKyMH;
+        CheckBox item_checkMH;
     }
 }

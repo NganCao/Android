@@ -1,6 +1,9 @@
 package com.example.myapplication.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.provider.ContactsContract;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -8,7 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,6 +30,7 @@ public class MonHocActivity extends AppCompatActivity {
     private EditText edt_maMH, edt_tenMH, edt_hocKyMH;
     private Button btn_NhapMH;
     private ListView lv_MH;
+    private ImageButton img_XoaMH;
 
     private ArrayList<MonHoc> monHocArrayList;
     MonHocAdapter monHocAdapter;
@@ -43,6 +49,51 @@ public class MonHocActivity extends AppCompatActivity {
         setEventButtonNhap();
         setEventClickItemListview();
         setEventLongClickItem();
+        setEventXoaNhieuLop();
+    }
+
+    private void setEventXoaNhieuLop() {
+        img_XoaMH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MonHocActivity.this);
+                builder.setTitle("Hỏi xóa");
+                builder.setMessage("Bạn chắc chắn muốn xóa các Môn học đã chọn?");
+                //builder.setCancelable(false);
+                builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteNhieuMonHoc();
+
+                    }
+                });
+                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.show();
+            }
+        });
+    }
+
+    private void deleteNhieuMonHoc(){
+        int dem = 0;
+        for (int i = lv_MH.getChildCount()-1; i >= 0; i--){
+            View v = lv_MH.getChildAt(i);
+            CheckBox checkBox = (CheckBox) v.findViewById(R.id.checkboxMonHoc);
+            if (checkBox.isChecked()){
+                int result = dbManager_lop.deleteMonHoc(monHocArrayList.get(i).getMaMH());
+                if (result > 0){
+                    dem++;
+                    //data_lop.get(i).setSelected(false);
+                }
+            }
+        }
+        uploadListMonHOc();
+        Toast.makeText(getApplicationContext(), "Đã xóa " + dem + " môn học.", Toast.LENGTH_LONG).show();
     }
 
     private void setEventLongClickItem() {
@@ -135,6 +186,7 @@ public class MonHocActivity extends AppCompatActivity {
         edt_hocKyMH = (EditText) findViewById(R.id.edittextHocKyMH);
         btn_NhapMH = (Button) findViewById(R.id.buttonNhapMH);
         lv_MH = (ListView) findViewById(R.id.listviewMonHoc);
+        img_XoaMH = (ImageButton) findViewById(R.id.imagebuttonXoaMH);
 
         edt_maMH.isFocused();
 
