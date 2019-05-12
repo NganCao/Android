@@ -64,56 +64,61 @@ public class DSSVActivity extends AppCompatActivity {
 
     }
 
-    private void setAdapter() {
-        if (adapter == null){
-            adapter = new SinhVienAdapter(this ,data);
-            lv.setAdapter(adapter);
-        }else {
-            adapter.notifyDataSetChanged();
-            lv.setSelection(adapter.getCount()-1);
-        }
-    }
+//    private void setAdapter() {
+//        if (adapter == null){
+//            adapter = new SinhVienAdapter(this ,data);
+//            lv.setAdapter(adapter);
+//        }else {
+//            adapter.notifyDataSetChanged();
+//            lv.setSelection(adapter.getCount()-1);
+//        }
+//    }
 
     private void setControl() {
 //        toolbar = (Toolbar) findViewById(R.id.toolbarDSSV);
         lv = (ListView) findViewById(R.id.lvSV);
 
+<<<<<<< HEAD
         data = KhoiTao();
         adapter = new SinhVienAdapter(this, data);
         lv.setAdapter(adapter);
+=======
+//        adapter = new SinhVienAdapter(this, R.layout.item_row_sv, data);
+//        lv.setAdapter(adapter);
+>>>>>>> 962d71db93539e2687bcd240000ffdd441025e57
     }
 
-//    @Override
-//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-//        super.onCreateContextMenu(menu, v, menuInfo);
-//        getMenuInflater().inflate(R.menu.context_menu_dssv,menu);
-//        menu.getItem(0).setTitle("Thêm sinh viên cho lớp " + sv_position.getMasv());
-//        menu.getItem(1).setTitle("Xem danh sách điểm");
-//        menu.getItem(2).setTitle("Chuyển lớp" + sv_position.getMasv());
-//        menu.getItem(3).setTitle("Xóa sinh viên");
-//    }
-//
-//    @Override
-//    public boolean onContextItemSelected(MenuItem item) {
-//        switch (item.getItemId()){
-//            case R.id.suaSV:
-//                Intent i = new Intent(DSSVActivity.this, ThemSVActivity.class);
-//                startActivity(i);
-//                break;
-//
-//            case R.id.xemDiem:
-//                break;
-//
-//            case R.id.chuyenLop:
-//                break;
-//
-//            case R.id.xoaSV:
-////                deleteLop();
-//
-//                break;
-//        }
-//        return super.onContextItemSelected(item);
-//    }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.context_menu_dssv,menu);
+        menu.getItem(0).setTitle("Thêm sinh viên cho lớp " + sv_position.getMasv());
+        menu.getItem(1).setTitle("Xem danh sách điểm");
+        menu.getItem(2).setTitle("Chuyển lớp" + sv_position.getMasv());
+        menu.getItem(3).setTitle("Xóa sinh viên");
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.suaSV:
+                Intent i = new Intent(DSSVActivity.this, ThemSVActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.xemDiem:
+                break;
+
+            case R.id.chuyenLop:
+                break;
+
+            case R.id.xoaSV:
+//                deleteLop();
+
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
 
     private ArrayList<SinhVien> KhoiTao(){
         ArrayList<SinhVien> list = new ArrayList<>();
