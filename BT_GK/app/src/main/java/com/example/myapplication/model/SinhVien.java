@@ -3,42 +3,36 @@ package com.example.myapplication.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class SinhVien extends SV_Lop implements Serializable {
+public class SinhVien implements Serializable {
 
     private static final long serialVersion = 1L;
-    private Lop lop;
+    private String masv;
     private String ho;
     private String ten;
-    private boolean phai;
+    private String phai;
     private String noisinh;
-    private Date ngaysinh;
+    private String ngaysinh;
+    private String malop;
 
     public SinhVien() {
     }
 
-    public SinhVien(String ma, String ho, String ten, boolean phai, String noisinh, Date ngaysinh, Lop lop) {
-        super(ma);
-        this.lop = lop;
+    public SinhVien(String masv, String ho, String ten, String phai, String noisinh, String ngaysinh, String malop) {
+        this.masv = masv;
         this.ho = ho;
         this.ten = ten;
         this.phai = phai;
         this.noisinh = noisinh;
         this.ngaysinh = ngaysinh;
+        this.malop = malop;
     }
 
-    public SinhVien(String ma, String ho, String ten, boolean phai) {
-        super(ma);
-        this.ho = ho;
-        this.ten = ten;
-        this.phai = phai;
+    public String getMasv() {
+        return masv;
     }
 
-    public Lop getLop() {
-        return lop;
-    }
-
-    public void setLop(Lop lop) {
-        this.lop = lop;
+    public void setMasv(String masv) {
+        this.masv = masv;
     }
 
     public String getHo() {
@@ -57,11 +51,11 @@ public class SinhVien extends SV_Lop implements Serializable {
         this.ten = ten;
     }
 
-    public boolean isPhai() {
+    public String getPhai() {
         return phai;
     }
 
-    public void setPhai(boolean phai) {
+    public void setPhai(String phai) {
         this.phai = phai;
     }
 
@@ -73,16 +67,19 @@ public class SinhVien extends SV_Lop implements Serializable {
         this.noisinh = noisinh;
     }
 
-    public Date getNgaysinh() {
+    public String getNgaysinh() {
         return ngaysinh;
     }
 
-    public void setNgaysinh(Date ngaysinh) {
+    public void setNgaysinh(String ngaysinh) {
         this.ngaysinh = ngaysinh;
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
+    public String getMalop() {
+        return malop;
+    }
+
+    public void setMalop(String malop) {
+        this.malop = malop;
     }
 }

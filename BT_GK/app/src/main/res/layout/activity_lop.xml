@@ -9,11 +9,11 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarLop"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:title="Lớp"
-        android:background="#4CAF50"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
+        android:layout_height="?attr/actionBarSize"
+        android:background="#4CAF50"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:title="Lớp"></android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:weightSum="3"

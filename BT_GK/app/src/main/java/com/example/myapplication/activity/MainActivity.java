@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,8 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.example.myapplication.activity.LopActivity;
-import com.example.myapplication.activity.MonHocActivity;
+import com.example.myapplication.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         btnLop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LopActivity.class);
+                Intent intent = new Intent(MainActivity.this, DSSVActivity.class);
                 startActivity(intent);
             }
         });
@@ -42,25 +41,9 @@ public class MainActivity extends AppCompatActivity {
         btnMonhoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MonHocActivity.class);
+                Intent intent = new Intent(MainActivity.this, ThemSVActivity.class);
                 startActivity(intent);
             }
         });
-
-//        btnSV.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, DSSV.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        btnDiem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, DSDiem.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 }
