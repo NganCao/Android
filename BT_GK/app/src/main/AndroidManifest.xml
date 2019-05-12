@@ -9,12 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MonHocActivity"></activity>
+        <activity android:name=".activity.DSSVActivity"></activity>
+        <activity android:name=".activity.ThemSVActivity" />
+        <activity android:name=".activity.SV" />
+        <activity android:name=".activity.MonHocActivity" />
         <activity android:name=".activity.LopActivity" />
-        <activity android:name=".DSDiem" />
-        <activity android:name=".EditSV" />
-        <activity android:name=".DSSV" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,9 +1,7 @@
 package com.example.myapplication.activity;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.LopAdapter;
 import com.example.myapplication.data.DBManager_Lop;
@@ -168,6 +165,7 @@ public class LopActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.menu_themSV:
                 // gọi phương thức thêm sinh viên của Ngân
+                startActivity(new Intent(LopActivity.this, ThemSVActivity.class));
                 break;
 
             case R.id.menu_dssv:

@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+    android:orientation="vertical"
+    tools:context=".activity.ThemSVActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="center"
@@ -26,8 +19,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginBottom="40dp">
+        android:layout_height="380dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -119,18 +111,14 @@
             android:layout_marginRight="10dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtMalop"
+            <Spinner
+                android:id="@+id/spinnerMalop"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginBottom="20dp"
-                android:gravity="bottom|left"
-                android:text="TextView"
-                android:textColor="#000"
-                android:textSize="14sp" />
+                android:dropDownWidth="wrap_content" />
 
             <EditText
                 android:id="@+id/editMasv"
@@ -236,7 +224,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -245,21 +233,21 @@
             android:text="Save" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btnReset"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:text="Restore" />
+            android:text="Reset" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnCancle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:text="Back" />
+            android:text="CANCLE" />
     </LinearLayout>
 </LinearLayout>

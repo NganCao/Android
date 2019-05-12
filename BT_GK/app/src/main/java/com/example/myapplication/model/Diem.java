@@ -4,17 +4,33 @@ import java.io.Serializable;
 
 public class Diem implements Serializable {
     private static final long serialVersion = 1L;
+    private String masv;
+    private String mamh;
     private float diem;
-    private MonHoc monHoc;
-    private SinhVien sinhVien;
 
     public Diem() {
     }
 
-    public Diem( SinhVien sinhVien, MonHoc monHoc,float diem) {
+    public Diem(String masv, String mamh, float diem) {
+        this.masv = masv;
+        this.mamh = mamh;
         this.diem = diem;
-        this.monHoc = monHoc;
-        this.sinhVien = sinhVien;
+    }
+
+    public String getMasv() {
+        return masv;
+    }
+
+    public void setMasv(String masv) {
+        this.masv = masv;
+    }
+
+    public String getMamh() {
+        return mamh;
+    }
+
+    public void setMamh(String mamh) {
+        this.mamh = mamh;
     }
 
     public float getDiem() {
@@ -23,26 +39,5 @@ public class Diem implements Serializable {
 
     public void setDiem(float diem) {
         this.diem = diem;
-    }
-
-    public MonHoc getMonHoc() {
-        return monHoc;
-    }
-
-    public void setMonHoc(MonHoc monHoc) {
-        this.monHoc = monHoc;
-    }
-
-    public SinhVien getSinhVien() {
-        return sinhVien;
-    }
-
-    public void setSinhVien(SinhVien sinhVien) {
-        this.sinhVien = sinhVien;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
     }
 }

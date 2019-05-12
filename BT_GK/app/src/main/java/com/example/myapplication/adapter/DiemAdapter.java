@@ -45,8 +45,8 @@ public class DiemAdapter extends ArrayAdapter<Diem> {
         }
 
         Diem diem = data.get(position);
-        holder.txtMamh.setText("Mã MH: ");
-        holder.txtMasv.setText("Mã SV: " + diem.getSinhVien().getMa());
+        holder.txtMamh.setText("Mã MH: "+ diem.getMamh());
+        holder.txtMasv.setText("Mã SV: " + diem.getMasv());
         holder.txtDiem.setText("Điểm: " + diem.getDiem());
         return row;
 
