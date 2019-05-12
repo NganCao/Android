@@ -32,6 +32,7 @@ public class DSSVActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dssv);
+        dbManager_lop = new DBManager_Lop(this);
 
         setControl();
         setEvent();
@@ -39,20 +40,16 @@ public class DSSVActivity extends AppCompatActivity {
     }
 
     private void setEvent() {
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
+
 
         data = dbManager_lop.getAllSV();
 
 //        setAdapter();
 //        adapter = new SinhVienAdapter(this, data);
 //        lv.setAdapter(adapter);
-//
-//        registerForContextMenu(lv);
+
+        registerForContextMenu(lv);
 
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -66,51 +63,51 @@ public class DSSVActivity extends AppCompatActivity {
 
     }
 
-//    private void setAdapter() {
-//        if (adapter == null){
-//            adapter = new SinhVienAdapter(this ,data);
-//            lv.setAdapter(adapter);
-//        }else {
-//            adapter.notifyDataSetChanged();
-//            lv.setSelection(adapter.getCount()-1);
-//        }
-//    }
+    private void setAdapter() {
+        if (adapter == null){
+            adapter = new SinhVienAdapter(this ,data);
+            lv.setAdapter(adapter);
+        }else {
+            adapter.notifyDataSetChanged();
+            lv.setSelection(adapter.getCount()-1);
+        }
+    }
 
     private void setControl() {
-        toolbar = (Toolbar) findViewById(R.id.toolbarDSSV);
+//        toolbar = (Toolbar) findViewById(R.id.toolbarDSSV);
         lv = (ListView) findViewById(R.id.lvSV);
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        getMenuInflater().inflate(R.menu.context_menu_dssv,menu);
-        menu.getItem(0).setTitle("Thêm sinh viên cho lớp " + sv_position.getMasv());
-        menu.getItem(1).setTitle("Xem danh sách điểm");
-        menu.getItem(2).setTitle("Chuyển lớp" + sv_position.getMasv());
-        menu.getItem(3).setTitle("Xóa sinh viên");
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.suaSV:
-                Intent i = new Intent(DSSVActivity.this, ThemSVActivity.class);
-                startActivity(i);
-                break;
-
-            case R.id.xemDiem:
-                break;
-
-            case R.id.chuyenLop:
-                break;
-
-            case R.id.xoaSV:
-//                deleteLop();
-
-                break;
-        }
-        return super.onContextItemSelected(item);
-    }
+//    @Override
+//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+//        super.onCreateContextMenu(menu, v, menuInfo);
+//        getMenuInflater().inflate(R.menu.context_menu_dssv,menu);
+//        menu.getItem(0).setTitle("Thêm sinh viên cho lớp " + sv_position.getMasv());
+//        menu.getItem(1).setTitle("Xem danh sách điểm");
+//        menu.getItem(2).setTitle("Chuyển lớp" + sv_position.getMasv());
+//        menu.getItem(3).setTitle("Xóa sinh viên");
+//    }
+//
+//    @Override
+//    public boolean onContextItemSelected(MenuItem item) {
+//        switch (item.getItemId()){
+//            case R.id.suaSV:
+//                Intent i = new Intent(DSSVActivity.this, ThemSVActivity.class);
+//                startActivity(i);
+//                break;
+//
+//            case R.id.xemDiem:
+//                break;
+//
+//            case R.id.chuyenLop:
+//                break;
+//
+//            case R.id.xoaSV:
+////                deleteLop();
+//
+//                break;
+//        }
+//        return super.onContextItemSelected(item);
+//    }
 
 }
