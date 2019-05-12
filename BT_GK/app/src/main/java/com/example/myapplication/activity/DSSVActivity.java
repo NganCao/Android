@@ -78,14 +78,13 @@ public class DSSVActivity extends AppCompatActivity {
 //        toolbar = (Toolbar) findViewById(R.id.toolbarDSSV);
         lv = (ListView) findViewById(R.id.lvSV);
 
-<<<<<<< HEAD
         data = KhoiTao();
         adapter = new SinhVienAdapter(this, data);
         lv.setAdapter(adapter);
-=======
+
 //        adapter = new SinhVienAdapter(this, R.layout.item_row_sv, data);
 //        lv.setAdapter(adapter);
->>>>>>> 962d71db93539e2687bcd240000ffdd441025e57
+
     }
 
     @Override
