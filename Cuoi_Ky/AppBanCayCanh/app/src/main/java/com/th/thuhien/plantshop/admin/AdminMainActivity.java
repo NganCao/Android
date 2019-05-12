@@ -20,7 +20,7 @@ public class AdminMainActivity extends AppCompatActivity {
     DrawerLayout drawerLayoutQuanTri;
     NavigationView navigationViewQuanTri;
     Toolbar toolbarMainQuanTri;
-    ImageButton btn_AdminMenu, btn_AdminSanPham;
+    ImageButton btn_AdminMenu, btn_AdminSanPham, btn_AdminDDH;
     TextView txt_tenAdmin;
 
     @Override
@@ -34,6 +34,17 @@ public class AdminMainActivity extends AppCompatActivity {
         NavigationItemClick();
         EventButtonMenu();
         EventButtonSanPham();
+        EventButtonDDH();
+    }
+
+    private void EventButtonDDH() {
+        btn_AdminDDH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminMainActivity.this, AdminDDHActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void EventButtonSanPham() {
@@ -112,6 +123,7 @@ public class AdminMainActivity extends AppCompatActivity {
 
         btn_AdminMenu = (ImageButton) findViewById(R.id.imgbuttonAdminMenu);
         btn_AdminSanPham = (ImageButton) findViewById(R.id.imgbuttonAdminSanPham);
+        btn_AdminDDH = (ImageButton) findViewById(R.id.imgbuttonAdminDDH);
 
     }
 }

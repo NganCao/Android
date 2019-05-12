@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.th.thuhien.plantshop.R;
 import com.th.thuhien.plantshop.admin.AdminMainActivity;
+import com.th.thuhien.plantshop.ultil.CT_DDHService;
 import com.th.thuhien.plantshop.ultil.DDH;
 
 import java.util.Map;
@@ -234,7 +235,7 @@ public class CheckOut extends AppCompatActivity {
 
         @Override
         protected Integer doInBackground(Integer... Integer) {
-            DDH createBill = new DDH();
+            CT_DDHService createBill = new CT_DDHService();
             return rs = createBill.insertCT_DDH(result, masanpham, slSP, giaSP);
         }
 
