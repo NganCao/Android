@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -37,6 +40,9 @@ public class MonHocActivity extends AppCompatActivity {
 
     private DBManager_Lop dbManager_lop;
 
+    private int index = -1;
+    private MonHoc seleted_MH;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +54,10 @@ public class MonHocActivity extends AppCompatActivity {
         ActionBar();
         setEventButtonNhap();
         setEventClickItemListview();
-        setEventLongClickItem();
+        setEventLongClickListview();
         setEventXoaNhieuLop();
+        registerForContextMenu(lv_MH);
+
     }
 
     private void setEventXoaNhieuLop() {
@@ -96,21 +104,34 @@ public class MonHocActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Đã xóa " + dem + " môn học.", Toast.LENGTH_LONG).show();
     }
 
-    private void setEventLongClickItem() {
+    private void setEventLongClickListview() {
         lv_MH.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                int result = dbManager_lop.deleteMonHoc(monHocArrayList.get(position).getMaMH());
-                if (result > 0){
-                    uploadListMonHOc();
-                    Toast.makeText(getApplicationContext(), "Xóa thành công", Toast.LENGTH_LONG).show();
-                }else {
-                    Toast.makeText(getApplicationContext(), "Xóa thất bại", Toast.LENGTH_LONG).show();
-                }
+                index = position;
+                seleted_MH = monHocArrayList.get(position);
+                //Toast.makeText(getApplicationContext(), seleted_MH.getMaMH(), Toast.LENGTH_LONG).show();
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.context_menu_monhoc,menu);
+        menu.getItem(0).setTitle("Xóa môn học " + seleted_MH.getTenMH());
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_xoaMH:
+                deleteMonHoc();
+                break;
+        }
+        return super.onContextItemSelected(item);
     }
 
     private void setEventClickItemListview() {
@@ -128,6 +149,36 @@ public class MonHocActivity extends AppCompatActivity {
         });
     }
 
+    private void deleteMonHoc(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MonHocActivity.this);
+        builder.setTitle("Hỏi xóa");
+        builder.setMessage("Bạn chắc chắn muốn xóa Môn học " + seleted_MH.getTenMH() + "?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                int result = dbManager_lop.deleteMonHoc(seleted_MH.getMaMH());
+                if (result > 0){
+                    Toast.makeText(getApplicationContext(), "Xóa thành công", Toast.LENGTH_LONG).show();
+                    uploadListMonHOc();
+                }else {
+                    Toast.makeText(getApplicationContext(), "Xóa thất bại", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.show();
+
+    }
+
     private void setEventButtonNhap() {
         btn_NhapMH.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +194,15 @@ public class MonHocActivity extends AppCompatActivity {
                 }
                 if (edt_hocKyMH.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(), "Học kỳ không được trống", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                int hocKy = Integer.parseInt(edt_hocKyMH.getText().toString());
+                if (hocKy <= 0){
+                    Toast.makeText(getApplicationContext(), "Học kỳ phải > 0", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (hocKy > 2){
+                    Toast.makeText(getApplicationContext(), "Học kỳ phải <= 2", Toast.LENGTH_LONG).show();
                     return;
                 }
 
