@@ -39,7 +39,7 @@ public class DBManager_Lop extends SQLiteOpenHelper {
 
     private static String TABLE_DIEM = "tbDiem";
     private static String COL_MASV_DIEM = "masv";
-    private static String COL_MAMH_DIEM = "mamh";
+    private static String COL_MAMH_DIEM = "ma_monhoc";
     private static String COL_DIEM = "diem";
 
     private Context context;
@@ -337,7 +337,7 @@ public class DBManager_Lop extends SQLiteOpenHelper {
         return db.update(TABLE_DIEM, values, COL_MASV_DIEM + "=? AND " + COL_MAMH_DIEM + "=?", new String[]{String.valueOf(diem.getMasv()), String.valueOf(diem.getMamh())});
     }
 
-    public int deleteSV(String masv, String mamh){
+    public int deleteDiem(String masv, String mamh){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_DIEM, COL_MASV_DIEM + "=? AND " + COL_MAMH_DIEM + "=?", new String[]{masv, mamh});
     }

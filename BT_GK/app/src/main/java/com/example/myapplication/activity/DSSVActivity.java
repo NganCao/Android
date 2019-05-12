@@ -41,8 +41,19 @@ public class DSSVActivity extends AppCompatActivity {
         dbManager_lop = new DBManager_Lop(this);
 
         setControl();
+        ActionBar();
         setEvent();
 
+    }
+
+    private void ActionBar() {
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DSSVActivity.this, MainActivity.class));
+            }
+        });
     }
 
     private void setEvent() {
@@ -80,13 +91,13 @@ public class DSSVActivity extends AppCompatActivity {
 //    }
 
     private void setControl() {
-//        toolbar = (Toolbar) findViewById(R.id.toolbarDSSV);
+        toolbar = (Toolbar) findViewById(R.id.toolbarDSSV);
         lv = (ListView) findViewById(R.id.lvSV);
 
 
          //   xoaTinhSinhVien();
 
-        insetTinhSinhVien();
+        //insetTinhSinhVien();
         data = dbManager_lop.getAllSV();
         adapter = new SinhVienAdapter(this, data);
         lv.setAdapter(adapter);
