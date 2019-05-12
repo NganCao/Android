@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.adapter.LopAdapter;
 import com.example.myapplication.adapter.SinhVienAdapter;
 import com.example.myapplication.data.DBManager_Lop;
+import com.example.myapplication.model.Lop;
 import com.example.myapplication.model.SinhVien;
 
 import java.util.ArrayList;
@@ -23,11 +25,14 @@ public class DSSVActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     ListView lv;
-    SinhVienAdapter adapter;
+
     ArrayList<SinhVien> data;
+    SinhVienAdapter adapter;
+
     int index = -1;
     SinhVien sv_position;
-    DBManager_Lop dbManager_lop;
+
+    private DBManager_Lop dbManager_lop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +83,11 @@ public class DSSVActivity extends AppCompatActivity {
 //        toolbar = (Toolbar) findViewById(R.id.toolbarDSSV);
         lv = (ListView) findViewById(R.id.lvSV);
 
-        data = KhoiTao();
+
+         //   xoaTinhSinhVien();
+
+        insetTinhSinhVien();
+        data = dbManager_lop.getAllSV();
         adapter = new SinhVienAdapter(this, data);
         lv.setAdapter(adapter);
 
@@ -130,5 +139,22 @@ public class DSSVActivity extends AppCompatActivity {
         list.add(sv3);
         list.add(sv4);
         return list;
+    }
+
+    private void insetTinhSinhVien(){
+        SinhVien sinhVien = new SinhVien("n072", "luong", "hien", "nu", "dong nai", "21/5/2000", "cp01");
+        SinhVien sv2 = new SinhVien("n073", "luong", "hien", "nam", "dong nai", "21/5/2000", "cp01");
+        SinhVien sv3 = new SinhVien("n074", "luong", "hien", "nu", "dong nai", "21/5/2000", "cp01");
+        SinhVien sv4 = new SinhVien("n075", "luong", "hien", "nam", "dong nai", "21/5/2000", "cp01");
+        dbManager_lop.addSV(sinhVien);
+        dbManager_lop.addSV(sv2);
+        dbManager_lop.addSV(sv3);
+        dbManager_lop.addSV(sv4);
+    }
+    private void xoaTinhSinhVien(){
+        int result = dbManager_lop.deleteSV("n072");
+        if (result > 0){
+            Log.d("xoa: ", "thanh cong");
+        }
     }
 }

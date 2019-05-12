@@ -21,6 +21,7 @@ public class DiemActivity extends AppCompatActivity {
     private ArrayList<Diem> diemArrayList;
     private DiemAdapter diemAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

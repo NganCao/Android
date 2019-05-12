@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         btnLop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LopActivity.class);
+                Intent intent = new Intent(MainActivity.this, DSSVActivity.class);
                 startActivity(intent);
             }
         });
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         btnMonhoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DiemActivity.class);
+                Intent intent = new Intent(MainActivity.this, MonHocActivity.class);
                 startActivity(intent);
             }
         });

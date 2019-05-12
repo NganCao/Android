@@ -35,7 +35,7 @@ public class DBManager_Lop extends SQLiteOpenHelper {
     private static String COL_PHAI = "phai";
     private static String COL_NOISINH = "noisinh";
     private static String COL_NGAYSINH = "ngaysinh";
-    private static String COL_MALOP = "malop";
+    private static String COL_MALOP = "lop_ma";
 
     private static String TABLE_DIEM = "tbDiem";
     private static String COL_MASV_DIEM = "masv";
@@ -53,12 +53,24 @@ public class DBManager_Lop extends SQLiteOpenHelper {
             + COL_HOCKY_MONHOC + " INTEGER)";
 
     //table sinh viên
+//    private static String querytest = "create table " + TABLE_SINHVIEN + ("
+//                                   + COL_MASV + " text primary key not null,"
+//                                   + COL_HO + " text, "
+//                                    + COL_TEN + " text, "
+//            + COL_PHAI + " text, "
+//            + COL_NOISINH + " text, "
+//            + COL_NGAYSINH + " text, "
+//            + COL_MALOP + " text not null constraint " + COL_MALOP + " references " + TB_LOPS + "(" + COL_LOP_MA
+//                                   +"dateadded date,"
+//                                   +"authorid integer not null constraint authorid references tblAuthors(id) on delete cascade)";
+//
     private static String SQLQuerySV = "CREATE TABLE " + TABLE_SINHVIEN
             + " (" + COL_MASV + " TEXT PRIMARY KEY NOT NULL, "
             + COL_HO + " TEXT, "
             + COL_TEN + " TEXT, "
             + COL_PHAI + " TEXT, "
             + COL_NOISINH + " TEXT, "
+            + COL_NGAYSINH + " TEXT, "
             + COL_MALOP + " TEXT NOT NULL, " +
             "CONSTRAINT FK_SV_Lop FOREIGN KEY ("+ COL_MALOP +") REFERENCES " +  TB_LOPS +"("+ COL_LOP_MA +"))";
 
@@ -221,6 +233,27 @@ public class DBManager_Lop extends SQLiteOpenHelper {
         db.close();
     }
 
+//    public ArrayList<SinhVien> getListSinhVien(){
+//        ArrayList<SinhVien> list = new ArrayList<>();
+//        SQLiteDatabase db = null;
+//        Cursor cursor =  db.query(TABLE_SINHVIEN, null, null, null, null, null, null);
+//        cursor.moveToFirst();
+//        SinhVien sinhVien = new SinhVien();
+//        while (!cursor.isAfterLast())
+//            sinhVien.setMasv(cursor.getString(0));
+//            sinhVien.setHo(cursor.getString(1));
+//            sinhVien.setTen(cursor.getString(2));
+//            sinhVien.setPhai(cursor.getString(3));
+//            sinhVien.setNoisinh(cursor.getString(4));
+//            sinhVien.setNgaysinh(cursor.getString(5));
+//            sinhVien.setMalop(cursor.getString(6));
+//            list.add(sinhVien);
+//            cursor.moveToNext();
+//        }
+//        cursor.close();
+//        return list;
+//    }
+
     public ArrayList<SinhVien> getAllSV(){
         ArrayList<SinhVien> list = new ArrayList<>();
 
@@ -234,8 +267,9 @@ public class DBManager_Lop extends SQLiteOpenHelper {
                 sv.setHo(cursor.getString(1));
                 sv.setTen(cursor.getString(2));
                 sv.setPhai(cursor.getString(3));
-                sv.setNgaysinh(cursor.getString(4));
-                sv.setNoisinh(cursor.getString(5));
+                sv.setNoisinh(cursor.getString(4));
+                sv.setNgaysinh(cursor.getString(5));
+
                 sv.setMalop(cursor.getString(6));
                 list.add(sv);
 

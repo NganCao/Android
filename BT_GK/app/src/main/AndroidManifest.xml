@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +14,6 @@
         <activity android:name=".activity.DiemActivity"></activity>
         <activity android:name=".activity.DSSVActivity" />
         <activity android:name=".activity.ThemSVActivity" />
-        <activity android:name=".activity.SV" />
         <activity android:name=".activity.MonHocActivity" />
         <activity android:name=".activity.LopActivity" />
         <activity android:name=".activity.MainActivity">
