@@ -8,6 +8,7 @@ import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.myapplication.R;
@@ -43,7 +44,7 @@ public class DSSVActivity extends AppCompatActivity {
 
 
 
-        data = dbManager_lop.getAllSV();
+        //data = dbManager_lop.getAllSV();
 
 //        setAdapter();
 //        adapter = new SinhVienAdapter(this, data);
@@ -76,6 +77,10 @@ public class DSSVActivity extends AppCompatActivity {
     private void setControl() {
 //        toolbar = (Toolbar) findViewById(R.id.toolbarDSSV);
         lv = (ListView) findViewById(R.id.lvSV);
+
+        data = KhoiTao();
+        adapter = new SinhVienAdapter(this, data);
+        lv.setAdapter(adapter);
     }
 
 //    @Override
@@ -110,4 +115,16 @@ public class DSSVActivity extends AppCompatActivity {
 //        return super.onContextItemSelected(item);
 //    }
 
+    private ArrayList<SinhVien> KhoiTao(){
+        ArrayList<SinhVien> list = new ArrayList<>();
+        SinhVien sv1 = new SinhVien("n072", "luong", "hien", "nu", "dong nai", "21/5/2000", "cp01");
+        SinhVien sv2 = new SinhVien("n073", "luong", "hien", "nam", "dong nai", "21/5/2000", "cp01");
+        SinhVien sv3 = new SinhVien("n074", "luong", "hien", "nu", "dong nai", "21/5/2000", "cp01");
+        SinhVien sv4 = new SinhVien("n075", "luong", "hien", "nam", "dong nai", "21/5/2000", "cp01");
+        list.add(sv1);
+        list.add(sv2);
+        list.add(sv3);
+        list.add(sv4);
+        return list;
+    }
 }
