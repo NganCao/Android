@@ -136,6 +136,7 @@ public class DBManager_Lop extends SQLiteOpenHelper {
                 monHoc.setMaMH(cursor.getString(0));
                 monHoc.setTenMH(cursor.getString(1));
                 monHoc.setHocKyMH(cursor.getInt(2));
+                monHoc.setSelected(false);
                 list.add(monHoc);
             }while (cursor.moveToNext());
         }
