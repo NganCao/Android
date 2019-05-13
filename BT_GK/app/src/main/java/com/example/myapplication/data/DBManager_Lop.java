@@ -35,11 +35,11 @@ public class DBManager_Lop extends SQLiteOpenHelper {
     private static String COL_PHAI = "phai";
     private static String COL_NOISINH = "noisinh";
     private static String COL_NGAYSINH = "ngaysinh";
-    private static String COL_MALOP = "malop";
+    private static String COL_MALOP = "lop_ma";
 
     private static String TABLE_DIEM = "tbDiem";
     private static String COL_MASV_DIEM = "masv";
-    private static String COL_MAMH_DIEM = "mamh";
+    private static String COL_MAMH_DIEM = "ma_monhoc";
     private static String COL_DIEM = "diem";
 
     private Context context;
@@ -52,13 +52,13 @@ public class DBManager_Lop extends SQLiteOpenHelper {
             + COL_TEN_MONHOC + " TEXT, "
             + COL_HOCKY_MONHOC + " INTEGER)";
 
-    //table sinh viên
     private static String SQLQuerySV = "CREATE TABLE " + TABLE_SINHVIEN
             + " (" + COL_MASV + " TEXT PRIMARY KEY NOT NULL, "
             + COL_HO + " TEXT, "
             + COL_TEN + " TEXT, "
             + COL_PHAI + " TEXT, "
             + COL_NOISINH + " TEXT, "
+            + COL_NGAYSINH + " TEXT, "
             + COL_MALOP + " TEXT NOT NULL, " +
             "CONSTRAINT FK_SV_Lop FOREIGN KEY ("+ COL_MALOP +") REFERENCES " +  TB_LOPS +"("+ COL_LOP_MA +"))";
 
@@ -234,8 +234,9 @@ public class DBManager_Lop extends SQLiteOpenHelper {
                 sv.setHo(cursor.getString(1));
                 sv.setTen(cursor.getString(2));
                 sv.setPhai(cursor.getString(3));
-                sv.setNgaysinh(cursor.getString(4));
-                sv.setNoisinh(cursor.getString(5));
+                sv.setNoisinh(cursor.getString(4));
+                sv.setNgaysinh(cursor.getString(5));
+
                 sv.setMalop(cursor.getString(6));
                 list.add(sv);
 
@@ -303,7 +304,7 @@ public class DBManager_Lop extends SQLiteOpenHelper {
         return db.update(TABLE_DIEM, values, COL_MASV_DIEM + "=? AND " + COL_MAMH_DIEM + "=?", new String[]{String.valueOf(diem.getMasv()), String.valueOf(diem.getMamh())});
     }
 
-    public int deleteSV(String masv, String mamh){
+    public int deleteDiem(String masv, String mamh){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_DIEM, COL_MASV_DIEM + "=? AND " + COL_MAMH_DIEM + "=?", new String[]{masv, mamh});
     }

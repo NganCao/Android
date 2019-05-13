@@ -5,27 +5,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.example.myapplication.R;
-import com.example.myapplication.adapter.LopAdapter;
 import com.example.myapplication.adapter.SpinnerAdapter;
 import com.example.myapplication.data.DBManager_Lop;
 import com.example.myapplication.model.Lop;
 import com.example.myapplication.model.SinhVien;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class ThemSVActivity extends AppCompatActivity {
+public class EditSVActivity extends AppCompatActivity {
 
     EditText txtMasv, txtHo, txtTen, txtNgaysinh, txtNoisinh;
     RadioButton rbNam, rbNu;
@@ -33,20 +30,22 @@ public class ThemSVActivity extends AppCompatActivity {
     Button btnCancle, btnSave, btnReset;
     RadioGroup radioGroup;
     ImageView img;
+    TextView selection;
     ArrayList<Lop> listLop;
     SpinnerAdapter adapter;
     int index;
     SinhVien sv;
+    String mm = "";
 
     DBManager_Lop dbManager_lop;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_them_sv);
+        setContentView(R.layout.activity_edit_sv);
         dbManager_lop = new DBManager_Lop(this);
 
         setControl();
+        getData();
         setEvent();
     }
 
@@ -84,7 +83,7 @@ public class ThemSVActivity extends AppCompatActivity {
                     sv.setNoisinh(txtNoisinh.getText().toString());
                     sv.setMalop(malop);
 
-                    dbManager_lop.addSV(sv);
+//                    dbManager_lop.updateSV(sv);
                     Toast.makeText(getApplicationContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception e){
@@ -103,6 +102,8 @@ public class ThemSVActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 index = position;
+//                mm = String.valueOf(spinnerMalop.getSelectedItemId());
+                mm = String.valueOf(parent.getItemAtPosition(position));
             }
 
             @Override
@@ -133,21 +134,27 @@ public class ThemSVActivity extends AppCompatActivity {
 //        toolbarSV = (Toolbar) findViewById(R.id.toolbarEditSV);
     }
 
-    private void checkInsert(){
-        if (txtMasv.getText().toString().equals("")){
-            Toast.makeText(this, "Bạn chưa nhập mã sv!", Toast.LENGTH_SHORT);
+    private void getData(){
+        Intent intent = getIntent();
+        Bundle b = intent.getBundleExtra("DATA");
+        SinhVien sinhVien = (SinhVien) b.getSerializable("SINHVIEN");
+        txtHo.setText(sv.getHo());
+        txtMasv.setText(sv.getMasv());
+        txtTen.setText(sv.getTen());
+        txtNgaysinh.setText(sv.getNgaysinh());
+        txtNoisinh.setText(sv.getNoisinh());
+        spinnerMalop.setAdapter(adapter);
+        txtMasv.setEnabled(false);
+//        String ma = sv.getMalop();
+        String phai = sv.getPhai();
+        if (phai.equals("Nam")){
+            rbNam.isChecked();
+            img.setImageResource(R.drawable.boy);
         }
-        if (txtHo.getText().toString().equals("")){
-            Toast.makeText(this, "Bạn chưa nhập họ!", Toast.LENGTH_SHORT);
+        else {rbNu.isChecked();
+            img.setImageResource(R.drawable.girl);
         }
-        if (txtTen.getText().toString().equals("")) {
-            Toast.makeText(this, "Bạn chưa nhập tên!", Toast.LENGTH_SHORT);
-        }
-        if (txtNgaysinh.getText().toString().equals("")){
-            Toast.makeText(this, "Bạn chưa nhập ngày sinh!", Toast.LENGTH_SHORT);
-        }
-        if (txtNoisinh.getText().toString().equals("")){
-            Toast.makeText(this, "Bạn chưa nhập nơi sinh!", Toast.LENGTH_SHORT);
-        }
+
     }
+
 }

@@ -1,72 +1,75 @@
 package com.example.myapplication.adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.myapplication.R;
 
 import com.example.myapplication.model.Diem;
+import com.example.myapplication.model.SinhVien;
 
 
 import java.util.ArrayList;
 
-public class DiemAdapter extends ArrayAdapter<Diem> {
-    Activity context;
-    int layoutId;
-    ArrayList<Diem> data;
+public class DiemAdapter extends BaseAdapter {
+    Context context;
+    LayoutInflater layoutResourceId;
+    ArrayList<Diem> data = null;
 
-    public DiemAdapter (Activity context, int layoutId, ArrayList<Diem> data){
-        super(context, layoutId, data);
+    public DiemAdapter(Context context, ArrayList<Diem> data) {
         this.context = context;
-        this.layoutId = layoutId;
         this.data = data;
+        layoutResourceId = LayoutInflater.from(context);
     }
 
+    @Override
+    public int getCount() {
+        return data.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return data.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        Holder holder = null;
-        if(row == null){
-            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-            row = inflater.inflate(layoutId, parent,false);
+        DiemHolder holder;
 
-            holder = new Holder();
-            holder.txtMamh = (TextView) row.findViewById(R.id.txtMamh);
-            holder.txtMasv = (TextView) row.findViewById(R.id.txtMasv);
-            holder.txtDiem = (TextView) row.findViewById(R.id.txtDiem);
+        if (convertView == null){
+            convertView = layoutResourceId.inflate(R.layout.item_row_core, null);
+            holder = new DiemHolder();
 
-            row.setTag(holder);
-        }
-        else {
-            holder = (Holder) row.getTag();
+            holder.txtMamh = (TextView) convertView.findViewById(R.id.txtMamh);
+            holder.txtMasv = (TextView) convertView.findViewById(R.id.txtMasv);
+            holder.txtDiem = (TextView) convertView.findViewById(R.id.txtDiem);
+
+            convertView.setTag(holder);
+        }else {
+            holder = (DiemHolder) convertView.getTag();
         }
 
         Diem diem = data.get(position);
-        holder.txtMamh.setText("Mã MH: "+ diem.getMamh());
-        holder.txtMasv.setText("Mã SV: " + diem.getMasv());
-        holder.txtDiem.setText("Điểm: " + diem.getDiem());
-        return row;
 
-//        Holder holder = null;
-//        convertView = context.getLayoutInflater().inflate(layoutId, null);
-//
-//        holder = new Holder();
-//            holder.txtMamh = (TextView) convertView.findViewById(R.id.txtMamh);
-//            holder.txtMasv = (TextView) convertView.findViewById(R.id.txtMasv);
-//            holder.txtDiem = (TextView) convertView.findViewById(R.id.txtDiem);
-//
-//        Diem diem = data.get(position);
-//        holder.txtMamh.setText("Mã MH: ");
-//        holder.txtMasv.setText("Mã SV: " + diem.getSinhVien().getMa());
-//        holder.txtDiem.setText("Điểm: " + diem.getDiem());
-//
-//        return convertView;
+        holder.txtMamh.setText(diem.getMamh());
+        holder.txtMasv.setText(diem.getMasv());
+        holder.txtDiem.setText(String.valueOf(diem.getDiem()));
+
+        return convertView;
     }
 
-    static class Holder{
+    static class DiemHolder{
         TextView txtMasv, txtMamh, txtDiem;
     }
 

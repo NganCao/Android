@@ -96,6 +96,7 @@ public class LopActivity extends AppCompatActivity {
                 edt_tenLop.setText(lop.getTenLop());
                 btnNhapLop.setText("Save");
                 edt_maLop.setEnabled(false);
+
             }
         });
 
@@ -212,7 +213,9 @@ public class LopActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.menu_themSV:
                 // gọi phương thức thêm sinh viên của Ngân
-                startActivity(new Intent(LopActivity.this, ThemSVActivity.class));
+                Intent intent = new Intent(LopActivity.this, ThemSVActivity.class);
+                intent.putExtra("malop",selected_lop.getMaLop());
+                startActivity(intent);
                 break;
 
             case R.id.menu_dssv:
