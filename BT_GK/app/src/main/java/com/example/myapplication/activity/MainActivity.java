@@ -25,10 +25,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dbManager_lop = new DBManager_Lop(this);
+
         insetTinhLop();
         insetTinhMonHoc();
         insetTinhSinhVien();
         insetTinhDiem();
+
         setControl();
         setEvent();
     }
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         btnLop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DSSVActivity.class);
+                Intent intent = new Intent(MainActivity.this, LopActivity.class);
                 startActivity(intent);
             }
         });
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         btnMonhoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DiemActivity.class);
+                Intent intent = new Intent(MainActivity.this, MonHocActivity.class);
                 startActivity(intent);
             }
         });
@@ -74,20 +76,20 @@ public class MainActivity extends AppCompatActivity {
         dbManager_lop.insertMonHoc(monHoc3);
     }
     private void insetTinhSinhVien(){
-        SinhVien sinhVien = new SinhVien("n072", "luong", "hien", "nu", "dong nai", "21/5/2000", "cp01");
-        SinhVien sv2 = new SinhVien("n073", "luong", "hien", "nam", "dong nai", "21/5/2000", "cp01");
-        SinhVien sv3 = new SinhVien("n074", "luong", "hien", "nu", "dong nai", "21/5/2000", "cp01");
-        SinhVien sv4 = new SinhVien("n075", "luong", "hien", "nam", "dong nai", "21/5/2000", "cp01");
+        SinhVien sinhVien = new SinhVien("n072", "luong", "hien", "nu", "dong nai", "21/5/2000", "cntt");
+        SinhVien sv2 = new SinhVien("n073", "luong", "hien", "nam", "dong nai", "21/5/2000", "mmt");
+        SinhVien sv3 = new SinhVien("n074", "luong", "hien", "nu", "dong nai", "21/5/2000", "cntt");
+        SinhVien sv4 = new SinhVien("n075", "luong", "hien", "nam", "dong nai", "21/5/2000", "mmt");
         dbManager_lop.addSV(sinhVien);
         dbManager_lop.addSV(sv2);
         dbManager_lop.addSV(sv3);
         dbManager_lop.addSV(sv4);
     }
     private void insetTinhDiem(){
-        Diem diem1 = new Diem("n071", "cntt", 9);
-        Diem diem2 = new Diem("n072", "mmt", 6);
-        Diem diem3 = new Diem("n073", "cntt", 5);
-        Diem diem4 = new Diem("n074", "mmt", 1);
+        Diem diem1 = new Diem("n071", "trr", 9);
+        Diem diem2 = new Diem("n072", "xstk", 6);
+        Diem diem3 = new Diem("n073", "csdl", 5);
+        Diem diem4 = new Diem("n074", "trr", 1);
 
         dbManager_lop.addDiem(diem1);
         dbManager_lop.addDiem(diem2);

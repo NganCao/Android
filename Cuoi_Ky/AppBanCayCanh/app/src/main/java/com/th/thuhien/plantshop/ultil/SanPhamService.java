@@ -24,13 +24,15 @@ public class SanPhamService {
     private final String METHOD_NAME_SANPHAM_BY_MENU = "GetListSanPhamTheoMenu";
     private final String METHOD_NAME_LIST_SANPHAM = "GetListSanPham";
     private final String METHOD_NAME_SAPXEP_SANPHAM_MOI = "FilterListSanPhamMoiNhat";
-    private final String METHOD_NAME_INSERT_SANPHAM = "InsertSanPham ";
+    private final String METHOD_NAME_INSERT_SANPHAM = "InsertSanPham";
+    private final String METHOD_NAME_SANPHAM_BY_MA_MENU = "GetSanPham ";
 
     private final String SOAP_ACTION_LIST_SANPHAM_MOI = NAME_SPACE + METHOD_NAME_SANPHAM_MOI;
     private final String SOAP_ACTION_SANPHAM_BY_MENU = NAME_SPACE + METHOD_NAME_SANPHAM_BY_MENU;
     private final String SOAP_ACTION_LIST_SANPHAM = NAME_SPACE + METHOD_NAME_LIST_SANPHAM;
     private final String SOAP_ACTION_SAPXEP_SANPHAM_MOI = NAME_SPACE + METHOD_NAME_SAPXEP_SANPHAM_MOI;
     private final String SOAP_ACTION_INSERT_SANPHAM = NAME_SPACE + METHOD_NAME_INSERT_SANPHAM;
+    private final String SOAP_ACTION_SANPHAM_BY_MA_MENU = NAME_SPACE + METHOD_NAME_SANPHAM_BY_MA_MENU;
 
     private final String URL = "http://plantshop.somee.com/SanPhamService.asmx?WSDL";
 
@@ -249,5 +251,42 @@ public class SanPhamService {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public String getSanPhamByMaMenu(int mamenu){
+        Log.d("mamenuAsyn: ", String.valueOf(mamenu));
+        SanPham sanPham = new SanPham();
+        SoapObject request = new SoapObject(NAME_SPACE, METHOD_NAME_SANPHAM_BY_MA_MENU);
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = true;
+        envelope.setOutputSoapObject(request);
+
+        request.addProperty("maSP", mamenu);
+
+        HttpTransportSE httpTransportSE = new HttpTransportSE(URL);
+        try {
+            httpTransportSE.call(SOAP_ACTION_SANPHAM_BY_MA_MENU, envelope);
+            SoapObject item = (SoapObject) envelope.getResponse();
+
+            String maSanPham = item.getProperty("MaSP").toString();
+            String tenSanPham = item.getProperty("TenSP").toString();
+            String hinhSanPham = item.getProperty("HinhAnh").toString();
+            String thongTinSanPham = item.getProperty("ThongTin").toString();
+            String giaSanPham = item.getProperty("Gia").toString();
+//                String maMenu = item.getProperty("MaMenu").toString();
+
+            sanPham.setMaSp(Integer.parseInt(maSanPham));
+            sanPham.setTenSp(tenSanPham);
+            sanPham.setHinhAnh(hinhSanPham);
+            sanPham.setThongTin(thongTinSanPham);
+            sanPham.setGiaSp(Integer.parseInt(giaSanPham));
+            //               sanPham.setMaMenu(Integer.parseInt(maMenu));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+        Log.d("sanphamduoc: ", sanPham.getTenSp());
+        return sanPham.getTenSp();
     }
 }

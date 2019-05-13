@@ -40,6 +40,7 @@ public class AdminDDHActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(AdminDDHActivity.this, AdminCT_DDHActivity.class);
+                intent.putExtra("maddh", donDatHangList.get(position).getMaDDH());
                 startActivity(intent);
             }
         });
