@@ -1,9 +1,14 @@
 package com.th.thuhien.plantshop.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,10 +18,16 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.th.thuhien.plantshop.R;
+import com.th.thuhien.plantshop.adapter.RecyclerViewCTHinhSpAdapter;
+import com.th.thuhien.plantshop.adapter.SanPhamAdapter;
 import com.th.thuhien.plantshop.model.GioHang;
+import com.th.thuhien.plantshop.model.HinhSanPham;
 import com.th.thuhien.plantshop.model.SanPham;
+import com.th.thuhien.plantshop.ultil.HinhSanPhamService;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChiTietSanPhamActivity extends AppCompatActivity {
 
@@ -25,6 +36,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     TextView txtTenCT, txtGiaCT, txtMoTaCT;
     Spinner spinnerCT;
     Button btnDatMuaCT;
+    RecyclerView recyclerViewHinhSp;
+
+    ArrayList<HinhSanPham> dataHinhSp;
+    RecyclerViewCTHinhSpAdapter adapter;
 
     // các biến lưu chi tiết sản phẩm nhận được
     int id = 0;
@@ -45,6 +60,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         NhanThongTinSanPham();
         CatchEventSpiner();
         ButtonDatMua();
+        ShowHinhSp();
     }
 
     private void AnhXa() {
@@ -56,6 +72,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         spinnerCT = (Spinner) findViewById(R.id.spinerSoLuongCTSP);
         btnDatMuaCT = (Button) findViewById(R.id.buttonDatMuaCT);
         //recyclerViewSPCungLoai = (RecyclerView) findViewById(R.id.recyclerviewSPCungLoai);
+
+        recyclerViewHinhSp = (RecyclerView) findViewById(R.id.recyclerviewHinhSP);
     }
     private void ActionToolbar() {
         setSupportActionBar(toolbarChiTiet);
@@ -121,5 +139,38 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    private void ShowHinhSp(){
+        dataHinhSp = new ArrayList<>();
+        adapter = new RecyclerViewCTHinhSpAdapter(getApplicationContext(), R.layout.dong_hinh_sanpham_recyclerview, dataHinhSp);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerViewHinhSp.setLayoutManager(llm);
+        recyclerViewHinhSp.setAdapter(adapter);
+
+        DividerItemDecoration dividerVertical =
+                new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL);
+        recyclerViewHinhSp.addItemDecoration(dividerVertical);
+
+        AsynShowHinhSp asynShowHinhSp = new AsynShowHinhSp();
+        asynShowHinhSp.execute(id);
+    }
+    private class AsynShowHinhSp extends AsyncTask<Integer, Void, List<HinhSanPham>>{
+
+        @Override
+        protected List<HinhSanPham> doInBackground(Integer... integers) {
+            HinhSanPhamService hinhSanPhamService = new HinhSanPhamService();
+            return hinhSanPhamService.getListHinhByMaSp(integers[0]);
+        }
+
+        @Override
+        protected void onPostExecute(List<HinhSanPham> hinhSanPhams) {
+            super.onPostExecute(hinhSanPhams);
+            for (int i = 0; i < hinhSanPhams.size(); i++){
+                dataHinhSp.add(hinhSanPhams.get(i));
+                Log.d("ghiHinh:", String.valueOf(dataHinhSp.get(i).getMaHinh()));
+            }
+            adapter.notifyDataSetChanged();
+        }
     }
 }
