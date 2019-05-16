@@ -14,6 +14,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -55,7 +57,9 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     //int idSp = 0;
     int idMenu = 0;
 
-    String hinh = "";
+    //String hinh = "";
+    String hinhsanpham = "https://4.bp.blogspot.com/-EfuHbKEuRF0/XNPqKPPT8bI/AAAAAAAAGUs/2EaZQ1UIYiMGOA3ma_tDrZcBabk5voiegCLcBGAs/s1600/product.png";
+    String adapterHinh = "";
     //boolean test = false;
 
     //String mMessageReceiver = "";
@@ -68,7 +72,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         AnhXa();
         ActionToolbar();
         //NhanThongTinSanPham();
-        NhanThongTinSanPham();
+        //NhanThongTinSanPham();
+        //getIncomingIntent();
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("custom-message"));
         //Toast.makeText(getApplicationContext(), "hinhnhan:" + hinh, Toast.LENGTH_LONG).show();
         ShowInfor();
@@ -82,11 +87,12 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             // Get extra data included in the Intent
-            hinh = intent.getStringExtra("hinhsp");
+            adapterHinh = intent.getStringExtra("hinhsp");
             ShowInfor();
             //Toast.makeText(ChiTietSanPhamActivity.this, hinh, Toast.LENGTH_SHORT).show();
         }
     };
+
     private void AnhXa() {
         toolbarChiTiet = (Toolbar) findViewById(R.id.toolbarChiTietSP);
         imgChiTiet = (ImageView) findViewById(R.id.imageviewChiTietSP);
@@ -99,6 +105,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
         recyclerViewHinhSp = (RecyclerView) findViewById(R.id.recyclerviewHinhSP);
     }
+
     private void ActionToolbar() {
         setSupportActionBar(toolbarChiTiet);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -109,6 +116,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             }
         });
     }
+
     private void NhanThongTinSanPham() {
         SanPham sanPham = (SanPham) getIntent().getSerializableExtra("thongtinsanpham");
         id = sanPham.getMaSp();
@@ -116,7 +124,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         giaChiTiet = sanPham.getGiaSp();
         //getIncomingIntent();
 
-            hinhChiTiet = sanPham.getHinhAnh();
+        hinhChiTiet = sanPham.getHinhAnh();
 
 //        if (!test){
 //            hinhChiTiet = sanPham.getHinhAnh();
@@ -133,58 +141,62 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
 
     }
-    private void ShowInfor(){
-        //getIncomingIntent();
-//        int masp = id;
-//        String tensp = tenChiTiet;
-//        int giasp = giaChiTiet;
-//        String motasp = motaChiTiet;
-        String hinhsp = "";
-        if (!hinh.equals("")){
-            hinhsp = hinh;
+
+    private void ShowInfor() {
+
+
+        NhanThongTinSanPham();
+        hinhsanpham = hinhChiTiet;
+
+        if (!adapterHinh.equals("")) {
+            hinhsanpham = adapterHinh;
             //Toast.makeText(getApplicationContext(), "hinhnhan:" + hinhsp, Toast.LENGTH_LONG).show();
-        }else {
-            hinhsp = hinhChiTiet;
         }
 
         txtTenCT.setText(tenChiTiet);
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         txtGiaCT.setText("Giá: " + decimalFormat.format(giaChiTiet) + "Đ");
         txtMoTaCT.setText(motaChiTiet);
-        Log.d("hinhdanhan:", hinhsp);
-        Picasso.with(getApplicationContext()).load(hinhsp)
+        Log.d("hinhdanhan:", hinhsanpham);
+        Picasso.with(getApplicationContext()).load(hinhsanpham)
                 .placeholder(R.drawable.product)
                 .error(R.drawable.error)
                 .into(imgChiTiet);
+
+        Animation animationHinh = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alphat_scale_hinhchinh_sanpham);
+        //animationHinh.setRepeatCount(Animation.INFINITE);
+        findViewById(R.id.imageviewChiTietSP).startAnimation(animationHinh);
     }
+
     private void CatchEventSpiner() {
-        Integer[] soluong = new Integer[]{1,2,3,4,5,6,7,8,9,10};
+        Integer[] soluong = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this, R.layout.support_simple_spinner_dropdown_item, soluong);
         spinnerCT.setAdapter(arrayAdapter);
     }
-    private void ButtonDatMua(){
+
+    private void ButtonDatMua() {
         btnDatMuaCT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MainActivity.arrayGioHang.size() > 0){
+                if (MainActivity.arrayGioHang.size() > 0) {
                     int sl = Integer.parseInt(spinnerCT.getSelectedItem().toString());
                     boolean exists = false;
-                    for (int i = 0; i < MainActivity.arrayGioHang.size(); i++){
-                        if (MainActivity.arrayGioHang.get(i).getIdSP() == id){
+                    for (int i = 0; i < MainActivity.arrayGioHang.size(); i++) {
+                        if (MainActivity.arrayGioHang.get(i).getIdSP() == id) {
                             MainActivity.arrayGioHang.get(i).setSoluongSP(MainActivity.arrayGioHang.get(i).getSoluongSP() + sl);
-                            if (MainActivity.arrayGioHang.get(i).getSoluongSP() >= 10){
+                            if (MainActivity.arrayGioHang.get(i).getSoluongSP() >= 10) {
                                 MainActivity.arrayGioHang.get(i).setSoluongSP(10);
                             }
                             MainActivity.arrayGioHang.get(i).setGiaSP(giaChiTiet * MainActivity.arrayGioHang.get(i).getSoluongSP());
                             exists = true;
                         }
                     }
-                    if (exists == false){
+                    if (exists == false) {
                         int soluong = Integer.parseInt(spinnerCT.getSelectedItem().toString());
                         long giaMoi = soluong * giaChiTiet;
                         MainActivity.arrayGioHang.add(new GioHang(id, tenChiTiet, giaMoi, hinhChiTiet, soluong));
                     }
-                }else {
+                } else {
                     int soluong = Integer.parseInt(spinnerCT.getSelectedItem().toString());
                     long giaMoi = soluong * giaChiTiet;
                     MainActivity.arrayGioHang.add(new GioHang(id, tenChiTiet, giaMoi, hinhChiTiet, soluong));
@@ -194,7 +206,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             }
         });
     }
-    private void ShowHinhSp(){
+
+    private void ShowHinhSp() {
         dataHinhSp = new ArrayList<>();
         adapter = new RecyclerViewCTHinhSpAdapter(getApplicationContext(), R.layout.dong_hinh_sanpham_recyclerview, dataHinhSp);
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -214,14 +227,14 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         asynShowHinhSp.execute(id);
     }
 
-    private void getIncomingIntent(){
-        if (getIntent().hasExtra("url_hinh")){
-            hinhChiTiet = getIntent().getStringExtra("url_hinh");
-        }else {
-            NhanThongTinSanPham();
-        }
-    }
-    private class AsynShowHinhSp extends AsyncTask<Integer, Void, List<HinhSanPham>>{
+    //    private void getIncomingIntent(){
+//        if (getIntent().hasExtra("url_hinh")){
+//            hinhsp = getIntent().getStringExtra("url_hinh");
+//        }else {
+//            NhanThongTinSanPham();
+//        }
+//    }
+    private class AsynShowHinhSp extends AsyncTask<Integer, Void, List<HinhSanPham>> {
 
         @Override
         protected List<HinhSanPham> doInBackground(Integer... integers) {
@@ -232,7 +245,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<HinhSanPham> hinhSanPhams) {
             super.onPostExecute(hinhSanPhams);
-            for (int i = 0; i < hinhSanPhams.size(); i++){
+            for (int i = 0; i < hinhSanPhams.size(); i++) {
                 dataHinhSp.add(hinhSanPhams.get(i));
                 Log.d("ghiHinh:", String.valueOf(dataHinhSp.get(i).getMaHinh()));
             }

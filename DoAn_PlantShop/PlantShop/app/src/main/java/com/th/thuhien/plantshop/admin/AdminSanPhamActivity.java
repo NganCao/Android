@@ -50,8 +50,19 @@ public class AdminSanPhamActivity extends AppCompatActivity {
         ActionBar();
         setEventSelectItemSpinner();
         getListMenu();
-        //setEventThemSp();
+        ItemListSanPham();
 
+    }
+
+    private void ItemListSanPham() {
+        lv_AdminSanPham.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(AdminSanPhamActivity.this, AdminEditSanPhamActivity.class);
+                intent.putExtra("editsanpham", data.get(position));
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
