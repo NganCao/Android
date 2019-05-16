@@ -1,7 +1,11 @@
 package com.th.thuhien.plantshop.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -15,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.th.thuhien.plantshop.R;
@@ -47,8 +52,13 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     int giaChiTiet = 0;
     String hinhChiTiet = "";
     String motaChiTiet = "";
-    int idSp = 0;
+    //int idSp = 0;
     int idMenu = 0;
+
+    String hinh = "";
+    //boolean test = false;
+
+    //String mMessageReceiver = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +67,26 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
         AnhXa();
         ActionToolbar();
+        //NhanThongTinSanPham();
         NhanThongTinSanPham();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("custom-message"));
+        //Toast.makeText(getApplicationContext(), "hinhnhan:" + hinh, Toast.LENGTH_LONG).show();
+        ShowInfor();
         CatchEventSpiner();
         ButtonDatMua();
         ShowHinhSp();
+
     }
 
+    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+            hinh = intent.getStringExtra("hinhsp");
+            ShowInfor();
+            //Toast.makeText(ChiTietSanPhamActivity.this, hinh, Toast.LENGTH_SHORT).show();
+        }
+    };
     private void AnhXa() {
         toolbarChiTiet = (Toolbar) findViewById(R.id.toolbarChiTietSP);
         imgChiTiet = (ImageView) findViewById(R.id.imageviewChiTietSP);
@@ -90,15 +114,45 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         id = sanPham.getMaSp();
         tenChiTiet = sanPham.getTenSp();
         giaChiTiet = sanPham.getGiaSp();
-        hinhChiTiet = sanPham.getHinhAnh();
+        //getIncomingIntent();
+
+            hinhChiTiet = sanPham.getHinhAnh();
+
+//        if (!test){
+//            hinhChiTiet = sanPham.getHinhAnh();
+//            test = true;
+//            Toast.makeText(getApplicationContext(), "test: " + String.valueOf(test), Toast.LENGTH_SHORT).show();
+//        }else {
+//            //LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("custom-message"));
+//            getIncomingIntent();
+//            hinhChiTiet = hinh;
+//        }
+        //Log.d("hinhsp: ", hinhChiTiet);
         motaChiTiet = sanPham.getThongTin();
         idMenu = sanPham.getMaMenu();
+
+
+    }
+    private void ShowInfor(){
+        //getIncomingIntent();
+//        int masp = id;
+//        String tensp = tenChiTiet;
+//        int giasp = giaChiTiet;
+//        String motasp = motaChiTiet;
+        String hinhsp = "";
+        if (!hinh.equals("")){
+            hinhsp = hinh;
+            //Toast.makeText(getApplicationContext(), "hinhnhan:" + hinhsp, Toast.LENGTH_LONG).show();
+        }else {
+            hinhsp = hinhChiTiet;
+        }
 
         txtTenCT.setText(tenChiTiet);
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         txtGiaCT.setText("Giá: " + decimalFormat.format(giaChiTiet) + "Đ");
         txtMoTaCT.setText(motaChiTiet);
-        Picasso.with(getApplicationContext()).load(hinhChiTiet)
+        Log.d("hinhdanhan:", hinhsp);
+        Picasso.with(getApplicationContext()).load(hinhsp)
                 .placeholder(R.drawable.product)
                 .error(R.drawable.error)
                 .into(imgChiTiet);
@@ -152,8 +206,20 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL);
         recyclerViewHinhSp.addItemDecoration(dividerVertical);
 
+//        HinhSanPham hinhSanPham = new HinhSanPham(1, 10, "https://1.bp.blogspot.com/-xA1DQYrcADo/XJcgoCV5NpI/AAAAAAAAF3k/f8UlgDDuYtMZzF3kF7-1JY7ITExYSgLzgCLcBGAs/s1600/banner-23.png");
+//
+//        dataHinhSp.add(hinhSanPham);
+        dataHinhSp.add(new HinhSanPham(id, 0, hinhChiTiet));
         AsynShowHinhSp asynShowHinhSp = new AsynShowHinhSp();
         asynShowHinhSp.execute(id);
+    }
+
+    private void getIncomingIntent(){
+        if (getIntent().hasExtra("url_hinh")){
+            hinhChiTiet = getIntent().getStringExtra("url_hinh");
+        }else {
+            NhanThongTinSanPham();
+        }
     }
     private class AsynShowHinhSp extends AsyncTask<Integer, Void, List<HinhSanPham>>{
 
@@ -171,6 +237,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 Log.d("ghiHinh:", String.valueOf(dataHinhSp.get(i).getMaHinh()));
             }
             adapter.notifyDataSetChanged();
+
         }
     }
 }
