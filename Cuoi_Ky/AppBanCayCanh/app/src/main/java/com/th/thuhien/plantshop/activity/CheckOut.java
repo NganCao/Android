@@ -184,7 +184,8 @@ public class CheckOut extends AppCompatActivity {
                     finally
                     {
                         MainActivity.arrayGioHang = null;
-                        Intent intent = new Intent(CheckOut.this, MainActivity.class);
+                        Intent intent = new Intent(CheckOut.this, KetquaDathangActivity.class);
+
                         startActivity(intent);
                     }
                 }

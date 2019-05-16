@@ -59,14 +59,14 @@ public class SanPhamService {
                 String maSanPham = object.getProperty("MaSP").toString();
                 String tenSanPham = object.getProperty("TenSP").toString();
                 String hinhSanPham = object.getProperty("HinhAnh").toString();
-                String thongTinSanPham = object.getProperty("ThongTin").toString();
+//                String thongTinSanPham = object.getProperty("ThongTin").toString();
                 String giaSanPham = object.getProperty("Gia").toString();
                 //String maMenu = object.getProperty("MaMenu").toString();
 
                 sanPham.setMaSp(Integer.parseInt(maSanPham));
                 sanPham.setTenSp(tenSanPham);
                 sanPham.setHinhAnh(hinhSanPham);
-                sanPham.setThongTin(thongTinSanPham);
+//                sanPham.setThongTin(thongTinSanPham);
                 sanPham.setGiaSp(Integer.parseInt(giaSanPham));
                 //sanPham.setMaMenu(Integer.parseInt(maMenu));
 
@@ -193,14 +193,14 @@ public class SanPhamService {
                 String maSanPham = item.getProperty("MaSP").toString();
                 String tenSanPham = item.getProperty("TenSP").toString();
                 String hinhSanPham = item.getProperty("HinhAnh").toString();
-                String thongTinSanPham = item.getProperty("ThongTin").toString();
+//                String thongTinSanPham = item.getProperty("ThongTin").toString();
                 String giaSanPham = item.getProperty("Gia").toString();
 //                String maMenu = item.getProperty("MaMenu").toString();
 
                 sanPham.setMaSp(Integer.parseInt(maSanPham));
                 sanPham.setTenSp(tenSanPham);
                 sanPham.setHinhAnh(hinhSanPham);
-                sanPham.setThongTin(thongTinSanPham);
+//                sanPham.setThongTin(thongTinSanPham);
                 sanPham.setGiaSp(Integer.parseInt(giaSanPham));
                 //               sanPham.setMaMenu(Integer.parseInt(maMenu));
 
