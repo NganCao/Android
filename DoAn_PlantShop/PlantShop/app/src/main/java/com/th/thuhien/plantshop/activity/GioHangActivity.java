@@ -93,8 +93,6 @@ public class GioHangActivity extends AppCompatActivity {
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent =new Intent(getApplicationContext(), MainActivity.class);
-//                startActivity(intent);
                 finish();
             }
         });
@@ -107,7 +105,6 @@ public class GioHangActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else {
-//                    CheckConnection.ShowToast_Short(getApplicationContext(),"Giỏ hàng của bạn trống!");
                     Toast.makeText(GioHangActivity.this, "Giỏ hàng của bạn đang trống!",Toast.LENGTH_SHORT).show();
                 }
             }
