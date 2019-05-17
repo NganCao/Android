@@ -141,7 +141,11 @@ public class CheckOut extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+//                finish();
+//                for (int i = 0 ; i< MainActivity.arrayGioHang.size(); i++){
+//                    Toast.makeText(getApplicationContext(), "gio hang: " + MainActivity.arrayGioHang.get(i), Toast.LENGTH_LONG).show();
+//                }
+
             }
         });
 
@@ -173,21 +177,24 @@ public class CheckOut extends AppCompatActivity {
                 else {
                     AsyncDDH asyncDDH = new AsyncDDH();
                     asyncDDH.execute(ten, sdt, email, diachi);
-                    insertCTDDH();
-                    Toast.makeText(getApplicationContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
-
-                    try {
-                        Thread.sleep(2000);
-                    } catch (Exception e) {
-
-                    }
-                    finally
-                    {
+//                    insertCTDDH();
+//                    Toast.makeText(getApplicationContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+//
+//                    try {
+//                        Thread.sleep(2000);
+//                    } catch (Exception e) {
+//
+//                    }
+//                    finally
+//                    {
+//                        Toast.makeText(getApplicationContext(), "result:  " + result, Toast.LENGTH_LONG).show();
                         MainActivity.arrayGioHang = null;
                         Intent intent = new Intent(CheckOut.this, KetquaDathangActivity.class);
-
+                        intent.putExtra("ten", ten);
+                        intent.putExtra("email", email);
+                        intent.putExtra("sdt", sdt);
                         startActivity(intent);
-                    }
+//                    }
                 }
             }
         });
@@ -215,16 +222,34 @@ public class CheckOut extends AppCompatActivity {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             result = integer;
+            Toast.makeText(getApplicationContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+
+            try {
+                Thread.sleep(2000);
+            } catch (Exception e) {
+
+            }
+            finally
+            {
+                Toast.makeText(getApplicationContext(), "result:  " + result, Toast.LENGTH_LONG).show();
+                insertCTDDH();
+//                        MainActivity.arrayGioHang = null;
+//                        Intent intent = new Intent(CheckOut.this, KetquaDathangActivity.class);
+//                        intent.putExtra("ten", ten);
+//                        intent.putExtra("email", email);
+//                        intent.putExtra("sdt", sdt);
+//                        startActivity(intent);
+            }
         }
     }
 
     public void insertCTDDH(){
-        AsyncCT_DDH asyncCT_ddh = new AsyncCT_DDH();
+
         for (int i= 0; i<MainActivity.arrayGioHang.size(); i++){
             int masp = MainActivity.arrayGioHang.get(i).idSP;
             int slsp = MainActivity.arrayGioHang.get(i).soluongSP;
             int giasp = Integer.parseInt(String.valueOf(MainActivity.arrayGioHang.get(i).giaSP));
-
+            AsyncCT_DDH asyncCT_ddh = new AsyncCT_DDH();
             asyncCT_ddh.execute(result, masp, slsp, giasp);
         }
     }
@@ -237,12 +262,13 @@ public class CheckOut extends AppCompatActivity {
         @Override
         protected Integer doInBackground(Integer... Integer) {
             CT_DDHService createBill = new CT_DDHService();
-            return rs = createBill.insertCT_DDH(result, masanpham, slSP, giaSP);
+            return rs = createBill.insertCT_DDH(Integer[0], Integer[1], Integer[2], Integer[3]);
         }
 
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
+            Toast.makeText(getApplicationContext(), "CT thanh cong", Toast.LENGTH_LONG).show();
         }
     }
 

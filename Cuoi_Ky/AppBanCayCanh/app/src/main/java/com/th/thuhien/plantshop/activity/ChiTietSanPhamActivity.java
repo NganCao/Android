@@ -98,8 +98,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                     long giaMoi = soluong * giaChiTiet;
                     MainActivity.arrayGioHang.add(new GioHang(id, tenChiTiet, giaMoi, hinhChiTiet, soluong));
                 }
-                Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
+//                startActivity(intent);
             }
         });
     }

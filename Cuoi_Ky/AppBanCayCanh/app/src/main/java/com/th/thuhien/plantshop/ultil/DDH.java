@@ -1,9 +1,12 @@
 package com.th.thuhien.plantshop.ultil;
 
+import android.util.Log;
+
 import com.th.thuhien.plantshop.model.DonDatHang;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
@@ -24,7 +27,7 @@ public class DDH {
 
     private final String URL = "http://plantshop.somee.com/Service.asmx?WSDL";
 
-    public Integer insertDDH(String tenKH, String sdt, String email, String diaChi)
+    public int insertDDH(String tenKH, String sdt, String email, String diaChi)
     {
         int result = 0;
         try {
@@ -39,9 +42,10 @@ public class DDH {
             envelope.setOutputSoapObject(request);
 
             httpTransportSE.call(SOAP_ACTION, envelope);
-            SoapObject s = (SoapObject) envelope.getResponse(); //Get XML Result
+            SoapPrimitive s = (SoapPrimitive) envelope.getResponse(); //Get XML Result
 
-            result = Integer.parseInt(s.getProperty("GetMaDDHMaxResult").toString());
+            String string = s.toString();
+            result = Integer.parseInt(string);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -50,6 +54,7 @@ public class DDH {
         }catch (Exception e){
             e.printStackTrace();
         }
+        Log.d("res", String.valueOf(result));
         return result;
     }
 
