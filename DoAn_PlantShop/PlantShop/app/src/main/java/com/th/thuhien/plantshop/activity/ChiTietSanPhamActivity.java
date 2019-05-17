@@ -12,13 +12,18 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,6 +86,22 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         ButtonDatMua();
         ShowHinhSp();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menugiohang:
+                Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
@@ -201,8 +222,17 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                     long giaMoi = soluong * giaChiTiet;
                     MainActivity.arrayGioHang.add(new GioHang(id, tenChiTiet, giaMoi, hinhChiTiet, soluong));
                 }
-                Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
-                startActivity(intent);
+                DisplayMetrics metrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                int height = metrics.heightPixels;
+                int width = metrics.widthPixels;
+                TranslateAnimation animation = new TranslateAnimation(0, 500, 0, -500);
+                animation.setDuration(500);
+                animation.setFillAfter(false);
+                animation.setAnimationListener(new MyAnimationListener());
+
+                imgChiTiet.startAnimation(animation);
+
             }
         });
     }
@@ -252,5 +282,28 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
 
         }
+    }
+
+    private class MyAnimationListener implements Animation.AnimationListener {
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            imgChiTiet.clearAnimation();
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(imgChiTiet.getWidth(), imgChiTiet.getHeight());
+            lp.setMargins(50, 100, 0, 0);
+            imgChiTiet.setLayoutParams(lp);
+
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+        }
+
+        @Override
+        public void onAnimationStart(Animation animation) {
+//            Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
+//            startActivity(intent);
+        }
+
     }
 }
