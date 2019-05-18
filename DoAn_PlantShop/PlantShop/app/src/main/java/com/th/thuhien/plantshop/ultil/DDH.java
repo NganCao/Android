@@ -116,7 +116,6 @@ public class DDH {
                 donDatHang.setSdtKH(sdtKH);
                 donDatHang.setEmailKH(emailKH);
                 donDatHang.setDiachiKH(diachiKH);
-
                 list.add(donDatHang);
             }
         } catch (IOException e) {

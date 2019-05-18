@@ -143,29 +143,11 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         id = sanPham.getMaSp();
         tenChiTiet = sanPham.getTenSp();
         giaChiTiet = sanPham.getGiaSp();
-        //getIncomingIntent();
-
         hinhChiTiet = sanPham.getHinhAnh();
-
-//        if (!test){
-//            hinhChiTiet = sanPham.getHinhAnh();
-//            test = true;
-//            Toast.makeText(getApplicationContext(), "test: " + String.valueOf(test), Toast.LENGTH_SHORT).show();
-//        }else {
-//            //LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("custom-message"));
-//            getIncomingIntent();
-//            hinhChiTiet = hinh;
-//        }
-        //Log.d("hinhsp: ", hinhChiTiet);
         motaChiTiet = sanPham.getThongTin();
         idMenu = sanPham.getMaMenu();
-
-
     }
-
     private void ShowInfor() {
-
-
         NhanThongTinSanPham();
         hinhsanpham = hinhChiTiet;
 
@@ -184,7 +166,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 .error(R.drawable.error)
                 .into(imgChiTiet);
 
-        Animation animationHinh = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alphat_scale_hinhchinh_sanpham);
+        Animation animationHinh = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.alphat_scale_hinhchinh_sanpham);
         //animationHinh.setRepeatCount(Animation.INFINITE);
         findViewById(R.id.imageviewChiTietSP).startAnimation(animationHinh);
     }
@@ -239,19 +222,18 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
     private void ShowHinhSp() {
         dataHinhSp = new ArrayList<>();
-        adapter = new RecyclerViewCTHinhSpAdapter(getApplicationContext(), R.layout.dong_hinh_sanpham_recyclerview, dataHinhSp);
+        adapter = new RecyclerViewCTHinhSpAdapter(getApplicationContext(),
+                R.layout.dong_hinh_sanpham_recyclerview, dataHinhSp);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerViewHinhSp.setLayoutManager(llm);
         recyclerViewHinhSp.setAdapter(adapter);
 
+        // hiện dòng kẻ giữa recylerview
         DividerItemDecoration dividerVertical =
                 new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL);
         recyclerViewHinhSp.addItemDecoration(dividerVertical);
 
-//        HinhSanPham hinhSanPham = new HinhSanPham(1, 10, "https://1.bp.blogspot.com/-xA1DQYrcADo/XJcgoCV5NpI/AAAAAAAAF3k/f8UlgDDuYtMZzF3kF7-1JY7ITExYSgLzgCLcBGAs/s1600/banner-23.png");
-//
-//        dataHinhSp.add(hinhSanPham);
         dataHinhSp.add(new HinhSanPham(id, 0, hinhChiTiet));
         AsynShowHinhSp asynShowHinhSp = new AsynShowHinhSp();
         asynShowHinhSp.execute(id);

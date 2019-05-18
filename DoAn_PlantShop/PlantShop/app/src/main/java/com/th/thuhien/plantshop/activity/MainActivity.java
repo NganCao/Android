@@ -203,9 +203,6 @@ public class MainActivity extends AppCompatActivity {
     private void DialogDangNhap(){
         final Dialog dialog = new Dialog(MainActivity.this);
         dialog.setContentView(R.layout.dialog_dangnhap);
-        //dialog.show();
-
-        //Anh xa
         final EditText edt_user_dn = (EditText) dialog.findViewById(R.id.edittextDNUser);
         final EditText edt_pass_dn = (EditText) dialog.findViewById(R.id.edittextDNPass);
         Button btn_DongY = (Button) dialog.findViewById(R.id.buttonDNDongY);
@@ -216,17 +213,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String ten = edt_user_dn.getText().toString().trim();
                 String matkhau = edt_pass_dn.getText().toString().trim();
-
                 if (ten.equals("")){
                     Toast.makeText(MainActivity.this, "Tên đăng nhập không được rỗng", Toast.LENGTH_LONG).show();
                     return;
                 }
-
                 if (matkhau.equals("")){
                     Toast.makeText(MainActivity.this, "Mật không được rỗng", Toast.LENGTH_LONG).show();
                     return;
                 }
-
                 user = ten;
 
                 AsynDangNhap asynDangNhap = new AsynDangNhap();

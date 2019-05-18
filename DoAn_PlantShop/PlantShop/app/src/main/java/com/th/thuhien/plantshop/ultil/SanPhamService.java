@@ -132,16 +132,12 @@ public class SanPhamService {
     }
 
     public List<SanPham> getListSanPham(){
-
         List<SanPham> list = new ArrayList<>();
-
         SoapObject request = new SoapObject(NAME_SPACE, METHOD_NAME_LIST_SANPHAM);
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         envelope.dotNet = true;
         envelope.setOutputSoapObject(request);
-
         HttpTransportSE httpTransportSE = new HttpTransportSE(URL);
-
         try {
             httpTransportSE.call(SOAP_ACTION_LIST_SANPHAM, envelope);
             SoapObject item = (SoapObject) envelope.getResponse();
@@ -154,14 +150,12 @@ public class SanPhamService {
                 String hinhSanPham = object.getProperty("HinhAnh").toString();
                 String thongTinSanPham = object.getProperty("ThongTin").toString();
                 String giaSanPham = object.getProperty("Gia").toString();
-//                String maMenu = object.getProperty("MaMenu").toString();
 
                 sanPham.setMaSp(Integer.parseInt(maSanPham));
                 sanPham.setTenSp(tenSanPham);
                 sanPham.setHinhAnh(hinhSanPham);
                 sanPham.setThongTin(thongTinSanPham);
                 sanPham.setGiaSp(Integer.parseInt(giaSanPham));
-                //               sanPham.setMaMenu(Integer.parseInt(maMenu));
 
                 list.add(sanPham);
             }

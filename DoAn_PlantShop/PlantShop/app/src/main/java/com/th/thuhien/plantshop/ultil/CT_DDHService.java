@@ -110,7 +110,6 @@ public class CT_DDHService {
                 ct_ddh.setMaSP(Integer.parseInt(masp));
                 ct_ddh.setSoluong(Integer.parseInt(soluong));
                 ct_ddh.setDongia(Integer.parseInt(dongia));
-
                 list.add(ct_ddh);
             }
         } catch (IOException e) {

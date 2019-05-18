@@ -84,8 +84,6 @@ public class MenuService {
 
             result = Boolean.parseBoolean(a);
 
-
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (XmlPullParserException e) {

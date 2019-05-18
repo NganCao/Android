@@ -83,6 +83,8 @@ public class AdminMainActivity extends AppCompatActivity {
                         break;
                     case R.id.quantri_dondathang:
                         // gọi màn hình chuyển màn hình sang quản trị đơn đặt hàng
+                        Intent intent2 = new Intent(AdminMainActivity.this, AdminDDHActivity.class);
+                        startActivity(intent2);
                         break;
                     case R.id.quantri_ctddh:
                         // gọi màn hình chuyển màn hình sang quản trị ctddh

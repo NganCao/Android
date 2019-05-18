@@ -128,7 +128,7 @@ public class AdminMenuActivity extends AppCompatActivity {
 
         // Set up the input
         final EditText input = new EditText(this);
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
@@ -168,7 +168,6 @@ public class AdminMenuActivity extends AppCompatActivity {
     private void ThemMenu() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Thêm menu");
-
         // Set up the input
         final EditText input = new EditText(this);
         // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
@@ -192,8 +191,6 @@ public class AdminMenuActivity extends AppCompatActivity {
                 data.clear();
                 AsynAdminListMenu asynAdminListMenu = new AsynAdminListMenu();
                 asynAdminListMenu.execute();
-
-
             }
         });
         builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
