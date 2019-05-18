@@ -1,0 +1,10 @@
+D:\Desktop\webservice\WebServiceProject\WebServiceProject\bin\WebServiceProject.dll
+D:\Desktop\webservice\WebServiceProject\WebServiceProject\bin\WebServiceProject.pdb
+D:\Desktop\webservice\WebServiceProject\WebServiceProject\obj\Debug\WebServiceProject.csprojResolveAssemblyReference.cache
+D:\Desktop\webservice\WebServiceProject\WebServiceProject\obj\Debug\WebServiceProject.dll
+D:\Desktop\webservice\WebServiceProject\WebServiceProject\obj\Debug\WebServiceProject.pdb
+D:\Desktop\webservice\webservicetest\WebServiceProject\bin\WebServiceProject.dll
+D:\Desktop\webservice\webservicetest\WebServiceProject\bin\WebServiceProject.pdb
+D:\Desktop\webservice\webservicetest\WebServiceProject\obj\Debug\WebServiceProject.csprojResolveAssemblyReference.cache
+D:\Desktop\webservice\webservicetest\WebServiceProject\obj\Debug\WebServiceProject.dll
+D:\Desktop\webservice\webservicetest\WebServiceProject\obj\Debug\WebServiceProject.pdb
